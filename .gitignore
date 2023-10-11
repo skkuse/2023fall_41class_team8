@@ -21,3 +21,6 @@ front/.env.production.local
 front/npm-debug.log*
 front/yarn-debug.log*
 front/yarn-error.log*
+
+# created java files/folders
+back/JavaSource/*
