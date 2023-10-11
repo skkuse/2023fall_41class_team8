@@ -1,0 +1,6 @@
+npm i
+이게 되지 않는다면 
+npm i --legacy-peer deps
+
+npm start
+이 명령어 실행한 후 localhost:3000 접속
