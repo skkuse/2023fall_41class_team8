@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from 'react';
 
-export function 	Analyser() {
+export function Analyser() {
 	return (
 		<Grid>
 			
