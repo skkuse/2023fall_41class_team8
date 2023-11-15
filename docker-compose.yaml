@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: frontend
+    image: frontend:latest
+    build: ./front
+    ports:
+      - "8081:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cc.rule=Host(`cc.skew.ch`)"
+      - "traefik.http.routers.cc.entrypoints=websecure"
+      - "traefik.http.routers.cc.tls=true"
+
+networks:
+  default:
+    name: cc
