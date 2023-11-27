@@ -7,6 +7,8 @@ import requests
 app = Flask(__name__)
 
 judge0_url = "https://exec.skew.ch/"
+pattern_json_file_path = "./pattern_json"
+patterns_json_file_path = "./patterns_json"
 
 def generate_uuid():
     return str(uuid.uuid4())
@@ -47,6 +49,22 @@ def runCode():
     delete_submission(token)
     return result.text
 
+@app.route("/patterns")
+def get_patterns():
+    with open(patterns_json_file_path, 'r') as file:
+    	data = json.load(file)
+    	
+    	return data
+
+@app.route("/pattern")
+def get_pattern():
+    id = request.args["id"]
+    
+    with open(pattern_json_file_path, 'r') as file:
+    	data = json.load(file)
+    	
+    	return data[id]
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
