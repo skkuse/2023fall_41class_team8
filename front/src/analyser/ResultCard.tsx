@@ -9,7 +9,9 @@ export function ResultCard() {
           <Typography variant='h5' textAlign='center'>실행 결과</Typography>
           <Typography variant='body1' textAlign='center'>코드 탄소 배출량 결과를 확인하세요.</Typography>
         </Box>
-        {/* <ValueDisplay title='Runtime' value='0' helperText='TODO' /> */}
+        <ValueDisplay title='Runtime' value='0' helperText='TODO' />
+        <ValueDisplay title='Runtime' value='0' helperText='TODO' />
+        <ValueDisplay title='Runtime' value='0' helperText='TODO' />
       </Stack>
     </Card>
   );
