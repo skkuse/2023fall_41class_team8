@@ -73,7 +73,7 @@ export function Analyser() {
           message: '코드를 실행해주세요.',
           code: ''
         } : results[results.length - 1]}/>
-        <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]}/>
+        <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]} reset={() => setResults([])}/>
       </Stack>
     </Stack>
   );
