@@ -2,17 +2,17 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import { ValueDisplay } from "./ValueDisplay";
 import { AnalysisResult, ErrorType } from "./Analyser";
 
-export function ResultCard(props: { result: AnalysisResult | null, pending: boolean }) {
+export function ResultCard(props: { result: AnalysisResult | null, pending: boolean, hideTitle?: boolean }) {
 
   const valueDisplay = () => {
-    if(!props.result) {
+    if (!props.result) {
       return (
         <Box style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Typography variant='h6'>실행 결과가 없습니다.</Typography>
         </Box>
       );
     }
-    if(props.pending) {
+    if (props.pending) {
       return (
         <>
           <ValueDisplay title='Runtime' value="계산중..." helperText='TODO' />
@@ -47,13 +47,16 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
   return (
     <Card style={{ padding: 16, flex: 1, display: 'flex' }}>
       <Stack spacing={2} style={{ flex: 1 }}>
-        <Box>
-          <Typography variant='h5' textAlign='center'>실행 결과</Typography>
-          <Typography variant='body1' textAlign='center'>코드 탄소 배출량 결과를 확인하세요.</Typography>
-        </Box>
+        {
+          !(props.hideTitle) &&
+          <Box>
+            <Typography variant='h5' textAlign='center'>실행 결과</Typography>
+            <Typography variant='body1' textAlign='center'>코드 탄소 배출량 결과를 확인하세요.</Typography>
+          </Box>
+        }
         {valueDisplay()}
       </Stack>
-      
+
     </Card>
   );
 }
