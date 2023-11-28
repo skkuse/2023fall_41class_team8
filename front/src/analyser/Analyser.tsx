@@ -1,8 +1,9 @@
-import { Box, Button, Card, Divider, Stack } from "@mui/material";
+import { Box, Button, Divider, Stack } from "@mui/material";
 import { useState } from "react";
 import Editor from '@monaco-editor/react'
 import { InfoCard } from "./InfoCard";
 import { ResultCard } from "./ResultCard";
+import { ChartDisplay } from "./ChartDisplay";
 
 const defaultVal = `class Main {
     public static void main(String[] args) {
@@ -16,18 +17,22 @@ export enum ErrorType {
   Timeout
 }
 
-export type AnalysisResult = {
+export type SuccessfulAnalysis = {
   success: true;
   runtime: number;
   carbonFootprint: number;
   energyNeeded: number;
   code: string;
-} | {
+};
+
+export type FailedAnalysis = {
   success: false;
   code: string;
   error: ErrorType;
   message: string;
 };
+
+export type AnalysisResult = SuccessfulAnalysis | FailedAnalysis;
 
 export function Analyser() {
   const [code, setCode] = useState(defaultVal);
@@ -36,9 +41,15 @@ export function Analyser() {
 
   const sendCode = () => {
     setSending(true);
-    console.log(code);
+    const newResult: AnalysisResult = {
+      success: true,
+      runtime: Math.random() * 1000,
+      carbonFootprint: Math.random() * 1000,
+      energyNeeded: Math.random() * 1000,
+      code: code
+    };
     setSending(false);
-    setResults([...results]);
+    setResults([...results, newResult]);
   }
 
   return (
@@ -62,8 +73,7 @@ export function Analyser() {
           message: '코드를 실행해주세요.',
           code: ''
         } : results[results.length - 1]}/>
-        <Card style={{ padding: 16, flex: 1 }}>
-        </Card>
+        <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]}/>
       </Stack>
     </Stack>
   );
