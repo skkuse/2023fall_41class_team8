@@ -4,6 +4,7 @@ import Editor from '@monaco-editor/react'
 import { InfoCard } from "./InfoCard";
 import { ResultCard } from "./ResultCard";
 import { ChartDisplay } from "./ChartDisplay";
+import { StdinDialog } from "./StdinDialog";
 
 const defaultVal = `class Main {
     public static void main(String[] args) {
@@ -42,6 +43,8 @@ export function Analyser() {
   const [code, setCode] = useState(defaultVal);
   const [sending, setSending] = useState(false);
   const [results, setResults] = useState<AnalysisResult[]>([]);
+  const [stdin, setStdin] = useState<string>('');
+  const [showStdin, setShowStdin] = useState(false);
 
   const sendCode = async () => {
     setSending(true);
@@ -58,23 +61,29 @@ export function Analyser() {
   }
 
   return (
-    <Stack spacing={2} style={{ margin: 16 }}>
-      <Stack spacing={2} direction='row' style={{ height: '500px' }}>
-        <Box style={{ flex: 1 }}>
-          <Editor defaultLanguage='java' onChange={(v) => setCode(v ?? '')} defaultValue={defaultVal} theme="vs-dark" options={{ readOnly: sending }}/>
-        </Box>
-        <InfoCard />
+    <>
+      <Stack spacing={2} style={{ margin: 16 }}>
+        <Stack spacing={2} direction='row' style={{ height: '500px' }}>
+          <Box style={{ flex: 1 }}>
+            <Editor defaultLanguage='java' onChange={(v) => setCode(v ?? '')} defaultValue={defaultVal} theme="vs-dark" options={{ readOnly: sending }} />
+          </Box>
+          <InfoCard />
+        </Stack>
+        <Divider />
+        <Stack spacing={2} direction='row'>
+          <Button onClick={() => setShowStdin(true)} variant='contained' fullWidth disabled={sending}>STDIN 추가하기</Button>
+          <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>분석하기</Button>
+        </Stack>
+        <Divider />
+        <Stack spacing={2} direction='row' style={{ height: '500px' }}>
+          <ResultCard pending={sending} result={results.length == 0 ? null : results[results.length - 1]} />
+          <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]} reset={() => setResults([])} />
+        </Stack>
       </Stack>
-      <Divider />
-      <Stack spacing={2} direction='row'>
-        <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>STDIN 추가하기</Button>
-        <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>분석하기</Button>
-      </Stack>
-      <Divider />
-      <Stack spacing={2} direction='row' style={{ height: '500px' }}>
-        <ResultCard pending={sending} result={results.length == 0 ? null : results[results.length - 1]}/>
-        <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]} reset={() => setResults([])}/>
-      </Stack>
-    </Stack>
+      <StdinDialog open={showStdin} onClose={() => setShowStdin(false)} confirm={(stdin) => {
+        if (stdin !== null) setStdin(stdin);
+        setShowStdin(false);
+      }} default={stdin} />
+    </>
   );
 }
