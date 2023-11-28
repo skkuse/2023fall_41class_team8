@@ -10,14 +10,41 @@ const defaultVal = `class Main {
     }
 }`;
 
+export enum ErrorType {
+  Runtime,
+  Compile,
+  Timeout
+}
+
+export type AnalysisResult = {
+  success: true;
+  runtime: number;
+  carbonFootprint: number;
+  energyNeeded: number;
+  code: string;
+} | {
+  success: false;
+  code: string;
+  error: ErrorType;
+  message: string;
+};
+
 export function Analyser() {
   const [code, setCode] = useState(defaultVal);
   const [sending, setSending] = useState(false);
+  const [results, setResults] = useState<AnalysisResult[]>([]);
 
   const sendCode = () => {
     setSending(true);
     console.log(code);
     setSending(false);
+    setResults([{
+      success: true,
+      runtime: 0,
+      carbonFootprint: 0,
+      energyNeeded: 0,
+      code: code
+    }]);
   }
 
   return (
@@ -35,7 +62,13 @@ export function Analyser() {
       </Stack>
       <Divider />
       <Stack spacing={2} direction='row' style={{ height: '500px' }}>
-        <ResultCard />
+        <ResultCard result={results.length == 0 ? {
+          success: true,
+          runtime: 0,
+          carbonFootprint: 0,
+          energyNeeded: 0,
+          code: ''
+        } : results[results.length - 1]}/>
         <Card style={{ padding: 16, flex: 1 }}>
         </Card>
       </Stack>
