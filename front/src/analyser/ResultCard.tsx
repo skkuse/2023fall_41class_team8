@@ -2,9 +2,16 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import { ValueDisplay } from "./ValueDisplay";
 import { AnalysisResult, ErrorType } from "./Analyser";
 
-export function ResultCard(props: { result: AnalysisResult }) {
+export function ResultCard(props: { result: AnalysisResult | null }) {
 
   const valueDisplay = () => {
+    if(!props.result) {
+      return (
+        <Box style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Typography variant='h6'>실행 결과가 없습니다.</Typography>
+        </Box>
+      );
+    }
     if (props.result.success) {
       return (
         <>
