@@ -38,13 +38,7 @@ export function Analyser() {
     setSending(true);
     console.log(code);
     setSending(false);
-    setResults([{
-      success: true,
-      runtime: 0,
-      carbonFootprint: 0,
-      energyNeeded: 0,
-      code: code
-    }]);
+    setResults([...results]);
   }
 
   return (
@@ -63,10 +57,9 @@ export function Analyser() {
       <Divider />
       <Stack spacing={2} direction='row' style={{ height: '500px' }}>
         <ResultCard result={results.length == 0 ? {
-          success: true,
-          runtime: 0,
-          carbonFootprint: 0,
-          energyNeeded: 0,
+          success: false,
+          error: ErrorType.Compile,
+          message: '코드를 실행해주세요.',
           code: ''
         } : results[results.length - 1]}/>
         <Card style={{ padding: 16, flex: 1 }}>

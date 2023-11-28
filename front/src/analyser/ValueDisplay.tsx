@@ -1,10 +1,10 @@
 import { Card, Stack, Box, Typography, Tooltip } from "@mui/material";
 import InfoIcon from '@mui/icons-material/Info';
 
-export function ValueDisplay(props: { title: string, value: string, helperText: string }) {
+export function ValueDisplay(props: { title: string, value: string, helperText: string, expand?: boolean }) {
   return (
-    <Card style={{ padding: 16, flex: 1 }}>
-      <Stack spacing={2} direction='row' style={{ alignItems: 'center' }}>
+    <Card style={{ padding: 16, display: 'flex', flex: props.expand ? 1 : undefined }}>
+      <Stack spacing={2} direction='row' style={{ alignItems: 'center', flex: 1 }}>
         <Box flex={1} display='flex'>
           <Box flex={1}/>
           <Typography variant='h6'>{props.title}</Typography>
@@ -16,7 +16,6 @@ export function ValueDisplay(props: { title: string, value: string, helperText: 
           <Typography variant='h6' textAlign='center'>{props.value}</Typography>
         </Box>
       </Stack>
-
     </Card>
   );
 }

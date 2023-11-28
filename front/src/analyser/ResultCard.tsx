@@ -21,22 +21,23 @@ export function ResultCard(props: { result: AnalysisResult }) {
       }
       return (
         <>
-          <ValueDisplay title='Runtime' value={msg[props.result.error]} helperText='TODO' />
-          <ValueDisplay title='Carbon Footprint' value={props.result.message} helperText='TODO' />
+          <ValueDisplay title='Error' value={msg[props.result.error]} helperText='TODO' />
+          <ValueDisplay title='Message' value={props.result.message} helperText='TODO' expand={true} />
         </>
       );
     }
   }
 
   return (
-    <Card style={{ padding: 16, flex: 1 }}>
-      <Stack spacing={2}>
+    <Card style={{ padding: 16, flex: 1, display: 'flex' }}>
+      <Stack spacing={2} style={{ flex: 1 }}>
         <Box>
           <Typography variant='h5' textAlign='center'>실행 결과</Typography>
           <Typography variant='body1' textAlign='center'>코드 탄소 배출량 결과를 확인하세요.</Typography>
         </Box>
         {valueDisplay()}
       </Stack>
+      
     </Card>
   );
 }
