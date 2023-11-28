@@ -32,6 +32,10 @@ export type FailedAnalysis = {
   message: string;
 };
 
+async function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export type AnalysisResult = SuccessfulAnalysis | FailedAnalysis;
 
 export function Analyser() {
@@ -39,8 +43,9 @@ export function Analyser() {
   const [sending, setSending] = useState(false);
   const [results, setResults] = useState<AnalysisResult[]>([]);
 
-  const sendCode = () => {
+  const sendCode = async () => {
     setSending(true);
+    await sleep(1000);
     const newResult: AnalysisResult = {
       success: true,
       runtime: Math.random() * 1000,
@@ -62,12 +67,12 @@ export function Analyser() {
       </Stack>
       <Divider />
       <Stack spacing={2} direction='row'>
-        <Button onClick={sendCode} variant='contained' fullWidth>STDIN 추가하기</Button>
-        <Button onClick={sendCode} variant='contained' fullWidth>분석하기</Button>
+        <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>STDIN 추가하기</Button>
+        <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>분석하기</Button>
       </Stack>
       <Divider />
       <Stack spacing={2} direction='row' style={{ height: '500px' }}>
-        <ResultCard result={results.length == 0 ? null : results[results.length - 1]}/>
+        <ResultCard pending={sending} result={results.length == 0 ? null : results[results.length - 1]}/>
         <ChartDisplay results={results.filter(r => r.success) as SuccessfulAnalysis[]} reset={() => setResults([])}/>
       </Stack>
     </Stack>

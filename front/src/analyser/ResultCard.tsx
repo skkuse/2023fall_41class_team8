@@ -2,7 +2,7 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import { ValueDisplay } from "./ValueDisplay";
 import { AnalysisResult, ErrorType } from "./Analyser";
 
-export function ResultCard(props: { result: AnalysisResult | null }) {
+export function ResultCard(props: { result: AnalysisResult | null, pending: boolean }) {
 
   const valueDisplay = () => {
     if(!props.result) {
@@ -10,6 +10,15 @@ export function ResultCard(props: { result: AnalysisResult | null }) {
         <Box style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Typography variant='h6'>실행 결과가 없습니다.</Typography>
         </Box>
+      );
+    }
+    if(props.pending) {
+      return (
+        <>
+          <ValueDisplay title='Runtime' value="계산중..." helperText='TODO' />
+          <ValueDisplay title='Carbon Footprint' value="계산중..." helperText='TODO' />
+          <ValueDisplay title='Energy Needed' value="계산중..." helperText='TODO' />
+        </>
       );
     }
     if (props.result.success) {
