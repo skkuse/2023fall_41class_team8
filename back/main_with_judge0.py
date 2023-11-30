@@ -56,7 +56,15 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if result.json()["status"]["id"] != 2:
             break
     delete_submission(token)
+    cpu_time = result.json()["cpu_time"]
+    memory = result.json()["memory"]
+    calculation_result = calculate_energy_and_carbon(cpu_time, memory)
+    return_result = dict()
+    return_result['energy'] = calculation_result['energy']
+    return_result['carbon_footprint'] = calculation_result['carbon_footprint']
     output_queue.put(result)
+
+
 def calculate_energy_and_carbon(cpu_time: float, memory: int):
     n_core = 1  # number of processor
     tdp = 12.5  # TDP(W): Core type: AMD EPYC 7702P 64-core processor, 200W for 64 cores. Our server has 4 cores.
@@ -73,26 +81,9 @@ def calculate_energy_and_carbon(cpu_time: float, memory: int):
         "carbon_footprint": carbon_footprint
     }
 
-@app.route("/runjava", methods=["POST"])
-def runCode():
-    code = request.get_data(as_text=True)
-    token = request_to_judge0(code)
-    while True:
-        time.sleep(0.2)
-        result = check_submission(token)
-        if result.json()["status"]["id"]!=2:  # if Processing, continue
-            if result.json()["status"]["id"]==3:  # Accepted
-                cpu_time = result.json()["cpu_time"]
-                memory = result.json()["memory"]
-                calculation_result = calculate_energy_and_carbon(cpu_time, memory)
 
-                result['energy'] = calculation_result['energy']
-                result['carbon_footprint'] = calculation_result['carbon_footprint']
-
-                
 running_judge0_IP = list()
 output_queue_dict = dict()
-
 
 @app.route("/api/runjava", methods=["POST"])
 def runCode():
@@ -112,7 +103,7 @@ def runCode():
     running_judge0_IP.append(request.remote_addr)
     result = output_queue_dict[request.remote_addr].get()
     running_judge0_IP.remove(request.remote_addr)
-    return result.text
+    return result
 
 
 @app.route("/patterns")
