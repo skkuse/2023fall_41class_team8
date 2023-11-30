@@ -1,6 +1,5 @@
-from flask import Flask, request, session, jsonify, Response
+from flask import Flask, request
 import json
-import os
 import uuid
 import threading
 import time
@@ -36,19 +35,19 @@ def request_to_judge0(code: str, stdin: str):
         # "enable_network": null
     }
     result = requests.post(judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"})
-    print(result.text)
+#    print(result.text)
     return result.json()["token"]
 
 
 def check_submission(token: str):
     result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
-    print(result.text)
+#    print(result.text)
     return result
 
 
 def delete_submission(token: str):
     result = requests.delete(judge0_url + "submissions/" + token)
-    print(result.text)
+#    print(result.text)
     return result
 
 def decode_base64(data):
@@ -59,7 +58,8 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     while True:
         time.sleep(0.2)
         result = check_submission(token)
-        if result.json()["status"]["id"] != 2:
+        id = result.json()["status"]["id"]
+        if id != 2 and id != 1:
             break
     delete_submission(token)
     if(result.json()["status"]["id"] == 6):
@@ -137,8 +137,8 @@ def runCode():
     running_judge0_IP.append(request.remote_addr)
     result = output_queue_dict[request.remote_addr].get()
     running_judge0_IP.remove(request.remote_addr)
-    print(result)
-    print(type(result))
+#    print(result)
+#    print(type(result))
     return json.dumps(result)
 
 
@@ -173,4 +173,4 @@ def runCode():
 #     return jsonify({'category_string': category_string})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
