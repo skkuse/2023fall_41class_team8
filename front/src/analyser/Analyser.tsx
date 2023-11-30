@@ -57,7 +57,7 @@ export function Analyser({ sending, setSending }: Props) {
   const sendCode = async () => {
     setSending(true);
     await sleep(1000);
-    const res = await (await fetch(`http://localhost:5000/api/runjava`, {
+    const res = await (await fetch(`https://cc.skew.ch/api/runjava`, {
 			method: 'POST',
 			body: JSON.stringify({
 				code: code,
