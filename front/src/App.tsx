@@ -1,14 +1,29 @@
-import {Box, Card, Tab, Tabs, Typography} from '@mui/material';
+import {Box, Card, CircularProgress, Tab, Tabs, Typography} from '@mui/material';
 import {Analyser} from './analyser/Analyser';
+import {useState} from "react";
 
 export function App() {
+
+    const [sending, setSending] = useState(false);
+
     return (
-        <Box sx={{width: '100vw'}}>
-            {/* <AppBar position='static'>
-				<Toolbar>
-					CarbonCoder
-				</Toolbar>
-			</AppBar> */}
+        <Box sx={{width: '100vw', position: 'relative'}}>
+            <Box style={{
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                visibility: sending ? 'visible' : 'hidden',
+                backgroundColor: '#000000',
+                opacity: '0.4',
+                zIndex: '10',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+                <CircularProgress/>
+            </Box>
             <Box style={{display: 'flex', justifyContent: 'center', margin: 16}}>
                 <Typography variant='h1'>
                     CarbonCoder
@@ -25,7 +40,7 @@ export function App() {
                         <Tab label='코드 분석' value={0}/>
                         <Tab label='그린 패턴 더보기' value={1}/>
                     </Tabs>
-                    <Analyser/>
+                    <Analyser sending={sending} setSending={setSending}/>
                 </Card>
             </Box>
         </Box>
