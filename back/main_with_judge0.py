@@ -1,4 +1,5 @@
 from flask import Flask, request, session, jsonify, Response
+from flask_cors import CORS, cross_origin
 import json
 import os
 import uuid
@@ -50,6 +51,8 @@ def delete_submission(token: str):
     print(result.text)
     return result
 
+def decode_base64(data):
+    return "\n".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
@@ -59,6 +62,26 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if result.json()["status"]["id"] != 2:
             break
     delete_submission(token)
+    if(result.json()["status"]["id"] == 6):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "compilation"
+        return_result["error"] = decode_base64(result.json()["compile_output"])
+        output_queue.put(return_result)
+        return
+    if(result.json()["status"]["id"] == 11):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "runtime"
+        return_result["error"] = decode_base64(result.json()["stderr"])
+        output_queue.put(return_result)
+        return
+    if(result.json()["status"]["id"] != 3):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "limited"
+        output_queue.put(return_result)
+        return
     cpu_time = result.json()["time"]
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
@@ -66,6 +89,7 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     return_result["time"] = cpu_time
     return_result["energy"] = calculation_result["energy"]
     return_result["carbon"] = calculation_result["carbon_footprint"]
+    return_result["result"] = "success"
     output_queue.put(return_result)
 
 
@@ -96,6 +120,7 @@ output_queue_dict = dict()
 
 
 @app.route("/api/runjava", methods=["POST"])
+@cross_origin()
 def runCode():
     global output_queue_dict
     data = request.get_json()
