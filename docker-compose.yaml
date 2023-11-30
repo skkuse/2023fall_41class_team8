@@ -11,6 +11,12 @@ services:
       - "traefik.http.routers.cc.rule=Host(`cc.skew.ch`)"
       - "traefik.http.routers.cc.entrypoints=websecure"
       - "traefik.http.routers.cc.tls=true"
+  backend:
+    container_name: backend
+    image: backend:latest
+    build: ./back
+    ports:
+      - "5000:5000"
 
 networks:
   default:

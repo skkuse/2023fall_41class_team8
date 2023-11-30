@@ -1,4 +1,5 @@
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, session, jsonify, Response
+from flask_cors import CORS, cross_origin
 import json
 import os
 import uuid
@@ -7,6 +8,7 @@ import time
 import requests
 import queue
 from queue import Queue
+import base64
 
 app = Flask(__name__)
 
@@ -22,9 +24,10 @@ def generate_uuid():
 
 def request_to_judge0(code: str, stdin: str):
     request_json = {
-        "source_code": code,
+        "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
         "language_id": 62,
         "stdin": stdin,
+        "number_of_runs": 10,
         # "cpu_time_limit": null,
         # "cpu_extra_time": null,
         # "wall_time_limit": null,
@@ -33,13 +36,13 @@ def request_to_judge0(code: str, stdin: str):
         # "max_processes_and_or_threads": null,
         # "enable_network": null
     }
-    result = requests.post(judge0_url + "submissions", json=request_json)
+    result = requests.post(judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"})
     print(result.text)
     return result.json()["token"]
 
 
 def check_submission(token: str):
-    result = requests.get(judge0_url + "submissions/" + token)
+    result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
     print(result.text)
     return result
 
@@ -49,6 +52,8 @@ def delete_submission(token: str):
     print(result.text)
     return result
 
+def decode_base64(data):
+    return "".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
@@ -58,12 +63,34 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if result.json()["status"]["id"] != 2:
             break
     delete_submission(token)
+    if(result.json()["status"]["id"] == 6):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "compilation"
+        return_result["error"] = decode_base64(result.json()["compile_output"])
+        output_queue.put(return_result)
+        return
+    if(result.json()["status"]["id"] == 11):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "runtime"
+        return_result["error"] = decode_base64(result.json()["stderr"])
+        output_queue.put(return_result)
+        return
+    if(result.json()["status"]["id"] != 3):
+        return_result = dict()
+        return_result["result"] = "failure"
+        return_result["err_type"] = "limited"
+        output_queue.put(return_result)
+        return
     cpu_time = result.json()["time"]
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
+    return_result["time"] = cpu_time
     return_result["energy"] = calculation_result["energy"]
-    return_result["carbon_footprint"] = calculation_result["carbon_footprint"]
+    return_result["carbon"] = calculation_result["carbon_footprint"]
+    return_result["result"] = "success"
     output_queue.put(return_result)
 
 
@@ -94,6 +121,7 @@ output_queue_dict = dict()
 
 
 @app.route("/api/runjava", methods=["POST"])
+@cross_origin()
 def runCode():
     global output_queue_dict
     data = request.get_json()
