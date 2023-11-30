@@ -52,7 +52,7 @@ def delete_submission(token: str):
     return result
 
 def decode_base64(data):
-    return "\n".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
+    return "".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
