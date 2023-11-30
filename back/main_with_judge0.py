@@ -19,7 +19,6 @@ category_json_file_path = "./category_json"
 def generate_uuid():
     return str(uuid.uuid4())
 
-
 def request_to_judge0(code: str, stdin: str):
     request_json = {
         "source_code": code,
@@ -49,7 +48,6 @@ def delete_submission(token: str):
     print(result.text)
     return result
 
-
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
     while True:
@@ -59,8 +57,39 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
             break
     delete_submission(token)
     output_queue.put(result)
+def calculate_energy_and_carbon(cpu_time: float, memory: int):
+    n_core = 1  # number of processor
+    tdp = 12.5  # TDP(W): Core type: AMD EPYC 7702P 64-core processor, 200W for 64 cores. Our server has 4 cores.
+    u_core = 1  # Usage of core(%): when cannot identify use 1 for value, [0,1] : 1 = 100%
+    p_memory = memory * 0.0000003752  #  power consume per memory usage(W): 0.3725W/1GB memory usage
+    pue = 1  # Power Usage Effectiveness(%), when cannot identify use 1 for value
+    carbon_intensity = 0.41130 # CI(gCO2e/kWh): Use 2023 stat of S.Korea
 
+    energy = time * 3600 * (n_core * tdp * u_core + p_memory) * pue * 0.001  # (kWh), Energy consumption when used for 1 hour 
+    carbon_footprint = energy * carbon_intensity  # (gCO2e), CO2e Emission on 1h with energy source of S.Korea
 
+    return {
+        "energy": energy,
+        "carbon_footprint": carbon_footprint
+    }
+
+@app.route("/runjava", methods=["POST"])
+def runCode():
+    code = request.get_data(as_text=True)
+    token = request_to_judge0(code)
+    while True:
+        time.sleep(0.2)
+        result = check_submission(token)
+        if result.json()["status"]["id"]!=2:  # if Processing, continue
+            if result.json()["status"]["id"]==3:  # Accepted
+                cpu_time = result.json()["cpu_time"]
+                memory = result.json()["memory"]
+                calculation_result = calculate_energy_and_carbon(cpu_time, memory)
+
+                result['energy'] = calculation_result['energy']
+                result['carbon_footprint'] = calculation_result['carbon_footprint']
+
+                
 running_judge0_IP = list()
 output_queue_dict = dict()
 
