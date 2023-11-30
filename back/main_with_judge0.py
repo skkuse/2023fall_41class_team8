@@ -82,6 +82,7 @@ def runCode():
     user_thread.start()
     running_judge0_IP.append(request.remote_addr)
     result = output_queue_dict[request.remote_addr].get()
+    running_judge0_IP.remove(request.remote_addr)
     return result.text
 
 
