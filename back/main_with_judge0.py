@@ -19,6 +19,7 @@ category_json_file_path = "./category_json"
 def generate_uuid():
     return str(uuid.uuid4())
 
+
 def request_to_judge0(code: str, stdin: str):
     request_json = {
         "source_code": code,
@@ -48,6 +49,7 @@ def delete_submission(token: str):
     print(result.text)
     return result
 
+
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
     while True:
@@ -56,34 +58,40 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if result.json()["status"]["id"] != 2:
             break
     delete_submission(token)
-    cpu_time = result.json()["cpu_time"]
+    cpu_time = result.json()["time"]
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
-    return_result['energy'] = calculation_result['energy']
-    return_result['carbon_footprint'] = calculation_result['carbon_footprint']
-    output_queue.put(result)
+    return_result["energy"] = calculation_result["energy"]
+    return_result["carbon_footprint"] = calculation_result["carbon_footprint"]
+    output_queue.put(return_result)
 
 
 def calculate_energy_and_carbon(cpu_time: float, memory: int):
-    n_core = 1  # number of processor
+    n_core = int(1)  # number of processor
     tdp = 12.5  # TDP(W): Core type: AMD EPYC 7702P 64-core processor, 200W for 64 cores. Our server has 4 cores.
-    u_core = 1  # Usage of core(%): when cannot identify use 1 for value, [0,1] : 1 = 100%
-    p_memory = memory * 0.0000003752  #  power consume per memory usage(W): 0.3725W/1GB memory usage
-    pue = 1  # Power Usage Effectiveness(%), when cannot identify use 1 for value
-    carbon_intensity = 0.41130 # CI(gCO2e/kWh): Use 2023 stat of S.Korea
+    u_core = int(
+        1
+    )  # Usage of core(%): when cannot identify use 1 for value, [0,1] : 1 = 100%
+    p_memory = (
+        memory * 0.0000003752
+    )  #  power consume per memory usage(W): 0.3725W/1GB memory usage
+    pue = int(1)  # Power Usage Effectiveness(%), when cannot identify use 1 for value
+    carbon_intensity = 0.41130  # CI(gCO2e/kWh): Use 2023 stat of S.Korea
 
-    energy = time * 3600 * (n_core * tdp * u_core + p_memory) * pue * 0.001  # (kWh), Energy consumption when used for 1 hour 
-    carbon_footprint = energy * carbon_intensity  # (gCO2e), CO2e Emission on 1h with energy source of S.Korea
+    energy = (
+        float(cpu_time) * int(3600) * (n_core * tdp * u_core + p_memory) * pue * 0.001
+    )  # (kWh), Energy consumption when used for 1 hour
+    carbon_footprint = (
+        energy * carbon_intensity
+    )  # (gCO2e), CO2e Emission on 1h with energy source of S.Korea
 
-    return {
-        "energy": energy,
-        "carbon_footprint": carbon_footprint
-    }
+    return {"energy": energy, "carbon_footprint": carbon_footprint}
 
 
 running_judge0_IP = list()
 output_queue_dict = dict()
+
 
 @app.route("/api/runjava", methods=["POST"])
 def runCode():
@@ -103,38 +111,40 @@ def runCode():
     running_judge0_IP.append(request.remote_addr)
     result = output_queue_dict[request.remote_addr].get()
     running_judge0_IP.remove(request.remote_addr)
-    return result
+    print(result)
+    print(type(result))
+    return json.dumps(result)
 
 
-@app.route("/patterns")
-def get_patterns():
-    with open(patterns_json_file_path, 'r') as file:
-        data = json.load(file)
+# @app.route("/patterns")
+# def get_patterns():
+#     with open(patterns_json_file_path, 'r') as file:
+#         data = json.load(file)
 
-    	return data
+#     	return data
 
-@app.route("/pattern")
-def get_pattern():
-    id = request.args["id"]
+# @app.route("/pattern")
+# def get_pattern():
+#     id = request.args["id"]
 
-    with open(pattern_json_file_path, 'r') as file:
-    	data = json.load(file)
+#     with open(pattern_json_file_path, 'r') as file:
+#     	data = json.load(file)
 
-    	return data[id]
+#     	return data[id]
 
-#전달받은 카테고리 아이디로 카데고리값 전달
-@app.route('/get_category_string', methods=['POST'])
-def get_category_string():
-    data = request.get_json()
-    with open(patterns_json_file_path, 'r') as file:
-    	categories = json.load(file)
-        # 전달받은 카테고리 ID 확인
-        category_id = data.get('category_id')
+# #전달받은 카테고리 아이디로 카데고리값 전달
+# @app.route('/get_category_string', methods=['POST'])
+# def get_category_string():
+#     data = request.get_json()
+#     with open(patterns_json_file_path, 'r') as file:
+#     	categories = json.load(file)
+#         # 전달받은 카테고리 ID 확인
+#         category_id = data.get('category_id')
 
-        # 카테고리 ID에 해당하는 문자열 반환
-        category_string = categories.get(category_id, "해당하는 카테고리가 없습니다.")
+#         # 카테고리 ID에 해당하는 문자열 반환
+#         category_string = categories.get(category_id, "해당하는 카테고리가 없습니다.")
 
-    return jsonify({'category_string': category_string})
+#     return jsonify({'category_string': category_string})
 
 if __name__ == "__main__":
     app.run(debug=True)
