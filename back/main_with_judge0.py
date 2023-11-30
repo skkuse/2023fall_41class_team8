@@ -1,4 +1,4 @@
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, session, jsonify, Response
 import json
 import os
 import uuid
@@ -7,6 +7,7 @@ import time
 import requests
 import queue
 from queue import Queue
+import base64
 
 app = Flask(__name__)
 
@@ -22,7 +23,7 @@ def generate_uuid():
 
 def request_to_judge0(code: str, stdin: str):
     request_json = {
-        "source_code": code,
+        "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
         "language_id": 62,
         "stdin": stdin,
         # "cpu_time_limit": null,
@@ -33,13 +34,13 @@ def request_to_judge0(code: str, stdin: str):
         # "max_processes_and_or_threads": null,
         # "enable_network": null
     }
-    result = requests.post(judge0_url + "submissions", json=request_json)
+    result = requests.post(judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"})
     print(result.text)
     return result.json()["token"]
 
 
 def check_submission(token: str):
-    result = requests.get(judge0_url + "submissions/" + token)
+    result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
     print(result.text)
     return result
 
@@ -62,8 +63,9 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
+    return_result["time"] = cpu_time
     return_result["energy"] = calculation_result["energy"]
-    return_result["carbon_footprint"] = calculation_result["carbon_footprint"]
+    return_result["carbon"] = calculation_result["carbon_footprint"]
     output_queue.put(return_result)
 
 
