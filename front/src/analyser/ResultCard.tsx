@@ -15,18 +15,18 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
     if (props.pending) {
       return (
         <>
-          <ValueDisplay title='Runtime' value="계산중..." helperText='TODO' />
-          <ValueDisplay title='Carbon Footprint' value="계산중..." helperText='TODO' />
-          <ValueDisplay title='Energy Needed' value="계산중..." helperText='TODO' />
+          <ValueDisplay title='Runtime' value="계산중..." helperText='Runtime =  CPU time + Wall time' />
+          <ValueDisplay title='Carbon Footprint' value="계산중..." helperText='carbon footprint = energy needed * carbon intensity' />
+          <ValueDisplay title='Energy Needed' value="계산중..." helperText='energy needed = runtime * (power draw for cores * usage + power draw for memory) * PUE * PSF' />
         </>
       );
     }
     if (props.result.success) {
       return (
         <>
-          <ValueDisplay title='Runtime' value={props.result.runtime.toString()} helperText='TODO' />
-          <ValueDisplay title='Carbon Footprint' value={props.result.carbonFootprint.toString()} helperText='TODO' />
-          <ValueDisplay title='Energy Needed' value={props.result.energyNeeded.toString()} helperText='TODO' />
+          <ValueDisplay title='Runtime' value={props.result.runtime.toString()} helperText='Runtime =  CPU time + Wall time' />
+          <ValueDisplay title='Carbon Footprint' value={props.result.carbonFootprint.toString()} helperText='carbon footprint = energy needed * carbon intensity' />
+          <ValueDisplay title='Energy Needed' value={props.result.energyNeeded.toString()} helperText='energy needed = runtime * (power draw for cores * usage + power draw for memory) * PUE * PSF' />
         </>
       );
     } else {
