@@ -24,3 +24,7 @@ front/yarn-error.log*
 
 # created java files/folders
 back/JavaSource/*
+
+#env
+.venv
+.vscode

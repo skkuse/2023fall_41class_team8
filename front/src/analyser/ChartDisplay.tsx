@@ -32,21 +32,27 @@ function ChartDisplayNoMemo(props: ChartDisplayProps) {
             label: 'Runtime',
             data: props.results.map(r => r.runtime),
             borderColor: '#00BCD4',
+            pointRadius: 10,
+            pointHoverRadius: 10
           },
           {
             label: 'Carbon Footprint',
             data: props.results.map(r => r.carbonFootprint),
             borderColor: '#7CB342',
+            pointRadius: 10,
+            pointHoverRadius: 10
           },
           {
             label: 'Energy Needed',
             data: props.results.map(r => r.energyNeeded),
             borderColor: '#FDD835',
+            pointRadius: 10,
+            pointHoverRadius: 10
           }],
         }}
         options={{
           onClick: (_, el) => {
-            if(el.length == 0) return;
+            if (el.length == 0) return;
             props.viewDetails(props.results[el[0].index]);
           }
         }}

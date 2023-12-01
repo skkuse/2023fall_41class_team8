@@ -34,15 +34,21 @@ export type FailedAnalysis = {
   message: string;
 };
 
+interface Props {
+  sending: boolean;
+
+  setSending(value: boolean): void;
+}
+
 async function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export type AnalysisResult = SuccessfulAnalysis | FailedAnalysis;
 
-export function Analyser() {
+export function Analyser({ sending, setSending }: Props) {
   const [code, setCode] = useState(defaultVal);
-  const [sending, setSending] = useState(false);
+
   const [results, setResults] = useState<AnalysisResult[]>([]);
   const [stdin, setStdin] = useState<string>('');
   const [showStdin, setShowStdin] = useState(false);
@@ -51,20 +57,40 @@ export function Analyser() {
   const sendCode = async () => {
     setSending(true);
     await sleep(1000);
-    const newResult: AnalysisResult = Math.random() > 0.1 ? {
-      success: true,
-      runtime: Math.random() * 1000,
-      carbonFootprint: Math.random() * 1000,
-      energyNeeded: Math.random() * 1000,
-      code: code
-    } : {
-      success: false,
-      code: code,
-      error: ErrorType.Runtime,
-      message: '런타임 에러'
-    };
+    const res = await (await fetch(`http://localhost:5000/api/runjava`, {
+			method: 'POST',
+			body: JSON.stringify({
+				code: code,
+        stdin: stdin,
+			}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+		})).json();
+    let newRecord: AnalysisResult;
+    if(res.result === 'success') {
+      newRecord = {
+        success: true,
+        runtime: res.time,
+        carbonFootprint: res.carbon,
+        energyNeeded: res.energy,
+        code: code
+      };
+    } else {
+      const errorMap: {[k: string]: ErrorType} = {
+        runtime: ErrorType.Runtime,
+        compile: ErrorType.Compile,
+        timeout: ErrorType.Timeout
+      };
+      newRecord = {
+        success: false,
+        code: code,
+        error: errorMap[res.err_type],
+        message: res.error
+      };
+    }
     setSending(false);
-    setResults([...results, newResult]);
+    setResults([...results, newRecord]);
   }
 
   const reset = useCallback(() => setResults([]), []);
@@ -76,13 +102,15 @@ export function Analyser() {
       <Stack spacing={2} style={{ margin: 16 }}>
         <Stack spacing={2} direction='row' style={{ height: '500px' }}>
           <Box style={{ flex: 1 }}>
-            <Editor defaultLanguage='java' onChange={(v) => setCode(v ?? '')} defaultValue={defaultVal} theme="vs-dark" options={{ readOnly: sending }} />
+            <Editor defaultLanguage='java' onChange={(v) => setCode(v ?? '')} defaultValue={defaultVal}
+              theme="vs-dark" options={{ readOnly: sending }} />
           </Box>
           <InfoCard />
         </Stack>
         <Divider />
         <Stack spacing={2} direction='row'>
-          <Button onClick={() => setShowStdin(true)} variant='contained' fullWidth disabled={sending}>STDIN 추가하기</Button>
+          <Button onClick={() => setShowStdin(true)} variant='contained' fullWidth disabled={sending}>STDIN
+            추가하기</Button>
           <Button onClick={sendCode} variant='contained' fullWidth disabled={sending}>분석하기</Button>
         </Stack>
         <Divider />
