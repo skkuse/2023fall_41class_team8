@@ -1,4 +1,4 @@
-import { Editor } from "@monaco-editor/react";
+import { Editor, DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 
@@ -8,9 +8,15 @@ const defaultVal = `class Main {
     }
 }`;
 
+const modifiedVal = `class Main {
+    public static void main(String[] args) {
+        System.out.println("코드를 입력하고 수정하세요!");
+    }
+}`;
+
 const CodeInfo = () => {
     const [prevCode, setPrevCode] = useState(defaultVal);
-    const [afterCode, setAfterCode] = useState(defaultVal);
+    const [afterCode, setAfterCode] = useState(modifiedVal);
 
     return (
         <Stack style={{ margin: "16px", display: "flex" }}>
@@ -19,11 +25,7 @@ const CodeInfo = () => {
                     <Typography>Code</Typography>
                 </Box>
                 <Box style={{ flex: 1, height: '500px' }}>
-                    <Editor defaultLanguage='java' onChange={(v) => setPrevCode(v ?? '')} defaultValue={prevCode}
-                        theme="vs-dark" />
-                </Box>
-                <Box style={{ flex: 1, height: '500px' }}>
-                    <Editor defaultLanguage='java' onChange={(v) => setAfterCode(v ?? '')} defaultValue={afterCode}
+                    <DiffEditor language="java" original={prevCode} modified={afterCode}
                         theme="vs-dark" />
                 </Box>
             </Stack>
