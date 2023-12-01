@@ -24,7 +24,7 @@ def generate_uuid():
 
 def request_to_judge0(code: str, stdin: str):
     request_json = {
-        "source_code": base64.b64encode(bytes(code, "utf-8")).decode("utf-8"),
+        "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
         "language_id": 62,
         "stdin": stdin,
         "number_of_runs": 10,
@@ -36,17 +36,13 @@ def request_to_judge0(code: str, stdin: str):
         # "max_processes_and_or_threads": null,
         # "enable_network": null
     }
-    result = requests.post(
-        judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"}
-    )
+    result = requests.post(judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"})
     print(result.text)
     return result.json()["token"]
 
 
 def check_submission(token: str):
-    result = requests.get(
-        judge0_url + "submissions/" + token, params={"base64_encoded": "true"}
-    )
+    result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
     print(result.text)
     return result
 
@@ -56,10 +52,8 @@ def delete_submission(token: str):
     print(result.text)
     return result
 
-
 def decode_base64(data):
-    return "".join([base64.b64decode(t).decode("utf-8") for t in data.split("\n")])
-
+    return "".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     token = request_to_judge0(code, stdin)
@@ -69,21 +63,21 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if result.json()["status"]["id"] != 2:
             break
     delete_submission(token)
-    if result.json()["status"]["id"] == 6:
+    if(result.json()["status"]["id"] == 6):
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "compilation"
         return_result["error"] = decode_base64(result.json()["compile_output"])
         output_queue.put(return_result)
         return
-    if result.json()["status"]["id"] == 11:
+    if(result.json()["status"]["id"] == 11):
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "runtime"
         return_result["error"] = decode_base64(result.json()["stderr"])
         output_queue.put(return_result)
         return
-    if result.json()["status"]["id"] != 3:
+    if(result.json()["status"]["id"] != 3):
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "limited"
@@ -145,7 +139,6 @@ def runCode():
     running_judge0_IP.append(request.remote_addr)
     result = output_queue_dict[request.remote_addr].get()
     running_judge0_IP.remove(request.remote_addr)
-    del output_queue_dict[request.remote_addr]
     print(result)
     print(type(result))
     return json.dumps(result)
