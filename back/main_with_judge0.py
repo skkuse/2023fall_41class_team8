@@ -99,7 +99,7 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
-    return_result["wall_time"] = cpu_time
+    return_result["time"] = result.json()["wall_time"]
     return_result["energy"] = calculation_result["energy"]
     return_result["carbon"] = calculation_result["carbon_footprint"]
     return_result["result"] = "success"
