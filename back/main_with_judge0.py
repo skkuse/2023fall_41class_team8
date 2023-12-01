@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
 import uuid
 import threading
@@ -22,7 +22,7 @@ def generate_uuid():
 
 def request_to_judge0(code: str, stdin: str):
     request_json = {
-        "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
+        "source_code": base64.b64encode(bytes(code, "utf-8")).decode("utf-8"),
         "language_id": 62,
         "stdin": stdin,
         "number_of_runs": 10,
@@ -34,26 +34,35 @@ def request_to_judge0(code: str, stdin: str):
         # "max_processes_and_or_threads": null,
         # "enable_network": null
     }
-    result = requests.post(judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"})
-#    print(result.text)
+    result = requests.post(
+        judge0_url + "submissions", json=request_json, params={"base64_encoded": "true"}
+    )
+    #    print(result.text)
     return result.json()["token"]
 
 
 def check_submission(token: str):
-    result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
-#    print(result.text)
+    result = requests.get(
+        judge0_url + "submissions/" + token, params={"base64_encoded": "true"}
+    )
+    #    print(result.text)
     return result
 
 
 def delete_submission(token: str):
     result = requests.delete(judge0_url + "submissions/" + token)
-#    print(result.text)
+    #    print(result.text)
     return result
 
+
 def decode_base64(data):
-    return "".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
+    return "".join([base64.b64decode(t).decode("utf-8") for t in data.split("\n")])
+
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
+    t = time.localtime()
+    current_time = time.strftime("%H:%M:%S", t)
+    print(f"in thread {threading.get_ident()}" + current_time)
     token = request_to_judge0(code, stdin)
     while True:
         time.sleep(0.2)
@@ -62,21 +71,21 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         if id != 2 and id != 1:
             break
     delete_submission(token)
-    if(result.json()["status"]["id"] == 6):
+    if result.json()["status"]["id"] == 6:
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "compilation"
         return_result["error"] = decode_base64(result.json()["compile_output"])
         output_queue.put(return_result)
         return
-    if(result.json()["status"]["id"] == 11):
+    if result.json()["status"]["id"] == 11:
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "runtime"
         return_result["error"] = decode_base64(result.json()["stderr"])
         output_queue.put(return_result)
         return
-    if(result.json()["status"]["id"] != 3):
+    if result.json()["status"]["id"] != 3:
         return_result = dict()
         return_result["result"] = "failure"
         return_result["err_type"] = "limited"
@@ -90,6 +99,7 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     return_result["energy"] = calculation_result["energy"]
     return_result["carbon"] = calculation_result["carbon_footprint"]
     return_result["result"] = "success"
+    print(f"thread {threading.get_ident()} done")
     output_queue.put(return_result)
 
 
@@ -125,20 +135,28 @@ def runCode():
     data = request.get_json()
     code = data["code"]
     stdin = data["stdin"]
-    if request.remote_addr in running_judge0_IP:
-        return 401
-    output_queue_dict[request.remote_addr] = Queue()
+    ip = None
+    if request.headers.getlist("X-Forwarded-For"):
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        ip = request.remote_addr
+    print(ip)
+    if ip in running_judge0_IP:
+        print("same ip!!!")
+        response = jsonify({"error": "Not valid"})
+        return response, 401
+    output_queue_dict[ip] = Queue()
     user_thread = threading.Thread(
         target=interact_judge0,
-        args=(code, stdin, output_queue_dict[request.remote_addr]),
+        args=(code, stdin, output_queue_dict[ip]),
     )
     user_thread.daemon = True
     user_thread.start()
-    running_judge0_IP.append(request.remote_addr)
-    result = output_queue_dict[request.remote_addr].get()
-    running_judge0_IP.remove(request.remote_addr)
-#    print(result)
-#    print(type(result))
+    running_judge0_IP.append(ip)
+    result = output_queue_dict[ip].get()
+    running_judge0_IP.remove(ip)
+    #    print(result)
+    #    print(type(result))
     return json.dumps(result)
 
 
@@ -147,23 +165,23 @@ def runCode():
 #     with open(patterns_json_file_path, 'r') as file:
 #         data = json.load(file)
 
-#     	return data
+#        return data
 
 # @app.route("/pattern")
 # def get_pattern():
 #     id = request.args["id"]
 
 #     with open(pattern_json_file_path, 'r') as file:
-#     	data = json.load(file)
+#        data = json.load(file)
 
-#     	return data[id]
+#        return data[id]
 
 # #전달받은 카테고리 아이디로 카데고리값 전달
 # @app.route('/get_category_string', methods=['POST'])
 # def get_category_string():
 #     data = request.get_json()
 #     with open(patterns_json_file_path, 'r') as file:
-#     	categories = json.load(file)
+#        categories = json.load(file)
 #         # 전달받은 카테고리 ID 확인
 #         category_id = data.get('category_id')
 
@@ -173,4 +191,4 @@ def runCode():
 #     return jsonify({'category_string': category_string})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host="0.0.0.0")
