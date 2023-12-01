@@ -43,7 +43,11 @@ def request_to_judge0(code: str, stdin: str):
 
 def check_submission(token: str):
     result = requests.get(
-        judge0_url + "submissions/" + token, params={"base64_encoded": "true"}
+        judge0_url + "submissions/" + token,
+        params={
+            "base64_encoded": "true",
+            "fields": "stdout,time,memory,stderr,token,compile_output,message,status,wall_time",
+        },
     )
     #    print(result.text)
     return result
@@ -95,7 +99,7 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
-    return_result["time"] = cpu_time
+    return_result["wall_time"] = cpu_time
     return_result["energy"] = calculation_result["energy"]
     return_result["carbon"] = calculation_result["carbon_footprint"]
     return_result["result"] = "success"
@@ -155,6 +159,7 @@ def runCode():
     running_judge0_IP.append(ip)
     result = output_queue_dict[ip].get()
     running_judge0_IP.remove(ip)
+    del output_queue_dict[request.remote_addr]
     #    print(result)
     #    print(type(result))
     return json.dumps(result)
