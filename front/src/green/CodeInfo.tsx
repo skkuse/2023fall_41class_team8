@@ -1,17 +1,38 @@
-import { Editor, DiffEditor } from "@monaco-editor/react";
+import { DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 
-const defaultVal = `class Main {
+const defaultVal = `import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Main {
     public static void main(String[] args) {
-        System.out.println("코드를 입력하세요!");
+        Pattern pattern = Pattern.compile("'(.*?)'"); // 변경된 부분
+        int found = 0;
+        for (int i = 0; i < 100000; i++) {
+            Matcher matcher = pattern
+                    .matcher("The code should be 'able to find a phrase' that is surrounded by single quotemarks.");
+            if (matcher.find()) found++;
+        }
+        System.out.println(found);
     }
 }`;
 
-const modifiedVal = `class Main {
+const modifiedVal = `import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Main {
     public static void main(String[] args) {
-        System.out.println("코드를 입력하고 수정하세요!");
+        Pattern pattern = Pattern.compile("'([^']+)'"); // 변경된 부분
+        int found = 0;
+        for (int i = 0; i < 100000; i++) {
+            Matcher matcher = pattern
+                    .matcher("The code should be 'able to find a phrase' that is surrounded by single quotemarks.");
+            if (matcher.find()) found++;
+        }
+        System.out.println(found);
     }
+}   }
 }`;
 
 const CodeInfo = () => {
