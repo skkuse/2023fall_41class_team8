@@ -8,16 +8,10 @@ export interface Category {
     techniques: Technique[];
 }
 
-export interface TechniquesData {
-    c1: Category;
-    c2: Category;
-    c3: Category;
-    c4: Category;
-    c5: Category;
-}
+export type TechniquesData = Category[];
 
-const techniquesData: TechniquesData = {
-    c1: {
+const techniquesData: TechniquesData = [
+    {
         name: "더 빠른 연산",
         techniques: [
             { id: 1, name: "Backtracking 줄이기" },
@@ -29,7 +23,7 @@ const techniquesData: TechniquesData = {
             { id: 30, name: "EntrySet 사용" },
         ],
     },
-    c2: {
+    {
         name: "컴파일 최적화",
         techniques: [
             { id: 23, name: "Inline Method" },
@@ -37,7 +31,7 @@ const techniquesData: TechniquesData = {
             { id: 26, name: "Casting 줄이기" },
         ],
     },
-    c3: {
+    {
         name: "코딩 스타일",
         techniques: [
             { id: 4, name: "Exception Throw" },
@@ -52,14 +46,14 @@ const techniquesData: TechniquesData = {
             { id: 29, name: "Logging with Lambda function" },
         ],
     },
-    c4: {
+    {
         name: "쓰레드 동기화",
         techniques: [
             { id: 20, name: "벡터 synchronization overhead" },
             { id: 25, name: "동기화 지양" },
         ],
     },
-    c5: {
+    {
         name: "Java 객체",
         techniques: [
             { id: 8, name: "User Input" },
@@ -73,6 +67,6 @@ const techniquesData: TechniquesData = {
             { id: 31, name: "EnumSet" },
         ],
     },
-};
+];
 
 export default techniquesData;

@@ -16,14 +16,18 @@ const defaultVal = `class Main {
 export enum ErrorType {
   Runtime,
   Compile,
-  Timeout
+  Timeout,
+  Server
 }
 
-export type SuccessfulAnalysis = {
+export type Sample = {
+  time: string;
+  carbon: string;
+  energy: string;
+}
+
+export type SuccessfulAnalysis = Sample & {
   success: true;
-  runtime: number;
-  carbonFootprint: number;
-  energyNeeded: number;
   code: string;
 };
 
@@ -40,10 +44,6 @@ interface Props {
   setSending(value: boolean): void;
 }
 
-async function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export type AnalysisResult = SuccessfulAnalysis | FailedAnalysis;
 
 export function Analyser({ sending, setSending }: Props) {
@@ -56,41 +56,51 @@ export function Analyser({ sending, setSending }: Props) {
 
   const sendCode = async () => {
     setSending(true);
-    await sleep(1000);
-    const res = await (await fetch(`http://localhost:5000/api/runjava`, {
-			method: 'POST',
-			body: JSON.stringify({
-				code: code,
-        stdin: stdin,
-			}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-		})).json();
     let newRecord: AnalysisResult;
-    if(res.result === 'success') {
-      newRecord = {
-        success: true,
-        runtime: res.time,
-        carbonFootprint: res.carbon,
-        energyNeeded: res.energy,
-        code: code
-      };
-    } else {
-      const errorMap: {[k: string]: ErrorType} = {
-        runtime: ErrorType.Runtime,
-        compile: ErrorType.Compile,
-        timeout: ErrorType.Timeout
-      };
-      newRecord = {
+    try {
+      const res = await (await fetch(`/api/runjava`, {
+        method: 'POST',
+        body: JSON.stringify({
+          code: code,
+          stdin: stdin,
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })).json();
+      if(res.result === 'success') {
+        newRecord = {
+          success: true,
+          time: res.time,
+          carbon: res.carbon,
+          energy: res.energy,
+          code: code
+        };
+      } else {
+        const errorMap: {[k: string]: ErrorType} = {
+          runtime: ErrorType.Runtime,
+          compile: ErrorType.Compile,
+          timeout: ErrorType.Timeout
+        };
+        newRecord = {
+          success: false,
+          code: code,
+          error: errorMap[res.err_type],
+          message: res.error
+        };
+      }
+      setSending(false);
+      setResults([...results, newRecord]);
+    } catch (e) {
+      setSending(false);
+      setResults([...results, {
         success: false,
         code: code,
-        error: errorMap[res.err_type],
-        message: res.error
-      };
+        error: ErrorType.Runtime,
+        message: "서버와의 통신에 실패했습니다."
+      }]);
+      console.log(e);
     }
-    setSending(false);
-    setResults([...results, newRecord]);
   }
 
   const reset = useCallback(() => setResults([]), []);
@@ -116,7 +126,7 @@ export function Analyser({ sending, setSending }: Props) {
         <Divider />
         <Stack spacing={2} direction='row' style={{ height: '500px' }}>
           <ResultCard pending={sending} result={results.length == 0 ? null : results[results.length - 1]} />
-          <ChartDisplay results={filtered} reset={reset} viewDetails={viewDetails} />
+          <ChartDisplay interactive={true} results={filtered} reset={reset} viewDetails={viewDetails} />
         </Stack>
       </Stack>
       <StdinDialog open={showStdin} onClose={() => setShowStdin(false)} confirm={(stdin) => {

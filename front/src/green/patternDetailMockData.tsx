@@ -1,16 +1,4 @@
-export interface Sample {
-    time: string;
-    carbon: string;
-    energy: string;
-}
-
-interface ExecutionData {
-    code: string;
-    time: string;
-    energy: string;
-    carbon: string;
-    samples: Sample[];
-}
+import { ExecutionData } from "./GreenPatternPage";
 
 interface CodePerformanceData {
     [key: string]: {
