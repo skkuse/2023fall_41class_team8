@@ -15,7 +15,7 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
     if (props.pending) {
       return (
         <>
-          <ValueDisplay title='Runtime' value="계산중..." helperText='Runtime =  CPU time + Wall time' />
+          <ValueDisplay title='Runtime' value="계산중..." helperText='Runtime =  I.E. Walltime' />
           <ValueDisplay title='Carbon Footprint' value="계산중..." helperText='carbon footprint = energy needed * carbon intensity' />
           <ValueDisplay title='Energy Needed' value="계산중..." helperText='energy needed = runtime * (power draw for cores * usage + power draw for memory) * PUE * PSF' />
         </>
