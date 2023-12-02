@@ -1,4 +1,4 @@
-import { Box, Card, List, ListItemButton, ListSubheader, Stack } from "@mui/material"
+import { Box, Card, List, ListItemButton, ListSubheader, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 import CodeInfo from "./CodeInfo";
 import techniquesData, { } from "./patternMockData";
@@ -21,7 +21,7 @@ const GreenPatternPage = () => {
       <ListSubheader key={c.name}>{c.name}</ListSubheader>,
       c.techniques.map((t) => (
         <ListItemButton key={t.id} onClick={() => setId(t.id)} selected={t.id === id}>
-          {t.name}
+          <Typography>{t.name}</Typography>
         </ListItemButton>
       ))
     ];
@@ -36,8 +36,8 @@ const GreenPatternPage = () => {
       <Card style={{ flex: 8, borderRadius: '12px' }}>
         {id ?
           <CodeInfo before={PatternDetailData[id].before} after={PatternDetailData[id].after} />
-          : <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-            <h1>그린 패턴을 선택해주세요</h1>
+          : <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50%" }}>
+            <Typography variant="h3">그린 패턴을 선택해주세요</Typography>
           </Box>}
       </Card>
     </Stack>
