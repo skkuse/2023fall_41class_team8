@@ -126,7 +126,7 @@ export function Analyser({ sending, setSending }: Props) {
         <Divider />
         <Stack spacing={2} direction='row' style={{ height: '500px' }}>
           <ResultCard pending={sending} result={results.length == 0 ? null : results[results.length - 1]} />
-          <ChartDisplay results={filtered} reset={reset} viewDetails={viewDetails} />
+          <ChartDisplay interactive={true} results={filtered} reset={reset} viewDetails={viewDetails} />
         </Stack>
       </Stack>
       <StdinDialog open={showStdin} onClose={() => setShowStdin(false)} confirm={(stdin) => {

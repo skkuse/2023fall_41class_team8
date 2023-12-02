@@ -15,7 +15,15 @@ Chart.register(
   Legend,
 );
 
-type ChartDisplayProps = { results: (Sample | SuccessfulAnalysis)[], reset?: () => void, viewDetails?: (result: SuccessfulAnalysis) => void};
+type ChartDisplayProps = {
+  interactive: true,
+  results: SuccessfulAnalysis[],
+  reset: () => void,
+  viewDetails: (result: SuccessfulAnalysis) => void
+} | {
+  interactive: false,
+  results: Sample[]
+};
 
 const needsUpdate = (a: ChartDisplayProps, b: ChartDisplayProps) => a.results.length == b.results.length;
 
@@ -53,14 +61,11 @@ function ChartDisplayNoMemo(props: ChartDisplayProps) {
         options={{
           onClick: (_, el) => {
             if (el.length == 0) return;
-            if (props.viewDetails) {
-              const target = props.results[el[0].index];
-              if ('code' in target && target.code) props.viewDetails(target);
-            }
+            if (props.interactive) props.viewDetails(props.results[el[0].index]);
           }
         }}
       />
-      {props.reset !== undefined ??
+      {props.interactive &&
         <Box style={{ position: 'absolute', bottom: 16, right: 16 }}>
           <Fab onClick={props.reset} style={{ float: 'right' }} color="primary">
             <Delete />

@@ -1,7 +1,7 @@
 import { DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
-import { ChartDisplay } from "../analyser/ChartDisplay";
 import { ExecutionData } from "./GreenPatternPage";
+import { ChartDisplay } from "../analyser/ChartDisplay";
 
 export type CodeInfo = {
   id: number | string
@@ -69,10 +69,10 @@ const CodeInfo = ({before, after}: CodeInfoProps) => {
           <Typography>Graph</Typography>
         </Box>
         <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <ChartDisplay results={before.samples} />
+          <ChartDisplay interactive={false} results={before.samples} />
         </Box>
         <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <ChartDisplay results={after.samples} />
+          <ChartDisplay interactive={false} results={after.samples} />
         </Box>
       </Stack>
     </Stack>
