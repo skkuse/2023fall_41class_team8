@@ -24,9 +24,9 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
     if (props.result.success) {
       return (
         <>
-          <ValueDisplay title='Runtime' value={props.result.runtime.toString()} helperText='Runtime =  CPU time + Wall time' />
-          <ValueDisplay title='Carbon Footprint' value={props.result.carbonFootprint.toString()} helperText='carbon footprint = energy needed * carbon intensity' />
-          <ValueDisplay title='Energy Needed' value={props.result.energyNeeded.toString()} helperText='energy needed = runtime * (power draw for cores * usage + power draw for memory) * PUE * PSF' />
+          <ValueDisplay title='Runtime' value={props.result.time.toString()} helperText='Runtime =  CPU time + Wall time' />
+          <ValueDisplay title='Carbon Footprint' value={props.result.carbon.toString()} helperText='carbon footprint = energy needed * carbon intensity' />
+          <ValueDisplay title='Energy Needed' value={props.result.energy.toString()} helperText='energy needed = runtime * (power draw for cores * usage + power draw for memory) * PUE * PSF' />
         </>
       );
     } else {

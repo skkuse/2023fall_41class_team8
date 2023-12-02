@@ -1,6 +1,6 @@
 import { Box, Card, Fab } from "@mui/material";
 import { Line } from "react-chartjs-2";
-import { SuccessfulAnalysis } from "./Analyser";
+import { Sample, SuccessfulAnalysis } from "./Analyser";
 import { CategoryScale, Chart, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js';
 import { Delete } from "@mui/icons-material";
 import React from "react";
@@ -15,7 +15,7 @@ Chart.register(
   Legend,
 );
 
-type ChartDisplayProps = { results: SuccessfulAnalysis[], reset: () => void, viewDetails: (result: SuccessfulAnalysis) => void };
+type ChartDisplayProps = { results: (Sample | SuccessfulAnalysis)[], reset?: () => void, viewDetails?: (result: SuccessfulAnalysis) => void};
 
 const needsUpdate = (a: ChartDisplayProps, b: ChartDisplayProps) => a.results.length == b.results.length;
 
@@ -30,21 +30,21 @@ function ChartDisplayNoMemo(props: ChartDisplayProps) {
           labels: label,
           datasets: [{
             label: 'Runtime',
-            data: props.results.map(r => r.runtime),
+            data: props.results.map(r => r.time),
             borderColor: '#00BCD4',
             pointRadius: 10,
             pointHoverRadius: 10
           },
           {
             label: 'Carbon Footprint',
-            data: props.results.map(r => r.carbonFootprint),
+            data: props.results.map(r => r.carbon),
             borderColor: '#7CB342',
             pointRadius: 10,
             pointHoverRadius: 10
           },
           {
             label: 'Energy Needed',
-            data: props.results.map(r => r.energyNeeded),
+            data: props.results.map(r => r.energy),
             borderColor: '#FDD835',
             pointRadius: 10,
             pointHoverRadius: 10
@@ -53,15 +53,21 @@ function ChartDisplayNoMemo(props: ChartDisplayProps) {
         options={{
           onClick: (_, el) => {
             if (el.length == 0) return;
-            props.viewDetails(props.results[el[0].index]);
+            if (props.viewDetails) {
+              const target = props.results[el[0].index];
+              if ('code' in target && target.code) props.viewDetails(target);
+            }
           }
         }}
       />
-      <Box style={{ position: 'absolute', bottom: 16, right: 16 }}>
-        <Fab onClick={props.reset} style={{ float: 'right' }} color="primary">
-          <Delete />
-        </Fab>
-      </Box>
+      {props.reset !== undefined ??
+        <Box style={{ position: 'absolute', bottom: 16, right: 16 }}>
+          <Fab onClick={props.reset} style={{ float: 'right' }} color="primary">
+            <Delete />
+          </Fab>
+        </Box>
+      }
+
 
     </Card >
   );

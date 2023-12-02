@@ -19,11 +19,14 @@ export enum ErrorType {
   Timeout
 }
 
-export type SuccessfulAnalysis = {
+export type Sample = {
+  time: string;
+  carbon: string;
+  energy: string;
+}
+
+export type SuccessfulAnalysis = Sample & {
   success: true;
-  runtime: number;
-  carbonFootprint: number;
-  energyNeeded: number;
   code: string;
 };
 
@@ -71,9 +74,9 @@ export function Analyser({ sending, setSending }: Props) {
     if(res.result === 'success') {
       newRecord = {
         success: true,
-        runtime: res.time,
-        carbonFootprint: res.carbon,
-        energyNeeded: res.energy,
+        time: res.time,
+        carbon: res.carbon,
+        energy: res.energy,
         code: code
       };
     } else {

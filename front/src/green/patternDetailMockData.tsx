@@ -1,8 +1,4 @@
-export interface Sample {
-    time: string;
-    carbon: string;
-    energy: string;
-}
+import { Sample } from "../analyser/Analyser";
 
 interface ExecutionData {
     code: string;

@@ -1,8 +1,9 @@
 import { DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-import { PatternDetailData, Sample } from "./patternDetailMockData";
-import { ChartDisplay } from "./ChartDisplay";
+import { PatternDetailData } from "./patternDetailMockData";
+import { ChartDisplay } from "../analyser/ChartDisplay";
+import { Sample } from "../analyser/Analyser";
 
 export type CodeInfo = {
   id: number | string
