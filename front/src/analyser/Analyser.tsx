@@ -16,7 +16,8 @@ const defaultVal = `class Main {
 export enum ErrorType {
   Runtime,
   Compile,
-  Timeout
+  Timeout,
+  Server
 }
 
 export type Sample = {
@@ -43,10 +44,6 @@ interface Props {
   setSending(value: boolean): void;
 }
 
-async function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export type AnalysisResult = SuccessfulAnalysis | FailedAnalysis;
 
 export function Analyser({ sending, setSending }: Props) {
@@ -59,41 +56,51 @@ export function Analyser({ sending, setSending }: Props) {
 
   const sendCode = async () => {
     setSending(true);
-    await sleep(1000);
-    const res = await (await fetch(`/api/runjava`, {
-			method: 'POST',
-			body: JSON.stringify({
-				code: code,
-        stdin: stdin,
-			}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-		})).json();
     let newRecord: AnalysisResult;
-    if(res.result === 'success') {
-      newRecord = {
-        success: true,
-        time: res.time,
-        carbon: res.carbon,
-        energy: res.energy,
-        code: code
-      };
-    } else {
-      const errorMap: {[k: string]: ErrorType} = {
-        runtime: ErrorType.Runtime,
-        compile: ErrorType.Compile,
-        timeout: ErrorType.Timeout
-      };
-      newRecord = {
+    try {
+      const res = await (await fetch(`/api/runjava`, {
+        method: 'POST',
+        body: JSON.stringify({
+          code: code,
+          stdin: stdin,
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })).json();
+      if(res.result === 'success') {
+        newRecord = {
+          success: true,
+          time: res.time,
+          carbon: res.carbon,
+          energy: res.energy,
+          code: code
+        };
+      } else {
+        const errorMap: {[k: string]: ErrorType} = {
+          runtime: ErrorType.Runtime,
+          compile: ErrorType.Compile,
+          timeout: ErrorType.Timeout
+        };
+        newRecord = {
+          success: false,
+          code: code,
+          error: errorMap[res.err_type],
+          message: res.error
+        };
+      }
+      setSending(false);
+      setResults([...results, newRecord]);
+    } catch (e) {
+      setSending(false);
+      setResults([...results, {
         success: false,
         code: code,
-        error: errorMap[res.err_type],
-        message: res.error
-      };
+        error: ErrorType.Runtime,
+        message: "서버와의 통신에 실패했습니다."
+      }]);
+      console.log(e);
     }
-    setSending(false);
-    setResults([...results, newRecord]);
   }
 
   const reset = useCallback(() => setResults([]), []);

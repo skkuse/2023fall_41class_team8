@@ -33,7 +33,8 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
       const msg = {
         [ErrorType.Compile]: '컴파일 에러',
         [ErrorType.Runtime]: '런타임 에러',
-        [ErrorType.Timeout]: '시간 초과'
+        [ErrorType.Timeout]: '시간 초과',
+        [ErrorType.Server]: '서버 에러',
       }
       return (
         <>
