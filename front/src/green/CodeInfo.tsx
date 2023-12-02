@@ -1,7 +1,8 @@
 import { DiffEditor } from "@monaco-editor/react";
-import { Box, Stack, Typography } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import { ExecutionData } from "./GreenPatternPage";
 import { ChartDisplay } from "../analyser/ChartDisplay";
+import { CenteredText } from "./CenteredText";
 
 export type CodeInfo = {
   id: number | string
@@ -18,64 +19,42 @@ type CodeInfoProps = {
   after: ExecutionData;
 };
 
-const CodeInfo = ({before, after}: CodeInfoProps) => {
+
+
+const CodeInfo = ({ before, after }: CodeInfoProps) => {
 
   return (
-    <Stack style={{ margin: "16px", display: "flex", overflowY: "scroll" }}>
-      <Stack spacing={2} direction='row' style={{ height: '500px', justifyContent: "center", alignItems: "center" }}>
-        <Box>
-          <Typography>Code</Typography>
-        </Box>
+    <Grid container spacing={2} style={{ height: "100%" }}>
+      <Grid item xs={2}>
+        <CenteredText text={"Code"} />
+      </Grid>
+      <Grid item xs={10}>
         <Box style={{ flex: 1, height: '500px' }}>
           <DiffEditor language="java" original={before.code} modified={after.code}
             theme="vs-dark" />
         </Box>
-      </Stack>
-      <Stack spacing={2} direction='row' style={{ height: '100px', display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box>
-          <Typography>Runtime</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{before.time}</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{after.time}</Typography>
-        </Box>
-      </Stack>
-      <Stack spacing={2} direction='row' style={{ height: '100px', display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box>
-          <Typography>Carbon Footprint</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{before.carbon}</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{after.carbon}</Typography>
-        </Box>
-      </Stack>
-      <Stack spacing={2} direction='row' style={{ height: '100px', display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box>
-          <Typography>Energe Needed</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{before.energy}</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <Typography>{after.energy}</Typography>
-        </Box>
-      </Stack>
-      <Stack spacing={2} direction='row' style={{ height: '200px', display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box>
-          <Typography>Graph</Typography>
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <ChartDisplay interactive={false} results={before.samples} />
-        </Box>
-        <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-          <ChartDisplay interactive={false} results={after.samples} />
-        </Box>
-      </Stack>
-    </Stack>
+      </Grid>
+      <Grid item xs={2}>
+        <CenteredText text={"Runtime"} />
+      </Grid>
+      <Grid item xs={5}><CenteredText text={before.time} /></Grid>
+      <Grid item xs={5}><CenteredText text={after.time} /></Grid>
+      <Grid item xs={2}>
+        <CenteredText text={"Carbon Footprint"} />
+      </Grid>
+      <Grid item xs={5}><CenteredText text={before.carbon} /></Grid>
+      <Grid item xs={5}><CenteredText text={after.carbon} /></Grid>
+      <Grid item xs={2}>
+        <CenteredText text={"Energy Needed"} />
+      </Grid>
+      <Grid item xs={5}><CenteredText text={before.energy} /></Grid>
+      <Grid item xs={5}><CenteredText text={after.energy} /></Grid>
+      <Grid item xs={2}>
+        <CenteredText text={"Graph"} />
+      </Grid>
+      <Grid item xs={5}><ChartDisplay interactive={false} results={before.samples} /></Grid>
+      <Grid item xs={5}><ChartDisplay interactive={false} results={after.samples} /></Grid>
+    </Grid>
   )
 }
 
