@@ -1,7 +1,7 @@
 import { DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
 import { ChartDisplay } from "../analyser/ChartDisplay";
-import { ExecutionData } from "./Green";
+import { ExecutionData } from "./GreenPatternPage";
 
 export type CodeInfo = {
   id: number | string

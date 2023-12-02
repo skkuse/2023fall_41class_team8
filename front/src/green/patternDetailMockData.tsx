@@ -1,4 +1,4 @@
-import { ExecutionData } from "./Green";
+import { ExecutionData } from "./GreenPatternPage";
 
 interface CodePerformanceData {
     [key: string]: {

@@ -13,7 +13,7 @@ export type ExecutionData = {
   samples: Sample[];
 }
 
-const Green = () => {
+const GreenPatternPage = () => {
   const [id, setId] = useState<number | null>(null);
 
   const categoryList = () => {
@@ -48,4 +48,4 @@ const Green = () => {
   )
 }
 
-export default Green
+export default GreenPatternPage
