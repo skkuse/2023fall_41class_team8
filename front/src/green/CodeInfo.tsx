@@ -1,6 +1,9 @@
 import { DiffEditor } from "@monaco-editor/react";
 import { Box, Stack, Typography } from "@mui/material"
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { PatternDetailData, Sample } from "./patternDetailMockData";
+import { AnalysisResult, SuccessfulAnalysis } from "../analyser/Analyser";
+import { ChartDisplay } from "./ChartDisplay";
 
 const defaultVal = `import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,12 +38,53 @@ class Main {
 }   }
 }`;
 
-const CodeInfo = () => {
-    const [prevCode, setPrevCode] = useState(defaultVal);
-    const [afterCode, setAfterCode] = useState(modifiedVal);
+export type CodeInfo = {
+    id: number | string
+}
+
+export type AnalyserList = {
+    runtime: number;
+    carbonFootprint: number;
+    energyNeeded: number;
+};
+
+const CodeInfo = ({ id }: CodeInfo) => {
+    const [prevCode, setPrevCode] = useState("");
+    const [afterCode, setAfterCode] = useState("");
+    const [prevRuntime, setPrevRuntime] = useState("");
+    const [afterRuntime, setAfterRuntime] = useState("");
+    const [prevCarbon, setPrevCarbon] = useState("");
+    const [afterCarbon, setAfterCarbon] = useState("");
+    const [prevEnerge, setPrevEnerge] = useState("");
+    const [afterEnerge, setAfterEnerge] = useState("");
+
+    const [results, setResults] = useState<Sample[]>([])
+    const [resultsAfter, setResultsAfter] = useState<Sample[]>([])
+
+    useEffect(() => {
+
+        console.log(PatternDetailData[id]);
+        
+        setPrevCode(PatternDetailData[id] && PatternDetailData[id].before.code)
+        setAfterCode(PatternDetailData[id] && PatternDetailData[id].after.code)
+
+        setPrevRuntime(PatternDetailData[id] && PatternDetailData[id].before.time)
+        setAfterRuntime(PatternDetailData[id] && PatternDetailData[id].after.time)
+
+        setPrevCarbon(PatternDetailData[id] && PatternDetailData[id].before.carbon)
+        setAfterCarbon(PatternDetailData[id] && PatternDetailData[id].after.carbon)
+
+        setPrevEnerge(PatternDetailData[id] && PatternDetailData[id].before.energy)
+        setAfterEnerge(PatternDetailData[id] && PatternDetailData[id].after.energy)
+
+        setResults(PatternDetailData[id] && PatternDetailData[id].before.samples)
+        setResultsAfter(PatternDetailData[id] && PatternDetailData[id].before.samples)
+
+    }, [id])
+
 
     return (
-        <Stack style={{ margin: "16px", display: "flex" }}>
+        <Stack style={{ margin: "16px", display: "flex",  overflowY: "scroll" }}>
             <Stack spacing={2} direction='row' style={{ height: '500px', justifyContent: "center", alignItems: "center" }}>
                 <Box>
                     <Typography>Code</Typography>
@@ -55,10 +99,10 @@ const CodeInfo = () => {
                     <Typography>Runtime</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{prevRuntime}</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{afterRuntime}</Typography>
                 </Box>
             </Stack>
             <Stack spacing={2} direction='row' style={{ height: '100px', display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -66,10 +110,10 @@ const CodeInfo = () => {
                     <Typography>Carbon Footprint</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{prevCarbon}</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{afterCarbon}</Typography>
                 </Box>
             </Stack>
             <Stack spacing={2} direction='row' style={{ height: '100px', display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -77,10 +121,10 @@ const CodeInfo = () => {
                     <Typography>Energe Needed</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{prevEnerge}</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <Typography>{afterEnerge}</Typography>
                 </Box>
             </Stack>
             <Stack spacing={2} direction='row' style={{ height: '200px', display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -88,10 +132,10 @@ const CodeInfo = () => {
                     <Typography>Graph</Typography>
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                    <ChartDisplay results={results} />
                 </Box>
                 <Box style={{ flex: 1, border: "1px", borderRadius: "10px", borderColor: "black" }}>
-                    <Typography>###</Typography>
+                <ChartDisplay results={resultsAfter} />
                 </Box>
             </Stack>
         </Stack>
