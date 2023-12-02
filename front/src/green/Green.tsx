@@ -1,4 +1,4 @@
-import { List, ListItemButton, ListSubheader, Paper, Stack } from "@mui/material"
+import { Box, Card, List, ListItemButton, ListSubheader, Stack } from "@mui/material"
 import { useState } from "react";
 import CodeInfo from "./CodeInfo";
 import techniquesData, { } from "./patternMockData";
@@ -14,17 +14,7 @@ export type ExecutionData = {
 }
 
 const Green = () => {
-  // const [open, setOpen] = useState(true);
-  const [id, setId] = useState(16);
-
-  const handleButtonClick = (techId: number) => {
-    console.log(techId);
-    setId((prevId) => {
-      // Do any additional processing with the previous state if needed
-      console.log(prevId);
-      return techId;
-    });
-  };
+  const [id, setId] = useState<number | null>(null);
 
   const categoryList = () => {
     return techniquesData.map((c) => {
@@ -32,7 +22,7 @@ const Green = () => {
         <>
           <ListSubheader key={c.name}>{c.name}</ListSubheader>
           {c.techniques.map((t) => (
-            <ListItemButton key={t.id} onClick={() => handleButtonClick(t.id)} selected={t.id === id}>
+            <ListItemButton key={t.id} onClick={() => setId(t.id)} selected={t.id === id}>
               {t.name}
             </ListItemButton>
           ))}
@@ -44,12 +34,16 @@ const Green = () => {
 
   return (
     <Stack style={{ display: "flex", overflowY: "auto" }} direction="row" spacing={2} >
-      <Paper style={{ flex: 2, borderRadius: '12px' }}>
+      <Card style={{ flex: 2, borderRadius: '12px' }}>
         <List>{categoryList()}</List>
-      </Paper>
-      <Paper style={{ flex: 8, borderRadius: '12px' }}>
-        <CodeInfo before={PatternDetailData[id].before} after={PatternDetailData[id].after} />
-      </Paper>
+      </Card>
+      <Card style={{ flex: 8, borderRadius: '12px' }}>
+        {id ?
+          <CodeInfo before={PatternDetailData[id].before} after={PatternDetailData[id].after} />
+          : <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+            <h1>그린 패턴을 선택해주세요</h1>
+          </Box>}
+      </Card>
     </Stack>
   )
 }
