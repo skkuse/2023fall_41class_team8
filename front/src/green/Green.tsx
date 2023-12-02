@@ -2,10 +2,20 @@ import { Button, Collapse, List, ListItem, Paper, Stack, Typography } from "@mui
 import { useState } from "react";
 import CodeInfo from "./CodeInfo";
 import techniquesData, { Category, Technique } from "./patternMockData";
+import { Sample } from "../analyser/Analyser";
+import { PatternDetailData } from "./patternDetailMockData";
+
+export type ExecutionData = {
+  code: string;
+  time: string;
+  energy: string;
+  carbon: string;
+  samples: Sample[];
+}
 
 const Green = () => {
   const [open, setOpen] = useState(true);
-  const [id, setId] = useState(16)
+  const [id, setId] = useState(16);
 
   const handleButtonClick = (techId: number) => {
     console.log(techId);
@@ -43,7 +53,7 @@ const Green = () => {
         </List>
       </Paper>
       <Paper style={{ flex: 8, borderRadius: '12px' }}>
-        <CodeInfo id={id} />
+        <CodeInfo before={PatternDetailData[id].before} after={PatternDetailData[id].after} />
       </Paper>
     </Stack>
   )

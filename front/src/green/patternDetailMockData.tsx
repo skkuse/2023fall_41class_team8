@@ -1,12 +1,4 @@
-import { Sample } from "../analyser/Analyser";
-
-interface ExecutionData {
-    code: string;
-    time: string;
-    energy: string;
-    carbon: string;
-    samples: Sample[];
-}
+import { ExecutionData } from "./Green";
 
 interface CodePerformanceData {
     [key: string]: {
