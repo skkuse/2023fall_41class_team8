@@ -1,7 +1,6 @@
-import { Box, Card, Fab } from "@mui/material";
+import { Card } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js';
-import { Delete } from "@mui/icons-material";
 import React from "react";
 import { Sample } from "./patternDetailMockData";
 
