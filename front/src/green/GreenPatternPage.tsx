@@ -16,26 +16,22 @@ export type ExecutionData = {
 const GreenPatternPage = () => {
   const [id, setId] = useState<number | null>(null);
 
-  const categoryList = () => {
-    return techniquesData.map((c) => {
-      return (
-        <>
-          <ListSubheader key={c.name}>{c.name}</ListSubheader>
-          {c.techniques.map((t) => (
-            <ListItemButton key={t.id} onClick={() => setId(t.id)} selected={t.id === id}>
-              {t.name}
-            </ListItemButton>
-          ))}
-        </>
-      )
-    })
-  }
+  const categoryList = techniquesData.map((c) => {
+    return [
+      <ListSubheader key={c.name}>{c.name}</ListSubheader>,
+      c.techniques.map((t) => (
+        <ListItemButton key={t.id} onClick={() => setId(t.id)} selected={t.id === id}>
+          {t.name}
+        </ListItemButton>
+      ))
+    ];
+  });
 
 
   return (
     <Stack style={{ display: "flex", overflowY: "auto" }} direction="row" spacing={2} >
       <Card style={{ flex: 2, borderRadius: '12px' }}>
-        <List>{categoryList()}</List>
+        <List>{categoryList}</List>
       </Card>
       <Card style={{ flex: 8, borderRadius: '12px' }}>
         {id ?
