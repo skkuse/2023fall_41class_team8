@@ -1,7 +1,5 @@
-from flask import Flask, request, session, jsonify, Response
-from flask_cors import CORS, cross_origin
+from flask import Flask, request
 import json
-import os
 import uuid
 import threading
 import time
@@ -13,9 +11,8 @@ import base64
 app = Flask(__name__)
 
 judge0_url = "https://exec.skew.ch/"
-pattern_json_file_path = "./pattern.json"
+pattern_list_json_file_path = "./pattern_list.json"
 patterns_json_file_path = "./patterns.json"
-category_json_file_path = "./category.json"
 
 
 def generate_uuid():
@@ -121,7 +118,6 @@ output_queue_dict = dict()
 
 
 @app.route("/api/runjava", methods=["POST"])
-@cross_origin()
 def runCode():
     global output_queue_dict
     data = request.get_json()
