@@ -143,11 +143,11 @@ def runCode():
     print(type(result))
     return json.dumps(result)
 
-#@app.route("/api/patterns")
-#def get_patterns():
-#    with open(patterns_json_file_path, 'r') as file:
-#        data = json.load(file)
-#        return data
+@app.route("/api/patterns")
+def get_patterns():
+    with open(patterns_json_file_path, 'r') as file:
+        data = json.load(file)
+        return data
 
 @app.route("/api/pattern")
 def get_pattern():
