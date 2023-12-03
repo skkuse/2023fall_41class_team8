@@ -13,9 +13,9 @@ import base64
 app = Flask(__name__)
 
 judge0_url = "https://exec.skew.ch/"
-pattern_json_file_path = "./pattern_json"
-patterns_json_file_path = "./patterns_json"
-category_json_file_path = "./category_json"
+pattern_json_file_path = "./pattern.json"
+patterns_json_file_path = "./patterns.json"
+category_json_file_path = "./category.json"
 
 
 def generate_uuid():
@@ -143,11 +143,11 @@ def runCode():
     print(type(result))
     return json.dumps(result)
 
-@app.route("/api/patterns")
-def get_patterns():
-    with open(patterns_json_file_path, 'r') as file:
-        data = json.load(file)
-        return data
+#@app.route("/api/patterns")
+#def get_patterns():
+#    with open(patterns_json_file_path, 'r') as file:
+#        data = json.load(file)
+#        return data
 
 @app.route("/api/pattern")
 def get_pattern():
