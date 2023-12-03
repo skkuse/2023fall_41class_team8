@@ -83,27 +83,28 @@ const GreenPatternPage = () => {
     if (!category) {
       return (
         <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50%" }}>
-          <Typography variant="h3">잠시만 기다려주세요...</Typography>
+          <Typography variant="h4">잠시만 기다려주세요...</Typography>
         </Box>
       );
     } else if (!id) {
       return (
         <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50%" }}>
-          <Typography variant="h3">그린 패턴을 선택해주세요</Typography>
+          <Typography variant="h4">그린 패턴을 선택해주세요</Typography>
         </Box>
       );
-    } else if(error) {
+    } else if (error) {
       return (
         <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50%" }}>
-          <Typography variant="h3">패턴을 가져오는 도중에 에러가 발생했습니다.</Typography>
-          <br/>
-          <Typography variant="h3">다른 패턴을 선택해주세요.</Typography>
+          <Stack spacing={2} alignItems='center'>
+            <Typography variant="h4">패턴을 가져오는 도중에 에러가 발생했습니다.</Typography>
+            <Typography variant="h4">다른 패턴을 선택해주세요.</Typography>
+          </Stack>
         </Box>
       );
-    } else if(!performanceData) {
+    } else if (!performanceData) {
       return (
         <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50%" }}>
-          <Typography variant="h3">패턴을 가져오는 중입니다...</Typography>
+          <Typography variant="h4">패턴을 가져오는 중입니다...</Typography>
         </Box>
       )
     } else return <CodeInfo before={performanceData.before} after={performanceData.after} />
