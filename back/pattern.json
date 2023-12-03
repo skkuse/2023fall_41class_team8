@@ -1,0 +1,4190 @@
+{
+    "1": {
+        "before": {
+            "code": "import java.util.regex.Matcher;\nimport java.util.regex.Pattern;\n\nclass Main {\n    public static void main(String[] args) {\n        Pattern pattern = Pattern.compile(\"'(.*?)'\");\n        int found = 0;\n        for (int i = 0; i < 100000; i++) {\n            Matcher matcher = pattern\n                    .matcher(\"The code should be 'able to find a phrase' that is surrounded by single quotemarks.\");\n            if (matcher.find()) found++;\n        }\n        System.out.println(found);\n    }\n}",
+            "time": "0.42230999999999996",
+            "energy": "19.02611495396344",
+            "carbon": "7.825441080565166",
+            "samples": [
+                {
+                    "time": "0.3981",
+                    "energy": "17.9347796336292",
+                    "carbon": "7.37657486331171"
+                },
+                {
+                    "time": "0.4796",
+                    "energy": "21.6096735951233",
+                    "carbon": "8.88805874967423"
+                },
+                {
+                    "time": "0.4046",
+                    "energy": "18.2280545095461",
+                    "carbon": "7.49719881977631"
+                },
+                {
+                    "time": "0.4104",
+                    "energy": "18.489897360447",
+                    "carbon": "7.60489478435184"
+                },
+                {
+                    "time": "0.3901",
+                    "energy": "17.5733830841049",
+                    "carbon": "7.22793246249233"
+                },
+                {
+                    "time": "0.451",
+                    "energy": "20.3187340562659",
+                    "carbon": "8.35709531734218"
+                },
+                {
+                    "time": "0.3898",
+                    "energy": "17.5605261741884",
+                    "carbon": "7.2226444154437"
+                },
+                {
+                    "time": "0.3924",
+                    "energy": "17.6785018014056",
+                    "carbon": "7.27116779091811"
+                },
+                {
+                    "time": "0.4277",
+                    "energy": "19.2693972561854",
+                    "carbon": "7.92550309146907"
+                },
+                {
+                    "time": "0.4794",
+                    "energy": "21.5982020687386",
+                    "carbon": "8.88334051087217"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.regex.Matcher;\nimport java.util.regex.Pattern;\n\nclass Main {\n    public static void main(String[] args) {\n        Pattern pattern = Pattern.compile(\"'([^']+)'\"); // 변경된 부분\n        int found = 0;\n        for (int i = 0; i < 100000; i++) {\n            Matcher matcher = pattern\n                    .matcher(\"The code should be 'able to find a phrase' that is surrounded by single quotemarks.\");\n            if (matcher.find()) found++;\n        }\n        System.out.println(found);\n    }\n}",
+            "time": "0.29343",
+            "energy": "13.216704807703408",
+            "carbon": "5.436030687408405",
+            "samples": [
+                {
+                    "time": "0.2746",
+                    "energy": "12.3683278924322",
+                    "carbon": "5.08709326215736"
+                },
+                {
+                    "time": "0.3246",
+                    "energy": "14.6215041564367",
+                    "carbon": "6.0138246595424"
+                },
+                {
+                    "time": "0.3028",
+                    "energy": "13.6388417197064",
+                    "carbon": "5.60965559931523"
+                },
+                {
+                    "time": "0.2758",
+                    "energy": "12.4227421007155",
+                    "carbon": "5.10947382602429"
+                },
+                {
+                    "time": "0.2696",
+                    "energy": "12.1427370839923",
+                    "carbon": "4.99430776264604"
+                },
+                {
+                    "time": "0.2809",
+                    "energy": "12.6523488212378",
+                    "carbon": "5.2039110701751"
+                },
+                {
+                    "time": "0.3105",
+                    "energy": "13.9854376067789",
+                    "carbon": "5.75221048766815"
+                },
+                {
+                    "time": "0.2911",
+                    "energy": "13.1116913915196",
+                    "carbon": "5.39283866933199"
+                },
+                {
+                    "time": "0.2831",
+                    "energy": "12.7511169727162",
+                    "carbon": "5.24453441087816"
+                },
+                {
+                    "time": "0.3213",
+                    "energy": "14.4723003314985",
+                    "carbon": "5.95245712634532"
+                }
+            ]
+        }
+    },
+    "2": {
+        "before": {
+            "code": "import java.util.regex.Matcher;\nimport java.util.regex.Pattern;\nclass Main {\n    public static void main(String[] args) {\n        String a = \"297364\";\n        Pattern pattern = Pattern.compile(\"^297\");\n        int count = 0;\n        for (int i = 0; i < 100000; i++) {\n            Matcher matcher = pattern.matcher(a); // 변경된 부분\n            if(matcher.find()) count++;\n        }\n        System.out.println(count);\n    }\n}",
+            "time": "0.19091",
+            "energy": "8.597867105844632",
+            "carbon": "3.5363027406338987",
+            "samples": [
+                {
+                    "time": "0.1644",
+                    "energy": "7.4039074187639",
+                    "carbon": "3.04522712133759"
+                },
+                {
+                    "time": "0.1853",
+                    "energy": "8.34523325896723",
+                    "carbon": "3.43239443941322"
+                },
+                {
+                    "time": "0.2104",
+                    "energy": "9.47560496421888",
+                    "carbon": "3.89731632178323"
+                },
+                {
+                    "time": "0.1672",
+                    "energy": "7.53001187102208",
+                    "carbon": "3.09709388255138"
+                },
+                {
+                    "time": "0.1702",
+                    "energy": "7.66513169393357",
+                    "carbon": "3.15266866571488"
+                },
+                {
+                    "time": "0.1812",
+                    "energy": "8.16057057095655",
+                    "carbon": "3.35644267583443"
+                },
+                {
+                    "time": "0.2137",
+                    "energy": "9.62418787384378",
+                    "carbon": "3.95842847251195"
+                },
+                {
+                    "time": "0.1802",
+                    "energy": "8.11560659925139",
+                    "carbon": "3.3379489942721"
+                },
+                {
+                    "time": "0.2091",
+                    "energy": "9.41705854024263",
+                    "carbon": "3.87323617760179"
+                },
+                {
+                    "time": "0.2274",
+                    "energy": "10.2413582672463",
+                    "carbon": "4.21227065531842"
+                }
+            ]
+        },
+        "after": {
+            "code": "class Main {\n    public static void main(String[] args) {\n        String a = \"297364\";\n        int count = 0;\n        for (int i = 0; i < 100000; i++) {\n            if(a.startsWith(\"297\")) count++; // 변경된 부분\n        }\n        System.out.println(count);\n    }\n}",
+            "time": "0.12514",
+            "energy": "5.633167819163215",
+            "carbon": "2.3169219240218277",
+            "samples": [
+                {
+                    "time": "0.0838",
+                    "energy": "3.7722406792729",
+                    "carbon": "1.55152259138494"
+                },
+                {
+                    "time": "0.147",
+                    "energy": "6.61717736334144",
+                    "carbon": "2.72164504954233"
+                },
+                {
+                    "time": "0.1236",
+                    "energy": "5.56383977789184",
+                    "carbon": "2.28840730064691"
+                },
+                {
+                    "time": "0.1285",
+                    "energy": "5.78441930963616",
+                    "carbon": "2.37913166205335"
+                },
+                {
+                    "time": "0.1302",
+                    "energy": "5.86092781836173",
+                    "carbon": "2.41059961169218"
+                },
+                {
+                    "time": "0.1271",
+                    "energy": "5.72143376423117",
+                    "carbon": "2.35322570722828"
+                },
+                {
+                    "time": "0.1252",
+                    "energy": "5.63585209429709",
+                    "carbon": "2.31802596638439"
+                },
+                {
+                    "time": "0.1363",
+                    "energy": "6.13558331108698",
+                    "carbon": "2.52356541585007"
+                },
+                {
+                    "time": "0.1232",
+                    "energy": "5.54582933088307",
+                    "carbon": "2.28099960379221"
+                },
+                {
+                    "time": "0.1265",
+                    "energy": "5.69437474262976",
+                    "carbon": "2.34209633164362"
+                }
+            ]
+        }
+    },
+    "3": {
+        "before": {
+            "code": "class Main {\n    public static void main(String[] args) {\n        byte[] bytes = new byte[500000];\n        byte[] out = new byte[bytes.length];\n        for (int i = 0; i < out.length; i++) { // 변경된 부분\n            out[i] = bytes[i];\n        }\n    }\n}",
+            "time": "0.11869999999999999",
+            "energy": "5.343445390634611",
+            "carbon": "2.1977590891680148",
+            "samples": [
+                {
+                    "time": "0.0894",
+                    "energy": "4.02443745999667",
+                    "carbon": "1.65525112729663"
+                },
+                {
+                    "time": "0.1279",
+                    "energy": "5.75756652028666",
+                    "carbon": "2.3680871097939"
+                },
+                {
+                    "time": "0.1363",
+                    "energy": "6.13570960583827",
+                    "carbon": "2.52361736088128"
+                },
+                {
+                    "time": "0.1191",
+                    "energy": "5.3614227272279",
+                    "carbon": "2.20515316770884"
+                },
+                {
+                    "time": "0.1241",
+                    "energy": "5.58655943278867",
+                    "carbon": "2.29775189470598"
+                },
+                {
+                    "time": "0.1195",
+                    "energy": "5.37942095278704",
+                    "carbon": "2.21255583788131"
+                },
+                {
+                    "time": "0.1122",
+                    "energy": "5.05079466438413",
+                    "carbon": "2.07739184546119"
+                },
+                {
+                    "time": "0.1015",
+                    "energy": "4.5691890483456",
+                    "carbon": "1.87930745558455"
+                },
+                {
+                    "time": "0.1269",
+                    "energy": "5.71254213546835",
+                    "carbon": "2.34956858031813"
+                },
+                {
+                    "time": "0.1301",
+                    "energy": "5.85681135922282",
+                    "carbon": "2.40890651204834"
+                }
+            ]
+        },
+        "after": {
+            "code": "class Main {\n    public static void main(String[] args) {\n        byte[] bytes = new byte[500000];\n        byte[] out = new byte[bytes.length];\n        System.arraycopy(bytes, 0, out, 0, out.length); // 변경된 부분\n    }\n}",
+            "time": "0.10729",
+            "energy": "4.829796309553632",
+            "carbon": "1.9864952221194092",
+            "samples": [
+                {
+                    "time": "0.0865",
+                    "energy": "3.89385858389184",
+                    "carbon": "1.60154403555471"
+                },
+                {
+                    "time": "0.1183",
+                    "energy": "5.3253855240768",
+                    "carbon": "2.19033106605279"
+                },
+                {
+                    "time": "0.103",
+                    "energy": "4.6366680986784",
+                    "carbon": "1.90706158898643"
+                },
+                {
+                    "time": "0.1068",
+                    "energy": "4.8076987692073",
+                    "carbon": "1.97740650377496"
+                },
+                {
+                    "time": "0.1082",
+                    "energy": "4.87074427523424",
+                    "carbon": "2.00333712040384"
+                },
+                {
+                    "time": "0.1101",
+                    "energy": "4.9563737998272",
+                    "carbon": "2.03855654386893"
+                },
+                {
+                    "time": "0.1119",
+                    "energy": "5.03727021689242",
+                    "carbon": "2.07182924020785"
+                },
+                {
+                    "time": "0.1064",
+                    "energy": "4.78969211934259",
+                    "carbon": "1.97000036868561"
+                },
+                {
+                    "time": "0.1064",
+                    "energy": "4.78974960598579",
+                    "carbon": "1.97002401294196"
+                },
+                {
+                    "time": "0.1153",
+                    "energy": "5.19052210239974",
+                    "carbon": "2.13486174071701"
+                }
+            ]
+        }
+    },
+    "4": {
+        "before": {
+            "code": "class Test {\n    int a = 0;\n\n    final int function1() {\n        return a++;\n    }\n\n    public void function2() throws Exception {\n        int re = function1();\n        if (re % 2 == 0)\n            throw new Exception(); // 변경된 부분\n    }\n}\n\nclass Main {\n    public static void main(String[] args) {\n        Test a = new Test();\n        int errCount = 0;\n        for (int i = 0; i < 1000000; i++) {\n            try {\n                a.function2();\n            } catch (Exception e) { // 변경된 부분\n                errCount++;\n            }\n        }\n        System.out.println(errCount);\n    }\n}",
+            "time": "0.6375500000000001",
+            "energy": "28.797029540530644",
+            "carbon": "11.844218250020258",
+            "samples": [
+                {
+                    "time": "0.6092",
+                    "energy": "27.5162632240735",
+                    "carbon": "11.3174390640614"
+                },
+                {
+                    "time": "0.644",
+                    "energy": "29.0881849458816",
+                    "carbon": "11.9639704682411"
+                },
+                {
+                    "time": "0.6289",
+                    "energy": "28.4060990421481",
+                    "carbon": "11.6834285360355"
+                },
+                {
+                    "time": "0.6024",
+                    "energy": "27.2091803280768",
+                    "carbon": "11.191135868938"
+                },
+                {
+                    "time": "0.6471",
+                    "energy": "29.2283455600714",
+                    "carbon": "12.0216185288574"
+                },
+                {
+                    "time": "0.66",
+                    "energy": "29.811287306592",
+                    "carbon": "12.2613824692013"
+                },
+                {
+                    "time": "0.6229",
+                    "energy": "28.1361676818214",
+                    "carbon": "11.5724057675331"
+                },
+                {
+                    "time": "0.6276",
+                    "energy": "28.3476571123023",
+                    "carbon": "11.65939137029"
+                },
+                {
+                    "time": "0.6674",
+                    "energy": "30.1452411939707",
+                    "carbon": "12.3987377030802"
+                },
+                {
+                    "time": "0.666",
+                    "energy": "30.0818690103686",
+                    "carbon": "12.3726727239646"
+                }
+            ]
+        },
+        "after": {
+            "code": "class Test {\n    int a = 0;\n\n    final int function1() {\n        return a++;\n    }\n\n    public int function2() {\n        int re = function1();\n        if (re % 2 == 0) return -1; // 변경된 부분\n        else return 0;\n    }\n}\n\nclass Main {\n    public static void main(String[] args) {\n        Test a = new Test();\n        int errCount = 0;\n        for (int i = 0; i < 1000000; i++) {\n            if(a.function2() != 0) errCount++; // 변경된 부분\n        }\n        System.out.println(errCount);\n    }\n}",
+            "time": "0.11141999999999999",
+            "energy": "5.015631253577558",
+            "carbon": "2.062929134596451",
+            "samples": [
+                {
+                    "time": "0.0907",
+                    "energy": "4.08285398387981",
+                    "carbon": "1.67927784356977"
+                },
+                {
+                    "time": "0.1027",
+                    "energy": "4.62302896020077",
+                    "carbon": "1.90145181133058"
+                },
+                {
+                    "time": "0.108",
+                    "energy": "4.86159050521728",
+                    "carbon": "1.99957217479587"
+                },
+                {
+                    "time": "0.1001",
+                    "energy": "4.50602418932265",
+                    "carbon": "1.85332774906841"
+                },
+                {
+                    "time": "0.1222",
+                    "energy": "5.50086053359565",
+                    "carbon": "2.26250393746789"
+                },
+                {
+                    "time": "0.1442",
+                    "energy": "6.49112887789632",
+                    "carbon": "2.66980130747876"
+                },
+                {
+                    "time": "0.1066",
+                    "energy": "4.79887989103411",
+                    "carbon": "1.97377929918233"
+                },
+                {
+                    "time": "0.1049",
+                    "energy": "4.72230967142362",
+                    "carbon": "1.94228596785653"
+                },
+                {
+                    "time": "0.1152",
+                    "energy": "5.18585665432781",
+                    "carbon": "2.13294284192503"
+                },
+                {
+                    "time": "0.1196",
+                    "energy": "5.38377926887757",
+                    "carbon": "2.21434841328934"
+                }
+            ]
+        }
+    },
+    "5": {
+        "before": {
+            "code": "import java.util.ArrayList;\n\nclass Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<Integer>();\n        ArrayList<Integer> answers = new ArrayList<Integer>(); //변경된 부분\n        for(int i = 0; i < 1000000; i++) arr.add(i);\n        for(int i = 0; i < arr.size(); i++) {\n            Integer val = arr.get(i);\n            if(val % 17 == 0) answers.add(val); //변경된 부분\n        }\n        int sum = 0;\n        for(int i = 0; i < answers.size(); i++) sum += answers.get(i);\n        System.out.println(String.valueOf(sum));\n    }\n}",
+            "time": "0.30178",
+            "energy": "13.60127819805617",
+            "carbon": "5.5942057228604956",
+            "samples": [
+                {
+                    "time": "0.248",
+                    "energy": "11.1774882256819",
+                    "carbon": "4.59730090722297"
+                },
+                {
+                    "time": "0.3616",
+                    "energy": "16.2972386332693",
+                    "carbon": "6.70305424986364"
+                },
+                {
+                    "time": "0.2943",
+                    "energy": "13.2640261824419",
+                    "carbon": "5.45549396883834"
+                },
+                {
+                    "time": "0.289",
+                    "energy": "13.0252798829722",
+                    "carbon": "5.35729761586645"
+                },
+                {
+                    "time": "0.3",
+                    "energy": "13.521064748544",
+                    "carbon": "5.56121393107615"
+                },
+                {
+                    "time": "0.2627",
+                    "energy": "11.8397970226354",
+                    "carbon": "4.86970851540992"
+                },
+                {
+                    "time": "0.2928",
+                    "energy": "13.1965868789361",
+                    "carbon": "5.4277561833064"
+                },
+                {
+                    "time": "0.2891",
+                    "energy": "13.0296677998213",
+                    "carbon": "5.35910236606652"
+                },
+                {
+                    "time": "0.3528",
+                    "energy": "15.9012200862628",
+                    "carbon": "6.54017182147988"
+                },
+                {
+                    "time": "0.3275",
+                    "energy": "14.7604125199968",
+                    "carbon": "6.07095766947468"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.ArrayList;\n\nclass Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<Integer>();\n        int index = 0, len = (1000000 / 17) + 1, sum = 0;\n        for(int i = 0; i < 1000000; i++) arr.add(i); //변경된 부분\n        int[] answers = new int[len];\n        for(int i = 0; i < arr.size(); i++) {\n            Integer val = arr.get(i);\n            if(val % 17 == 0) answers[index++] = val; //변경된 부분\n        }\n        for(int i = 0; i < len; i++) sum += answers[i];\n        System.out.println(String.valueOf(sum));\n    }\n}",
+            "time": "0.30494000000000004",
+            "energy": "13.743559624914662",
+            "carbon": "5.652726073727401",
+            "samples": [
+                {
+                    "time": "0.2434",
+                    "energy": "10.9700395740386",
+                    "carbon": "4.51197727680207"
+                },
+                {
+                    "time": "0.2881",
+                    "energy": "12.9845279935477",
+                    "carbon": "5.34053636374619"
+                },
+                {
+                    "time": "0.2967",
+                    "energy": "13.3721166266531",
+                    "carbon": "5.4999515685424"
+                },
+                {
+                    "time": "0.2717",
+                    "energy": "12.2453842365392",
+                    "carbon": "5.03652653648856"
+                },
+                {
+                    "time": "0.2815",
+                    "energy": "12.6870604327699",
+                    "carbon": "5.21818795599827"
+                },
+                {
+                    "time": "0.3053",
+                    "energy": "13.759762045513",
+                    "carbon": "5.65939012931948"
+                },
+                {
+                    "time": "0.3086",
+                    "energy": "13.9084443489496",
+                    "carbon": "5.72054316072298"
+                },
+                {
+                    "time": "0.3412",
+                    "energy": "15.3779069454543",
+                    "carbon": "6.32493312666537"
+                },
+                {
+                    "time": "0.3275",
+                    "energy": "14.7605151477024",
+                    "carbon": "6.07099988025"
+                },
+                {
+                    "time": "0.3854",
+                    "energy": "17.3698388979788",
+                    "carbon": "7.14421473873869"
+                }
+            ]
+        }
+    },
+    "6": {
+        "before": {
+            "code": "import java.util.LinkedList;\nimport java.util.Arrays;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String args[]) {\n        List<Integer> list = new LinkedList<>();\n        int sum = 0;\n\n        for (int i = 0; i < 10000; i++) {\n            list.add(i);\n        }\n\n        for (int i = 0; i < list.size(); i++) { // 변경된 부분\n            sum += list.get(i);\n        }\n\n        System.out.println(sum);\n    }\n}",
+            "time": "0.17277",
+            "energy": "7.777368200611727",
+            "carbon": "3.198831540911604",
+            "samples": [
+                {
+                    "time": "0.1447",
+                    "energy": "6.51376291065235",
+                    "carbon": "2.67911068515131"
+                },
+                {
+                    "time": "0.1908",
+                    "energy": "8.58897586254067",
+                    "carbon": "3.53264577226298"
+                },
+                {
+                    "time": "0.1524",
+                    "energy": "6.86036562507418",
+                    "carbon": "2.82166838159301"
+                },
+                {
+                    "time": "0.1869",
+                    "energy": "8.41341478271213",
+                    "carbon": "3.4604375001295"
+                },
+                {
+                    "time": "0.1933",
+                    "energy": "8.7015156377328",
+                    "carbon": "3.5789333817995"
+                },
+                {
+                    "time": "0.192",
+                    "energy": "8.64305059571712",
+                    "carbon": "3.55488671001845"
+                },
+                {
+                    "time": "0.1837",
+                    "energy": "8.26937033618995",
+                    "carbon": "3.40119201927493"
+                },
+                {
+                    "time": "0.1726",
+                    "energy": "7.76967428323411",
+                    "carbon": "3.19566703269419"
+                },
+                {
+                    "time": "0.1492",
+                    "energy": "6.71648563924762",
+                    "carbon": "2.76249054342254"
+                },
+                {
+                    "time": "0.1621",
+                    "energy": "7.29706633301635",
+                    "carbon": "3.00128338276963"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.LinkedList;\nimport java.util.Arrays;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String args[]) {\n        List<Integer> list = new LinkedList<>();\n        int sum = 0;\n\n        for (int i = 0; i < 10000; i++) {\n            list.add(i);\n        }\n\n        for (int n: list) { // 변경된 부분\n            sum += n;\n        }\n\n        System.out.println(sum);\n    }\n}",
+            "time": "0.12819000000000003",
+            "energy": "5.770571547996721",
+            "carbon": "carbon2.373436077691051",
+            "samples": [
+                {
+                    "time": "0.0822",
+                    "energy": "3.70029782013178",
+                    "carbon": "1.5219324934202"
+                },
+                {
+                    "time": "0.1292",
+                    "energy": "5.81598840139546",
+                    "carbon": "2.39211602949395"
+                },
+                {
+                    "time": "0.112",
+                    "energy": "5.04171219428352",
+                    "carbon": "2.07365622550881"
+                },
+                {
+                    "time": "0.1292",
+                    "energy": "5.81597583645773",
+                    "carbon": "2.39211086153506"
+                },
+                {
+                    "time": "0.1419",
+                    "energy": "6.38767868069866",
+                    "carbon": "2.62725224137136"
+                },
+                {
+                    "time": "0.1458",
+                    "energy": "6.56324466485645",
+                    "carbon": "2.69946253065546"
+                },
+                {
+                    "time": "0.1317",
+                    "energy": "5.92875368618026",
+                    "carbon": "2.43849639112594"
+                },
+                {
+                    "time": "0.1328",
+                    "energy": "5.9780538508032",
+                    "carbon": "2.45877354883536"
+                },
+                {
+                    "time": "0.126",
+                    "energy": "5.6721214273248",
+                    "carbon": "2.33294354305869"
+                },
+                {
+                    "time": "0.1511",
+                    "energy": "6.80188891783536",
+                    "carbon": "2.79761691190568"
+                }
+            ]
+        }
+    },
+    "7": {
+        "before": {
+            "code": "import java.util.List;\nimport java.util.stream.IntStream;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String args[]) {\n        List<Integer> list = IntStream.rangeClosed(1, 10000) // 변경된 부분\n            .boxed()\n            .collect(Collectors.toList());\n\n        System.out.println(list);\n    }\n}",
+            "time": "0.16660999999999998",
+            "energy": "7.50050979788883",
+            "carbon": "3.0849596798716754",
+            "samples": [
+                {
+                    "time": "0.1232",
+                    "energy": "5.54636749663181",
+                    "carbon": "2.28122095136466"
+                },
+                {
+                    "time": "0.1601",
+                    "energy": "7.20740661990595",
+                    "carbon": "2.96440634276732"
+                },
+                {
+                    "time": "0.1873",
+                    "energy": "8.43192548265024",
+                    "carbon": "3.46805095101404"
+                },
+                {
+                    "time": "0.1751",
+                    "energy": "7.88265363863405",
+                    "carbon": "3.24213544157018"
+                },
+                {
+                    "time": "0.1504",
+                    "energy": "6.77074026725683",
+                    "carbon": "2.78480547192274"
+                },
+                {
+                    "time": "0.193",
+                    "energy": "8.68855423328064",
+                    "carbon": "3.57360235614833"
+                },
+                {
+                    "time": "0.1696",
+                    "energy": "7.63505137373184",
+                    "carbon": "3.14029663001591"
+                },
+                {
+                    "time": "0.2022",
+                    "energy": "9.10274769204365",
+                    "carbon": "3.74396012573755"
+                },
+                {
+                    "time": "0.1634",
+                    "energy": "7.3559689592809",
+                    "carbon": "3.02551003295223"
+                },
+                {
+                    "time": "0.1418",
+                    "energy": "6.38368221547239",
+                    "carbon": "2.62560849522379"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String args[]) {\n        List<Integer> list = new ArrayList<>();\n\n        for (int i = 1; i <= 10000; i++) { // 변경된 부분\n            list.add(i);\n        }\n\n        System.out.println(list);\n    }\n}",
+            "time": "0.14709",
+            "energy": "6.621507341744659",
+            "carbon": "2.7234259696595777",
+            "samples": [
+                {
+                    "time": "0.109",
+                    "energy": "4.90678249520736",
+                    "carbon": "2.01815964027879"
+                },
+                {
+                    "time": "0.1804",
+                    "energy": "8.12102662367885",
+                    "carbon": "3.34017825031911"
+                },
+                {
+                    "time": "0.131",
+                    "energy": "5.89719800234304",
+                    "carbon": "2.42551753836369"
+                },
+                {
+                    "time": "0.1452",
+                    "energy": "6.53641546988391",
+                    "carbon": "2.68842768276325"
+                },
+                {
+                    "time": "0.1629",
+                    "energy": "7.33319935610918",
+                    "carbon": "3.01614489516771"
+                },
+                {
+                    "time": "0.1333",
+                    "energy": "6.00073353235728",
+                    "carbon": "2.46810170185855"
+                },
+                {
+                    "time": "0.1795",
+                    "energy": "8.08047952015536",
+                    "carbon": "3.3235012266399"
+                },
+                {
+                    "time": "0.1165",
+                    "energy": "5.24441474285184",
+                    "carbon": "2.15702778373496"
+                },
+                {
+                    "time": "0.1427",
+                    "energy": "6.42395791923149",
+                    "carbon": "2.64217389217991"
+                },
+                {
+                    "time": "0.1704",
+                    "energy": "7.67086575562829",
+                    "carbon": "3.15502708528991"
+                }
+            ]
+        }
+    },
+    "8": {
+        "before": {
+            "code": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in); // 변경된 부분\n\n        String input = sc.nextLine();\n\n        System.out.println(input);\n    }\n}",
+            "time": "0.17068999999999998",
+            "energy": "7.684135851008421",
+            "carbon": "3.160485075519761",
+            "samples": [
+                {
+                    "time": "0.2059",
+                    "energy": "9.26922143337149",
+                    "carbon": "3.81243077554569"
+                },
+                {
+                    "time": "0.1465",
+                    "energy": "6.59508669363456",
+                    "carbon": "2.71255915709189"
+                },
+                {
+                    "time": "0.1993",
+                    "energy": "8.97211156702234",
+                    "carbon": "3.69022948751629"
+                },
+                {
+                    "time": "0.1469",
+                    "energy": "6.61313919463517",
+                    "carbon": "2.71998415075344"
+                },
+                {
+                    "time": "0.184",
+                    "energy": "8.28331592034816",
+                    "carbon": "3.4069278380392"
+                },
+                {
+                    "time": "0.1662",
+                    "energy": "7.48200232476634",
+                    "carbon": "3.07734755617639"
+                },
+                {
+                    "time": "0.2019",
+                    "energy": "9.08914995556531",
+                    "carbon": "3.73836737672401"
+                },
+                {
+                    "time": "0.1496",
+                    "energy": "6.73470871767936",
+                    "carbon": "2.76998569558152"
+                },
+                {
+                    "time": "0.1567",
+                    "energy": "7.05443548236106",
+                    "carbon": "2.9014893138951"
+                },
+                {
+                    "time": "0.1499",
+                    "energy": "6.74818722070042",
+                    "carbon": "2.77552940387408"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // 변경된 부분\n\n        String input = br.readLine();\n\n        System.out.println(input);\n    }\n}",
+            "time": "0.11471",
+            "energy": "5.163646532266395",
+            "carbon": "2.1238078187211675",
+            "samples": [
+                {
+                    "time": "0.1269",
+                    "energy": "5.71238135629517",
+                    "carbon": "2.3495024518442"
+                },
+                {
+                    "time": "0.088",
+                    "energy": "3.96128645814528",
+                    "carbon": "1.62927712023515"
+                },
+                {
+                    "time": "0.1221",
+                    "energy": "5.49629023820976",
+                    "carbon": "2.26062417497567"
+                },
+                {
+                    "time": "0.1117",
+                    "energy": "5.02814318424278",
+                    "carbon": "2.06807529167906"
+                },
+                {
+                    "time": "0.1011",
+                    "energy": "4.55096895216854",
+                    "carbon": "1.87181353002692"
+                },
+                {
+                    "time": "0.11",
+                    "energy": "4.9516501205952",
+                    "carbon": "2.03661369460081"
+                },
+                {
+                    "time": "0.1239",
+                    "energy": "5.57735394991622",
+                    "carbon": "2.29396567960054"
+                },
+                {
+                    "time": "0.1283",
+                    "energy": "5.77541077686778",
+                    "carbon": "2.37542645252572"
+                },
+                {
+                    "time": "0.1192",
+                    "energy": "5.36577766530278",
+                    "carbon": "2.20694435373903"
+                },
+                {
+                    "time": "0.1159",
+                    "energy": "5.21720262092045",
+                    "carbon": "2.14583543798458"
+                }
+            ]
+        }
+    },
+    "9": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        String result = \"\";\n        String hello = \"Hello \";\n\n        for (int i = 0; i < 10000; i++) { // 변경된 부분\n            result += hello;\n        }\n\n        System.out.println(result);\n    }\n}",
+            "time": "0.28946",
+            "energy": "13.060415208284478",
+            "carbon": "5.3717487751674025",
+            "samples": [
+                {
+                    "time": "0.2513",
+                    "energy": "11.338598463317",
+                    "carbon": "4.66356554796228"
+                },
+                {
+                    "time": "0.2972",
+                    "energy": "13.4096352947597",
+                    "carbon": "5.51538299673466"
+                },
+                {
+                    "time": "0.2685",
+                    "energy": "12.1146454692115",
+                    "carbon": "4.9827536814867"
+                },
+                {
+                    "time": "0.2853",
+                    "energy": "12.8726884053867",
+                    "carbon": "5.29453674113555"
+                },
+                {
+                    "time": "0.2707",
+                    "energy": "12.2139373784435",
+                    "carbon": "5.02359244375379"
+                },
+                {
+                    "time": "0.2932",
+                    "energy": "13.2291976603991",
+                    "carbon": "5.44116899772215"
+                },
+                {
+                    "time": "0.2836",
+                    "energy": "12.7960130357361",
+                    "carbon": "5.26300016159824"
+                },
+                {
+                    "time": "0.342",
+                    "energy": "15.431099818919",
+                    "carbon": "6.3468113555214"
+                },
+                {
+                    "time": "0.3117",
+                    "energy": "14.0638351604815",
+                    "carbon": "5.78445540150603"
+                },
+                {
+                    "time": "0.2911",
+                    "energy": "13.1345013961907",
+                    "carbon": "5.40222042425322"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        String result = \"\";\n        String hello = \"Hello\";\n        StringBuffer sb = new StringBuffer();\n\n        for (int i = 0; i < 10000; i++) { // 변경된 부분\n            sb.append(hello);\n        }\n\n        result = sb.toString();\n\n        System.out.println(result);\n    }\n}",
+            "time": "0.12607000000000002",
+            "energy": "5.675080830872544",
+            "carbon": "2.334160745737878",
+            "samples": [
+                {
+                    "time": "0.0924",
+                    "energy": "4.15938909665664",
+                    "carbon": "1.71075673545488"
+                },
+                {
+                    "time": "0.1387",
+                    "energy": "6.2436050068919",
+                    "carbon": "2.56799473933464"
+                },
+                {
+                    "time": "0.1149",
+                    "energy": "5.17223247223766",
+                    "carbon": "2.12733921583135"
+                },
+                {
+                    "time": "0.1347",
+                    "energy": "6.06354557372611",
+                    "carbon": "2.49393629447355"
+                },
+                {
+                    "time": "0.1254",
+                    "energy": "5.64489028401408",
+                    "carbon": "2.32174337381499"
+                },
+                {
+                    "time": "0.1065",
+                    "energy": "4.79418047532576",
+                    "carbon": "1.97184642950149"
+                },
+                {
+                    "time": "0.1457",
+                    "energy": "6.5587238389152",
+                    "carbon": "2.69760311494582"
+                },
+                {
+                    "time": "0.1079",
+                    "energy": "4.85713406701786",
+                    "carbon": "1.99773924176444"
+                },
+                {
+                    "time": "0.1332",
+                    "energy": "5.99602441375181",
+                    "carbon": "2.46616484137612"
+                },
+                {
+                    "time": "0.1613",
+                    "energy": "7.26108308018842",
+                    "carbon": "2.9864834708815"
+                }
+            ]
+        }
+    },
+    "10": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        String hello_world = \"Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world \";\n\n        String[] str = hello_world.split(\" \"); // 변경된 부분\n    }\n}",
+            "time": "0.11452",
+            "energy": "5.155088041113695",
+            "carbon": "2.120287711310063",
+            "samples": [
+                {
+                    "time": "0.0869",
+                    "energy": "3.91177589416416",
+                    "carbon": "1.60891342526972"
+                },
+                {
+                    "time": "0.1078",
+                    "energy": "4.85257794973459",
+                    "carbon": "1.99586531072584"
+                },
+                {
+                    "time": "0.1354",
+                    "energy": "6.09498487790726",
+                    "carbon": "2.50686728028326"
+                },
+                {
+                    "time": "0.0895",
+                    "energy": "4.02881092508736",
+                    "carbon": "1.65704993348843"
+                },
+                {
+                    "time": "0.1283",
+                    "energy": "5.77540748421763",
+                    "carbon": "2.37542509825871"
+                },
+                {
+                    "time": "0.1319",
+                    "energy": "5.93749058132246",
+                    "carbon": "2.44208987609793"
+                },
+                {
+                    "time": "0.1283",
+                    "energy": "5.77540748421763",
+                    "carbon": "2.37542509825871"
+                },
+                {
+                    "time": "0.0965",
+                    "energy": "4.34390420108304",
+                    "carbon": "1.78664779790545"
+                },
+                {
+                    "time": "0.1218",
+                    "energy": "5.4827687297497",
+                    "carbon": "2.25506277854605"
+                },
+                {
+                    "time": "0.1188",
+                    "energy": "5.34775228365312",
+                    "carbon": "2.19953051426653"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.StringTokenizer;\n\npublic class Main {\n    public static void main(String[] args) {\n        String hello_world = \"Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world Hello world \";\n\n        StringTokenizer st = new StringTokenizer(hello_world, \"\"); // 변경된 부분\n    }\n}",
+            "time": "0.11086000000000003",
+            "energy": "4.990344747241938",
+            "carbon": "2.052528794540609",
+            "samples": [
+                {
+                    "time": "0.1103",
+                    "energy": "4.96518680155795",
+                    "carbon": "2.04218133148079"
+                },
+                {
+                    "time": "0.082",
+                    "energy": "3.69119065968",
+                    "carbon": "1.51818671832638"
+                },
+                {
+                    "time": "0.1348",
+                    "energy": "6.06801686754931",
+                    "carbon": "2.49577533762303"
+                },
+                {
+                    "time": "0.1025",
+                    "energy": "4.6139946932448",
+                    "carbon": "1.89773601733159"
+                },
+                {
+                    "time": "0.1124",
+                    "energy": "5.05976461464614",
+                    "carbon": "2.08108118600396"
+                },
+                {
+                    "time": "0.1167",
+                    "energy": "5.25321594955526",
+                    "carbon": "2.16064772005208"
+                },
+                {
+                    "time": "0.1184",
+                    "energy": "5.3297468634839",
+                    "carbon": "2.19212488495093"
+                },
+                {
+                    "time": "0.1159",
+                    "energy": "5.21719119288374",
+                    "carbon": "2.14583073763308"
+                },
+                {
+                    "time": "0.1053",
+                    "energy": "4.7400440577385",
+                    "carbon": "1.94958012094784"
+                },
+                {
+                    "time": "0.1103",
+                    "energy": "4.96509577207978",
+                    "carbon": "2.04214389105641"
+                }
+            ]
+        }
+    },
+    "11": {
+        "before": {
+            "code": "import java.util.HashMap;\nimport java.util.TreeMap;\n\nclass Main {\n\npublic static void main(String[] args) throws Exception {\n        String[] cats = new String[]{\"Hello\", \"How\", \"Are\", \"You\", \"I\", \"Am\", \"Fine\", \"Thank\", \"You\", \"And\"};\n        Integer age;\n\n        TreeMap<String, Integer> tMap = new TreeMap<>();\n        for (int i = 0; i < cats.length; i++) {\n            tMap.put(cats[i], i);\n        }\n        System.out.println(\"TreeMap ordered by keys (alphabetical order of the cats' names:\");\n        System.out.println(tMap);\n\n    }\n}",
+            "time": "0.13334",
+            "energy": "6.00260156723",
+            "carbon": "2.4688700246",
+            "samples": [
+                {
+                    "time": "0.1323",
+                    "carbon": "2.4496266614257034",
+                    "energy": "5.955814883116225"
+                },
+                {
+                    "time": "0.1338",
+                    "carbon": "2.4773090743981387",
+                    "energy": "6.023119558468609"
+                },
+                {
+                    "time": "0.1378",
+                    "carbon": "2.5514293851559584",
+                    "energy": "6.2033294071382405"
+                },
+                {
+                    "time": "0.1361",
+                    "carbon": "2.5198715317878952",
+                    "energy": "6.126602314096512"
+                },
+                {
+                    "time": "0.13",
+                    "carbon": "2.4070020650858335",
+                    "energy": "5.8521810481056"
+                },
+                {
+                    "time": "0.1363",
+                    "carbon": "2.523575486825512",
+                    "energy": "6.135607796804065"
+                },
+                {
+                    "time": "0.1381",
+                    "carbon": "2.557095113866703",
+                    "energy": "6.217104580274016"
+                },
+                {
+                    "time": "0.1219",
+                    "carbon": "2.2571120408565166",
+                    "energy": "5.487751132644096"
+                },
+                {
+                    "time": "0.1361",
+                    "carbon": "2.5200467969491704",
+                    "energy": "6.127028438971968"
+                },
+                {
+                    "time": "0.131",
+                    "carbon": "2.425632089674629",
+                    "energy": "5.89747651270272"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.HashMap;\nimport java.util.TreeMap;\n\nclass Main {\n\npublic static void main(String[] args) throws Exception {\n        String[] cats = new String[]{\"Hello\", \"How\", \"Are\", \"You\", \"I\", \"Am\", \"Fine\", \"Thank\", \"You\", \"And\"};\n        Integer age;\n        HashMap<String, Integer> hMap = new HashMap<>();\n        for (int i = 0; i < cats.length; i++) {\n            hMap.put(cats[i], i);\n        }\n        System.out.println(\"HashMap ordered by hash:\");\n        System.out.println(hMap);\n\n    }\n}",
+            "time": "0.13299",
+            "energy": "5.98687360454",
+            "carbon": "2.46240111355",
+            "samples": [
+                {
+                    "time": "0.1463",
+                    "carbon": "2.708973206282191",
+                    "energy": "6.586368116416706"
+                },
+                {
+                    "time": "0.1332",
+                    "carbon": "2.466236694804506",
+                    "energy": "5.996199112094592"
+                },
+                {
+                    "time": "0.1294",
+                    "carbon": "2.395881106989766",
+                    "energy": "5.8251424920733434"
+                },
+                {
+                    "time": "0.1337",
+                    "carbon": "2.475401642126043",
+                    "energy": "6.0184819891224"
+                },
+                {
+                    "time": "0.1299",
+                    "carbon": "2.4050560596205974",
+                    "energy": "5.847449695163135"
+                },
+                {
+                    "time": "0.1331",
+                    "carbon": "2.46463028963766",
+                    "energy": "5.992293434567616"
+                },
+                {
+                    "time": "0.1306",
+                    "carbon": "2.418076696661551",
+                    "energy": "5.879106969758208"
+                },
+                {
+                    "time": "0.1282",
+                    "carbon": "2.3737102398990855",
+                    "energy": "5.771238122779201"
+                },
+                {
+                    "time": "0.1317",
+                    "carbon": "2.438588946222973",
+                    "energy": "5.928978716807618"
+                },
+                {
+                    "time": "0.1338",
+                    "carbon": "2.477456253227292",
+                    "energy": "6.023477396613888"
+                }
+            ]
+        }
+    },
+    "12": {
+        "before": {
+            "code": "class Main {\n    public static void main(String[] args) throws Exception {\n        System.out.println(\"a\"+ \"b\" + \"c\");\n    }\n}",
+            "time": "0.12932",
+            "energy": "2.39437950528",
+            "carbon": "5.8214916248",
+            "samples": [
+                {
+                    "time": "0.1353",
+                    "carbon": "2.5051176773666994",
+                    "energy": "6.090731041494529"
+                },
+                {
+                    "time": "0.1323",
+                    "carbon": "2.4495338316641884",
+                    "energy": "5.955589184692896"
+                },
+                {
+                    "time": "0.1353",
+                    "carbon": "2.505208327645553",
+                    "energy": "6.090951440908225"
+                },
+                {
+                    "time": "0.1292",
+                    "carbon": "2.3924317056493316",
+                    "energy": "5.81675590967501"
+                },
+                {
+                    "time": "0.1284",
+                    "carbon": "2.3773134387937986",
+                    "energy": "5.779998635530752"
+                },
+                {
+                    "time": "0.1247",
+                    "carbon": "2.3087756019090375",
+                    "energy": "5.613361541232768"
+                },
+                {
+                    "time": "0.1166",
+                    "carbon": "2.1588006053556983",
+                    "energy": "5.248725031256257"
+                },
+                {
+                    "time": "0.1243",
+                    "carbon": "2.301362702317942",
+                    "energy": "5.595338444731199"
+                },
+                {
+                    "time": "0.1361",
+                    "carbon": "2.519838641216215",
+                    "energy": "6.126522346744991"
+                },
+                {
+                    "time": "0.131",
+                    "carbon": "2.425412520865801",
+                    "energy": "5.89694267168928"
+                }
+            ]
+        },
+        "after": {
+            "code": "class Main {\n    public static void main(String[] args) throws Exception {\n        StringBuilder sb = new StringBuilder(100);\n        System.out.println(sb.append(\"a\").append(\"b\").append(\"c\"));\n    }\n}",
+            "time": "0.12907",
+            "energy": "5.81016025675",
+            "carbon": "2.3897189136",
+            "samples": [
+                {
+                    "time": "0.1329",
+                    "carbon": "2.4606387678321577",
+                    "energy": "5.982588786365567"
+                },
+                {
+                    "time": "0.1286",
+                    "carbon": "2.381073574328928",
+                    "energy": "5.789140710743808"
+                },
+                {
+                    "time": "0.1363",
+                    "carbon": "2.523592297025115",
+                    "energy": "6.135648667700256"
+                },
+                {
+                    "time": "0.1353",
+                    "carbon": "2.5051850261642556",
+                    "energy": "6.0908947876592645"
+                },
+                {
+                    "time": "0.1283",
+                    "carbon": "2.3754161173301576",
+                    "energy": "5.775385648748256"
+                },
+                {
+                    "time": "0.1149",
+                    "carbon": "2.127323704454749",
+                    "energy": "5.172194759189761"
+                },
+                {
+                    "time": "0.125",
+                    "carbon": "2.31438054904776",
+                    "energy": "5.6269889352"
+                },
+                {
+                    "time": "0.1182",
+                    "carbon": "2.1884170463330976",
+                    "energy": "5.320731938568192"
+                },
+                {
+                    "time": "0.1286",
+                    "carbon": "2.380983269269551",
+                    "energy": "5.78892115066752"
+                },
+                {
+                    "time": "0.1426",
+                    "carbon": "2.6401787842164097",
+                    "energy": "6.41910718263168"
+                }
+            ]
+        }
+    },
+    "13": {
+        "before": {
+            "code": "import java.util.Set;\nimport java.util.Arrays;\nimport java.util.HashSet;\n\nclass Main {\n    public static void main(String[] args) throws Exception {\n        Set<String> set = new HashSet<>();\n        set.addAll(Arrays.asList(\"one\", \"two\", \"three\"));\n    }\n}",
+            "time": "0.13389",
+            "energy": "6.02722911686",
+            "carbon": "2.47899933576",
+            "samples": [
+                {
+                    "time": "0.1234",
+                    "carbon": "2.2849327329511278",
+                    "energy": "5.555392008147648"
+                },
+                {
+                    "time": "0.1402",
+                    "carbon": "2.5959403876574134",
+                    "energy": "6.311549690390016"
+                },
+                {
+                    "time": "0.1323",
+                    "carbon": "2.449741614511221",
+                    "energy": "5.956094370316609"
+                },
+                {
+                    "time": "0.1327",
+                    "carbon": "2.457008243321494",
+                    "energy": "5.973761836424736"
+                },
+                {
+                    "time": "0.134",
+                    "carbon": "2.4809552768396363",
+                    "energy": "6.031984626403201"
+                },
+                {
+                    "time": "0.1336",
+                    "carbon": "2.4735548583714726",
+                    "energy": "6.013991875447296"
+                },
+                {
+                    "time": "0.1353",
+                    "carbon": "2.5050223667915867",
+                    "energy": "6.09049931143104"
+                },
+                {
+                    "time": "0.1348",
+                    "carbon": "2.4957646285971142",
+                    "energy": "6.067990830530304"
+                },
+                {
+                    "time": "0.1375",
+                    "carbon": "2.545752146147892",
+                    "energy": "6.18952624884"
+                },
+                {
+                    "time": "0.1351",
+                    "carbon": "2.5013211024547877",
+                    "energy": "6.0815003706656645"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.Set;\nimport java.util.Arrays;\nimport java.util.HashSet;\n\nclass Main {\n    public static void main(String[] args) throws Exception {\n        Set<String> set = new HashSet<>(Arrays.asList(\"one\", \"two\", \"three\"));\n    }\n}",
+            "time": "0.1305",
+            "energy": "5.87460027494",
+            "carbon": "2.41622309308",
+            "samples": [
+                {
+                    "time": "0.1353",
+                    "carbon": "2.5050806956608986",
+                    "energy": "6.090641127305856"
+                },
+                {
+                    "time": "0.132",
+                    "carbon": "2.444114338772351",
+                    "energy": "5.942412688481281"
+                },
+                {
+                    "time": "0.128",
+                    "carbon": "2.3699466598358017",
+                    "energy": "5.762087672832"
+                },
+                {
+                    "time": "0.1324",
+                    "carbon": "2.451534132864153",
+                    "energy": "5.960452547688192"
+                },
+                {
+                    "time": "0.1283",
+                    "carbon": "2.375530018312934",
+                    "energy": "5.775662577955104"
+                },
+                {
+                    "time": "0.1382",
+                    "carbon": "2.55873706113969",
+                    "energy": "6.221096671868928"
+                },
+                {
+                    "time": "0.1279",
+                    "carbon": "2.3680080255897042",
+                    "energy": "5.757374241647713"
+                },
+                {
+                    "time": "0.1284",
+                    "carbon": "2.3773262786916534",
+                    "energy": "5.780029853371391"
+                },
+                {
+                    "time": "0.1283",
+                    "carbon": "2.3754159034985256",
+                    "energy": "5.775385128856128"
+                },
+                {
+                    "time": "0.1262",
+                    "carbon": "2.3365378164688533",
+                    "energy": "5.680860239408833"
+                }
+            ]
+        }
+    },
+    "14": {
+        "before": {
+            "code": "import java.util.ArrayList;\nimport java.util.List;\n\nclass main {\n    public static void main(String[] args) throws Exception {\n        List<String> names = new ArrayList<>();\n            names.add(\"Alice\");\n            names.add(\"Bob\");\n            names.add(\"Charlie\");\n    for (int i = 0; i < names.size(); i++);\n    }\n}",
+            "time": "0.13274",
+            "energy": "5.97540380129",
+            "carbon": "2.45768358347",
+            "samples": [
+                {
+                    "time": "0.1244",
+                    "carbon": "2.303216233963276",
+                    "energy": "5.59984496465664"
+                },
+                {
+                    "time": "0.1374",
+                    "carbon": "2.54411022337471",
+                    "energy": "6.185534216811841"
+                },
+                {
+                    "time": "0.1296",
+                    "carbon": "2.3996337045848626",
+                    "energy": "5.834266240177152"
+                },
+                {
+                    "time": "0.1343",
+                    "carbon": "2.4866304487530355",
+                    "energy": "6.045782758942464"
+                },
+                {
+                    "time": "0.1341",
+                    "carbon": "2.4828109079682674",
+                    "energy": "6.036496250834592"
+                },
+                {
+                    "time": "0.1368",
+                    "carbon": "2.532847508961907",
+                    "energy": "6.158151006471936"
+                },
+                {
+                    "time": "0.137",
+                    "carbon": "2.5364975294841425",
+                    "energy": "6.167025357364801"
+                },
+                {
+                    "time": "0.1301",
+                    "carbon": "2.4087511160623376",
+                    "energy": "5.856433542578015"
+                },
+                {
+                    "time": "0.1329",
+                    "carbon": "2.4605906288817825",
+                    "energy": "5.982471745396992"
+                },
+                {
+                    "time": "0.1308",
+                    "carbon": "2.4217475326848596",
+                    "energy": "5.888031929698176"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.ArrayList;\nimport java.util.List;\n\nclass main {\n    public static void main(String[] args) throws Exception {\n        List<String> names = new ArrayList<>();\n            names.add(\"Alice\");\n            names.add(\"Bob\");\n            names.add(\"Charlie\");\n    int size = names.size();\n    for (int i = 0; i < size; i++);\n    }\n}",
+            "time": "0.13151",
+            "energy": "5.92002466828",
+            "carbon": "2.43490614606",
+            "samples": [
+                {
+                    "time": "0.1299",
+                    "carbon": "2.4052749393793516",
+                    "energy": "5.847981860878559"
+                },
+                {
+                    "time": "0.1303",
+                    "carbon": "2.4124481027665",
+                    "energy": "5.865422083069536"
+                },
+                {
+                    "time": "0.1301",
+                    "carbon": "2.408751622002758",
+                    "energy": "5.85643477267872"
+                },
+                {
+                    "time": "0.1389",
+                    "carbon": "2.571842991446557",
+                    "energy": "6.252961321289951"
+                },
+                {
+                    "time": "0.1339",
+                    "carbon": "2.4792427006285203",
+                    "energy": "6.027820813587455"
+                },
+                {
+                    "time": "0.1261",
+                    "carbon": "2.334682226951001",
+                    "energy": "5.676348716146368"
+                },
+                {
+                    "time": "0.125",
+                    "carbon": "2.3143295772310326",
+                    "energy": "5.626865006640001"
+                },
+                {
+                    "time": "0.1299",
+                    "carbon": "2.4050391727549374",
+                    "energy": "5.847408637867584"
+                },
+                {
+                    "time": "0.1368",
+                    "carbon": "2.532794765381497",
+                    "energy": "6.158022770195713"
+                },
+                {
+                    "time": "0.1342",
+                    "carbon": "2.4846553620747045",
+                    "energy": "6.040980700400449"
+                }
+            ]
+        }
+    },
+    "15": {
+        "before": {
+            "code": "import java.util.logging.Logger;\n\nclass main {\n    private final static Logger LOG = Logger.getGlobal();\n    \n    public static void main(String[] args) throws Exception {\n        LOG.severe(\"Log Log\");\n    }\n}",
+            "time": "0.30562",
+            "energy": "13.7597546842",
+            "carbon": "5.65938710162",
+            "samples": [
+                {
+                    "time": "0.2991",
+                    "carbon": "5.5388150322492935",
+                    "energy": "13.466605962191329"
+                },
+                {
+                    "time": "0.302",
+                    "carbon": "5.592668179773744",
+                    "energy": "13.597539945960962"
+                },
+                {
+                    "time": "0.3038",
+                    "carbon": "5.625646014125038",
+                    "energy": "13.677719460552"
+                },
+                {
+                    "time": "0.3018",
+                    "carbon": "5.588661119425187",
+                    "energy": "13.5877975186608"
+                },
+                {
+                    "time": "0.301",
+                    "carbon": "5.573803932603806",
+                    "energy": "13.55167501240896"
+                },
+                {
+                    "time": "0.294",
+                    "carbon": "5.444106759254588",
+                    "energy": "13.236340285082878"
+                },
+                {
+                    "time": "0.3219",
+                    "carbon": "5.960774643021278",
+                    "energy": "14.492522837396736"
+                },
+                {
+                    "time": "0.3138",
+                    "carbon": "5.810777182313314",
+                    "energy": "14.12783170997645"
+                },
+                {
+                    "time": "0.3126",
+                    "carbon": "5.788566309651997",
+                    "energy": "14.07383007452467"
+                },
+                {
+                    "time": "0.3062",
+                    "carbon": "5.6700518437965055",
+                    "energy": "13.785684035488707"
+                }
+            ]
+        },
+        "after": {
+            "code": "class Main {\n    public static void main(String[] args) throws Exception {\n    }\n}",
+            "time": "0.12911",
+            "energy": "5.81193579022",
+            "carbon": "2.39044919052",
+            "samples": [
+                {
+                    "time": "0.129",
+                    "carbon": "2.388512966042605",
+                    "energy": "5.807228217949441"
+                },
+                {
+                    "time": "0.1334",
+                    "carbon": "2.4699485720568757",
+                    "energy": "6.005223856204415"
+                },
+                {
+                    "time": "0.126",
+                    "carbon": "2.3328386138934296",
+                    "energy": "5.671866311435521"
+                },
+                {
+                    "time": "0.1344",
+                    "carbon": "2.4883590228368835",
+                    "energy": "6.049985467631616"
+                },
+                {
+                    "time": "0.1313",
+                    "carbon": "2.431047795429927",
+                    "energy": "5.910643801191168"
+                },
+                {
+                    "time": "0.1269",
+                    "carbon": "2.3495010418554196",
+                    "energy": "5.712377928167808"
+                },
+                {
+                    "time": "0.123",
+                    "carbon": "2.2772955890328443",
+                    "energy": "5.53682370297312"
+                },
+                {
+                    "time": "0.1278",
+                    "carbon": "2.366156501872841",
+                    "energy": "5.752872603629568"
+                },
+                {
+                    "time": "0.131",
+                    "carbon": "2.4254104103270353",
+                    "energy": "5.896937540304"
+                },
+                {
+                    "time": "0.1283",
+                    "carbon": "2.3754213918437532",
+                    "energy": "5.77539847275408"
+                }
+            ]
+        }
+    },
+    "16": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int n = 1000;\n        long result = 0;\n\n        for (int i = 1; i <= n; i++) {\n            result += i * i;\n        }\n        \n        System.out.println(\"Result: \" + result);\n    }\n}\n\n",
+            "time": "0.17204",
+            "energy": "7.74459920533",
+            "carbon": "3.18535365315",
+            "samples": [
+                {
+                    "time": "0.1782",
+                    "carbon": "3.299382890706735",
+                    "energy": "8.021840239987199"
+                },
+                {
+                    "time": "0.1698",
+                    "carbon": "3.1438486892063375",
+                    "energy": "7.643687549735807"
+                },
+                {
+                    "time": "0.1715",
+                    "carbon": "3.175340022103589",
+                    "energy": "7.720252910536321"
+                },
+                {
+                    "time": "0.1714",
+                    "carbon": "3.173484988692424",
+                    "energy": "7.715742739344576"
+                },
+                {
+                    "time": "0.176",
+                    "carbon": "3.258662870717236",
+                    "energy": "7.9228370306764795"
+                },
+                {
+                    "time": "0.1668",
+                    "carbon": "3.0885296715637165",
+                    "energy": "7.509189573459072"
+                },
+                {
+                    "time": "0.1856",
+                    "carbon": "3.4363924454466956",
+                    "energy": "8.354953672372224"
+                },
+                {
+                    "time": "0.1707",
+                    "carbon": "3.1605222504130936",
+                    "energy": "7.684226234896896"
+                },
+                {
+                    "time": "0.1746",
+                    "carbon": "3.232731988868242",
+                    "energy": "7.859790879815809"
+                },
+                {
+                    "time": "0.1558",
+                    "carbon": "2.8846407138030496",
+                    "energy": "7.013471222472768"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int n = 1000;\n        \n        // Calculate the sum of squares using a mathematical formula\n        long result = (n * (n + 1) * (2 * n + 1)) / 6;\n\n        System.out.println(\"Result: \" + result);\n    }\n}\n\n",
+            "time": "0.1712",
+            "energy": "7.70699801508",
+            "carbon": "3.1698882836",
+            "samples": [
+                {
+                    "time": "0.1643",
+                    "carbon": "3.0421939421877786",
+                    "energy": "7.3965328037631375"
+                },
+                {
+                    "time": "0.1759",
+                    "carbon": "3.2571092126863297",
+                    "energy": "7.919059598070337"
+                },
+                {
+                    "time": "0.1777",
+                    "carbon": "3.290262289587968",
+                    "energy": "7.999665182562529"
+                },
+                {
+                    "time": "0.1766",
+                    "carbon": "3.2698896810823315",
+                    "energy": "7.950132946954368"
+                },
+                {
+                    "time": "0.1562",
+                    "carbon": "2.892337339803693",
+                    "energy": "7.032184147346689"
+                },
+                {
+                    "time": "0.1697",
+                    "carbon": "3.1420735526040176",
+                    "energy": "7.639371632881152"
+                },
+                {
+                    "time": "0.1711",
+                    "carbon": "3.1679326504685172",
+                    "energy": "7.702243254239041"
+                },
+                {
+                    "time": "0.1742",
+                    "carbon": "3.225317636288706",
+                    "energy": "7.841764250641153"
+                },
+                {
+                    "time": "0.1779",
+                    "carbon": "3.2938266939024134",
+                    "energy": "8.008331373455905"
+                },
+                {
+                    "time": "0.1684",
+                    "carbon": "3.117939837404311",
+                    "energy": "7.580694960866305"
+                }
+            ]
+        }
+    },
+    "17": {
+        "before": {
+            "code": "import java.util.List;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> numbers = IntStream.rangeClosed(1, 1000)\n                .boxed()\n                .collect(Collectors.toList());\n\n        long sum = numbers.parallelStream()\n                .mapToLong(Integer::intValue)\n                .sum();\n\n        System.out.println(\"Sum of numbers: \" + sum);\n    }\n}\n",
+            "time": "0.21351",
+            "energy": "9.61187156063",
+            "carbon": "3.95336277289",
+            "samples": [
+                {
+                    "time": "0.2139",
+                    "carbon": "3.9605760710418987",
+                    "energy": "9.629409363097249"
+                },
+                {
+                    "time": "0.2202",
+                    "carbon": "4.077210831293613",
+                    "energy": "9.912985245061057"
+                },
+                {
+                    "time": "0.2185",
+                    "carbon": "4.045863369085167",
+                    "energy": "9.836769679273441"
+                },
+                {
+                    "time": "0.2141",
+                    "carbon": "3.96426274132813",
+                    "energy": "9.638372821123584"
+                },
+                {
+                    "time": "0.2384",
+                    "carbon": "4.414206439172654",
+                    "energy": "10.732327836549121"
+                },
+                {
+                    "time": "0.202",
+                    "carbon": "3.740271040970528",
+                    "energy": "9.09377836365312"
+                },
+                {
+                    "time": "0.2073",
+                    "carbon": "3.8383450213048103",
+                    "energy": "9.332227136651618"
+                },
+                {
+                    "time": "0.2023",
+                    "carbon": "3.745778920770335",
+                    "energy": "9.107169756310078"
+                },
+                {
+                    "time": "0.2082",
+                    "carbon": "3.855018927008824",
+                    "energy": "9.372766659394175"
+                },
+                {
+                    "time": "0.2102",
+                    "carbon": "3.892094366877253",
+                    "energy": "9.462908745142848"
+                }
+            ]
+        },
+        "after": {
+            "code": "// 후 코드\nimport java.util.concurrent.ForkJoinPool;\nimport java.util.concurrent.ForkJoinTask;\nimport java.util.concurrent.RecursiveTask;\nimport java.util.stream.IntStream;\n\npublic class Main {\n    public static void main(String[] args) {\n        int[] numbers = IntStream.rangeClosed(1, 1000)\n                .toArray();\n\n        ForkJoinPool forkJoinPool = new ForkJoinPool();\n        long sum = forkJoinPool.invoke(new SumTask(numbers, 0, numbers.length));\n        \n        System.out.println(\"Sum of numbers: \" + sum);\n    }\n}\n\nclass SumTask extends RecursiveTask<Long> {\n    private int[] numbers;\n    private int start;\n    private int end;\n    \n    public SumTask(int[] numbers, int start, int end) {\n        this.numbers = numbers;\n        this.start = start;\n        this.end = end;\n    }\n\n    @Override\n    protected Long compute() {\n        if (end - start <= 100) {\n            long sum = 0;\n            for (int i = start; i < end; i++) {\n                sum += numbers[i];\n            }\n            return sum;\n        } else {\n            int mid = (start + end) / 2;\n            SumTask leftTask = new SumTask(numbers, start, mid);\n            SumTask rightTask = new SumTask(numbers, mid, end);\n            leftTask.fork();\n            return rightTask.compute() + leftTask.join();\n        }\n    }\n}\n\n\n",
+            "time": "0.19774",
+            "energy": "8.90190711416",
+            "carbon": "3.66135439605",
+            "samples": [
+                {
+                    "time": "0.1994",
+                    "carbon": "3.6920944868481698",
+                    "energy": "8.976645968510017"
+                },
+                {
+                    "time": "0.2047",
+                    "carbon": "3.7902094942449582",
+                    "energy": "9.215194491235007"
+                },
+                {
+                    "time": "0.1902",
+                    "carbon": "3.521723746139911",
+                    "energy": "8.562420972866304"
+                },
+                {
+                    "time": "0.1975",
+                    "carbon": "3.6568799245666357",
+                    "energy": "8.8910282629872"
+                },
+                {
+                    "time": "0.197",
+                    "carbon": "3.6476261595627775",
+                    "energy": "8.86852944216576"
+                },
+                {
+                    "time": "0.2062",
+                    "carbon": "3.8180651711723668",
+                    "energy": "9.282920425899263"
+                },
+                {
+                    "time": "0.202",
+                    "carbon": "3.740306054025324",
+                    "energy": "9.093863491430401"
+                },
+                {
+                    "time": "0.1912",
+                    "carbon": "3.5402412371794965",
+                    "energy": "8.607442832918785"
+                },
+                {
+                    "time": "0.1876",
+                    "carbon": "3.4735855387124936",
+                    "energy": "8.445381810630911"
+                },
+                {
+                    "time": "0.2016",
+                    "carbon": "3.7328121480786556",
+                    "energy": "9.07564344293376"
+                }
+            ]
+        }
+    },
+    "18": {
+        "before": {
+            "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> numbers = new ArrayList<>();\n\n        for (int i = 0; i < 1000000; i++) {\n            numbers.add(i);\n        }\n\n        int sum = calculateSum(numbers);\n        System.out.println(\"Sum of numbers: \" + sum);\n    }\n\n    private static int calculateSum(List<Integer> numbers) {\n        int sum = 0;\n        for (int number : numbers) {\n            sum += number;\n        }\n        return sum;\n    }\n}\n",
+            "time": "0.41486",
+            "energy": "18.6983017354",
+            "carbon": "7.69061150379",
+            "samples": [
+                {
+                    "time": "0.4367",
+                    "carbon": "8.09539310938694",
+                    "energy": "19.68245346313382"
+                },
+                {
+                    "time": "0.4262",
+                    "carbon": "7.900781847550869",
+                    "energy": "19.209292116583683"
+                },
+                {
+                    "time": "0.3899",
+                    "carbon": "7.228213476419905",
+                    "energy": "17.57406631757818"
+                },
+                {
+                    "time": "0.4329",
+                    "carbon": "8.025347811437099",
+                    "energy": "19.51215125562144"
+                },
+                {
+                    "time": "0.4111",
+                    "carbon": "7.6208294183778476",
+                    "energy": "18.528639480617183"
+                },
+                {
+                    "time": "0.3933",
+                    "carbon": "7.2908692342039325",
+                    "energy": "17.726402222718047"
+                },
+                {
+                    "time": "0.4197",
+                    "carbon": "7.780223161567018",
+                    "energy": "18.916175933788033"
+                },
+                {
+                    "time": "0.4036",
+                    "carbon": "7.48181315982219",
+                    "energy": "18.190647118459008"
+                },
+                {
+                    "time": "0.4105",
+                    "carbon": "7.609714580010875",
+                    "energy": "18.50161580357616"
+                },
+                {
+                    "time": "0.4247",
+                    "carbon": "7.87292923909905",
+                    "energy": "19.141573642351204"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int[] numbers = new int[1000000];\n\n        for (int i = 0; i < 1000000; i++) {\n            numbers[i] = i;\n        }\n\n        int sum = calculateSum(numbers);\n        System.out.println(\"Sum of numbers: \" + sum);\n    }\n\n    private static int calculateSum(int[] numbers) {\n        int sum = 0;\n        for (int number : numbers) {\n            sum += number;\n        }\n        return sum;\n    }\n}\n",
+            "time": "0.2027",
+            "energy": "9.12585444477",
+            "carbon": "3.75346393314",
+            "samples": [
+                {
+                    "time": "0.2012",
+                    "carbon": "3.725684769882829",
+                    "energy": "9.058314538980863"
+                },
+                {
+                    "time": "0.2008",
+                    "carbon": "3.718298702633832",
+                    "energy": "9.040356680364289"
+                },
+                {
+                    "time": "0.2056",
+                    "carbon": "3.8071551522871125",
+                    "energy": "9.2563947296064"
+                },
+                {
+                    "time": "0.2011",
+                    "carbon": "3.7238294628071755",
+                    "energy": "9.053803702424448"
+                },
+                {
+                    "time": "0.2014",
+                    "carbon": "3.7294017723166495",
+                    "energy": "9.067351744022975"
+                },
+                {
+                    "time": "0.2115",
+                    "carbon": "3.9164149276461107",
+                    "energy": "9.522039697656481"
+                },
+                {
+                    "time": "0.203",
+                    "carbon": "3.7590150435414884",
+                    "energy": "9.139350944666882"
+                },
+                {
+                    "time": "0.2051",
+                    "carbon": "3.797908242673162",
+                    "energy": "9.233912576399616"
+                },
+                {
+                    "time": "0.2084",
+                    "carbon": "3.85901560955105",
+                    "energy": "9.382483854974593"
+                },
+                {
+                    "time": "0.1889",
+                    "carbon": "3.4979156480165017",
+                    "energy": "8.504535978644546"
+                }
+            ]
+        }
+    },
+    "19": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        String str = new String(\"hello\");\n        System.out.println(str);\n    }\n}",
+            "time": "0.13546",
+            "energy": "6.09772140867",
+            "carbon": "2.50799281539",
+            "samples": [
+                {
+                    "time": "0.1373",
+                    "carbon": "2.542061667114182",
+                    "energy": "6.180553530547488"
+                },
+                {
+                    "time": "0.1273",
+                    "carbon": "2.356902421038162",
+                    "energy": "5.730373014923807"
+                },
+                {
+                    "time": "0.1317",
+                    "carbon": "2.4383705454604083",
+                    "energy": "5.928447715682977"
+                },
+                {
+                    "time": "0.1318",
+                    "carbon": "2.440230277778636",
+                    "energy": "5.932969311399553"
+                },
+                {
+                    "time": "0.1301",
+                    "carbon": "2.408742081411989",
+                    "energy": "5.856411576494017"
+                },
+                {
+                    "time": "0.1504",
+                    "carbon": "2.784645464306749",
+                    "energy": "6.770351238285312"
+                },
+                {
+                    "time": "0.1335",
+                    "carbon": "2.4716990193556065",
+                    "energy": "6.00947974557648"
+                },
+                {
+                    "time": "0.1424",
+                    "carbon": "2.6364961209538564",
+                    "energy": "6.410153466943488"
+                },
+                {
+                    "time": "0.1309",
+                    "carbon": "2.4235595337716904",
+                    "energy": "5.892437475739583"
+                },
+                {
+                    "time": "0.1392",
+                    "carbon": "2.5772210226682333",
+                    "energy": "6.266037011106816"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        String str = \"hello\";\n        System.out.println(str);\n    }\n}",
+            "time": "0.13224",
+            "energy": "5.95281782187",
+            "carbon": "2.44839397014",
+            "samples": [
+                {
+                    "time": "0.1313",
+                    "carbon": "2.4309999442550403",
+                    "energy": "5.910527459895552"
+                },
+                {
+                    "time": "0.1344",
+                    "carbon": "2.4883602174940465",
+                    "energy": "6.049988372219904"
+                },
+                {
+                    "time": "0.1416",
+                    "carbon": "2.6217584484039294",
+                    "energy": "6.374321537573375"
+                },
+                {
+                    "time": "0.1308",
+                    "carbon": "2.4217098916509707",
+                    "energy": "5.887940412475008"
+                },
+                {
+                    "time": "0.1214",
+                    "carbon": "2.2476759411920675",
+                    "energy": "5.464808998765056"
+                },
+                {
+                    "time": "0.1309",
+                    "carbon": "2.4235662241629115",
+                    "energy": "5.8924537421903995"
+                },
+                {
+                    "time": "0.1269",
+                    "carbon": "2.3495651258456145",
+                    "energy": "5.7125337365563205"
+                },
+                {
+                    "time": "0.1394",
+                    "carbon": "2.580939105426793",
+                    "energy": "6.27507684275904"
+                },
+                {
+                    "time": "0.1359",
+                    "carbon": "2.5161560282310393",
+                    "energy": "6.117568753296959"
+                },
+                {
+                    "time": "0.1298",
+                    "carbon": "2.403208774703348",
+                    "energy": "5.84295836300352"
+                }
+            ]
+        }
+    },
+    "20": {
+        "before": {
+            "code": "import java.util.Vector;\n\npublic class Main {\n    public static void main(String[] args) {\n        Vector<Integer> v = new Vector();\n\n        for(int i = 0; i < 100; ++i) {\n            v.add(i);\n        }\n\n        System.out.println(v);\n    }\n}",
+            "time": "0.13626",
+            "energy": "6.13374974632",
+            "carbon": "2.52281127066",
+            "samples": [
+                {
+                    "time": "0.1363",
+                    "carbon": "2.5235529217828003",
+                    "energy": "6.135552934069537"
+                },
+                {
+                    "time": "0.1356",
+                    "carbon": "2.5106175704522657",
+                    "energy": "6.104103015930624"
+                },
+                {
+                    "time": "0.1377",
+                    "carbon": "2.549458577332476",
+                    "energy": "6.198537751841664"
+                },
+                {
+                    "time": "0.1277",
+                    "carbon": "2.3643163292878997",
+                    "energy": "5.748398563792608"
+                },
+                {
+                    "time": "0.1397",
+                    "carbon": "2.5864829387183588",
+                    "energy": "6.288555649692095"
+                },
+                {
+                    "time": "0.1417",
+                    "carbon": "2.6235761224456304",
+                    "energy": "6.378740876356991"
+                },
+                {
+                    "time": "0.1378",
+                    "carbon": "2.551318074263688",
+                    "energy": "6.203058775258176"
+                },
+                {
+                    "time": "0.1371",
+                    "carbon": "2.5383548523215382",
+                    "energy": "6.171541094873665"
+                },
+                {
+                    "time": "0.1292",
+                    "carbon": "2.3920956447672284",
+                    "energy": "5.81593883969664"
+                },
+                {
+                    "time": "0.1398",
+                    "carbon": "2.588339675227086",
+                    "energy": "6.293069961651073"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> v = new ArrayList();\n\n        for(int i = 0; i < 100; ++i) {\n            v.add(i);\n        }\n\n        System.out.println(v);\n    }\n}",
+            "time": "0.13568",
+            "energy": "6.10761736813",
+            "carbon": "2.51206302351",
+            "samples": [
+                {
+                    "time": "0.1399",
+                    "carbon": "2.59020279246283",
+                    "energy": "6.297599787169536"
+                },
+                {
+                    "time": "0.1351",
+                    "carbon": "2.501323354103542",
+                    "energy": "6.081505845133824"
+                },
+                {
+                    "time": "0.1351",
+                    "carbon": "2.5013244799279186",
+                    "energy": "6.081508582367904"
+                },
+                {
+                    "time": "0.1345",
+                    "carbon": "2.490213842916412",
+                    "energy": "6.05449512014688"
+                },
+                {
+                    "time": "0.1357",
+                    "carbon": "2.512432268850972",
+                    "energy": "6.108515119987776"
+                },
+                {
+                    "time": "0.1371",
+                    "carbon": "2.5383572134694212",
+                    "energy": "6.171546835568736"
+                },
+                {
+                    "time": "0.1363",
+                    "carbon": "2.523539670499329",
+                    "energy": "6.135520716020737"
+                },
+                {
+                    "time": "0.1387",
+                    "carbon": "2.567972855730952",
+                    "energy": "6.243551800950527"
+                },
+                {
+                    "time": "0.1301",
+                    "carbon": "2.4087510437851347",
+                    "energy": "5.856433366849343"
+                },
+                {
+                    "time": "0.1343",
+                    "carbon": "2.4865127133563183",
+                    "energy": "6.045496507066177"
+                }
+            ]
+        }
+    },
+    "21": {
+        "before": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.2322",
+                    "carbon": "10.452198785639615",
+                    "energy": "4.298989360533573"
+                }
+            ]
+        },
+        "after": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.0",
+                    "carbon": "0.0",
+                    "energy": "0.0"
+                }
+            ]
+        }
+    },
+    "22": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        StringBuffer sb = new StringBuffer();\n        sb.append(\"Hello\");\n        System.out.println(sb.toString());\n        sb.setLength(0);\n        sb.append(\"World\");\n        System.out.println(sb.toString());\n    }\n}",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.2322",
+                    "carbon": "10.452198785639615",
+                    "energy": "4.298989360533573"
+                },
+                {
+                    "time": "0.1746",
+                    "carbon": "7.859398685026752",
+                    "energy": "3.2325706791515034"
+                },
+                {
+                    "time": "0.1988",
+                    "carbon": "8.948728195061761",
+                    "energy": "3.6806119066289025"
+                },
+                {
+                    "time": "0.2138",
+                    "carbon": "9.62390574396403",
+                    "energy": "3.9583124324924057"
+                },
+                {
+                    "time": "0.2004",
+                    "carbon": "9.02077045368768",
+                    "energy": "3.710242887601743"
+                },
+                {
+                    "time": "0.1884",
+                    "carbon": "8.480599723219967",
+                    "energy": "3.4880706661603726"
+                },
+                {
+                    "time": "0.1926",
+                    "carbon": "8.669660800617216",
+                    "energy": "3.5658314872938606"
+                },
+                {
+                    "time": "0.1724",
+                    "carbon": "7.760389185953279",
+                    "energy": "3.1918480721825837"
+                },
+                {
+                    "time": "0.152",
+                    "carbon": "6.842088407623679",
+                    "energy": "2.8141509620556193"
+                },
+                {
+                    "time": "0.1906",
+                    "carbon": "8.579608970249089",
+                    "energy": "3.5287931694634502"
+                },
+                {
+                    "time": "0.2082",
+                    "carbon": "9.371896002571392",
+                    "energy": "3.8546608258576134"
+                },
+                {
+                    "time": "0.172",
+                    "carbon": "7.742355531413759",
+                    "energy": "3.184430830070479"
+                },
+                {
+                    "time": "0.168",
+                    "carbon": "7.562330705180162",
+                    "energy": "3.1103866190406007"
+                },
+                {
+                    "time": "0.1834",
+                    "carbon": "8.25553791238176",
+                    "energy": "3.3955027433626177"
+                },
+                {
+                    "time": "0.1676",
+                    "carbon": "7.5443136104678405",
+                    "energy": "3.1029761879854227"
+                },
+                {
+                    "time": "0.1492",
+                    "carbon": "6.716062028602368",
+                    "energy": "2.762316312364154"
+                },
+                {
+                    "time": "0.1724",
+                    "carbon": "7.760369392502399",
+                    "energy": "3.191839931136237"
+                },
+                {
+                    "time": "0.1712",
+                    "carbon": "7.706364231131135",
+                    "energy": "3.169627608264236"
+                },
+                {
+                    "time": "0.1928",
+                    "carbon": "8.678682313804801",
+                    "energy": "3.5695420356679146"
+                },
+                {
+                    "time": "0.22",
+                    "carbon": "9.903042902015999",
+                    "energy": "4.0731215455991805"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        StringBuffer sb = new StringBuffer();\n        sb.append(\"Hello\");\n        System.out.println(sb.toString());\n        sb.setLength(0);\n        sb.append(\"World\");\n        System.out.println(sb.toString());\n    }\n}",
+            "time": "0.17551",
+            "energy": "7.900370222567818",
+            "carbon": "3.2494222725421436",
+            "samples": [
+                {
+                    "time": "0.1684",
+                    "carbon": "7.580307366899713",
+                    "energy": "3.1177804200058516"
+                },
+                {
+                    "time": "0.1518",
+                    "carbon": "6.833079713579329",
+                    "energy": "2.8104456861951777"
+                },
+                {
+                    "time": "0.183",
+                    "carbon": "8.237536826402879",
+                    "energy": "3.3880988966995043"
+                },
+                {
+                    "time": "0.1782",
+                    "carbon": "8.02148641348032",
+                    "energy": "3.2992373618644555"
+                },
+                {
+                    "time": "0.177",
+                    "carbon": "7.967465605638719",
+                    "energy": "3.2770186035992053"
+                },
+                {
+                    "time": "0.1626",
+                    "carbon": "7.319243051286336",
+                    "energy": "3.01040466699407"
+                },
+                {
+                    "time": "0.173",
+                    "carbon": "7.78738511623392",
+                    "energy": "3.2029514983070113"
+                },
+                {
+                    "time": "0.2388",
+                    "carbon": "10.749274224702337",
+                    "energy": "4.421176488620071"
+                },
+                {
+                    "time": "0.1842",
+                    "carbon": "8.29152335621261",
+                    "energy": "3.410303556410246"
+                },
+                {
+                    "time": "0.2408",
+                    "carbon": "10.839337750144512",
+                    "energy": "4.458219616634438"
+                },
+                {
+                    "time": "0.161",
+                    "carbon": "7.24721684758848",
+                    "energy": "2.980780289413142"
+                },
+                {
+                    "time": "0.1584",
+                    "carbon": "7.13016842427648",
+                    "energy": "2.9326382729049163"
+                },
+                {
+                    "time": "0.1842",
+                    "carbon": "8.291533059514945",
+                    "energy": "3.410307547378497"
+                },
+                {
+                    "time": "0.1558",
+                    "carbon": "7.0131359880863995",
+                    "energy": "2.884502831899936"
+                },
+                {
+                    "time": "0.1872",
+                    "carbon": "8.426580383070721",
+                    "energy": "3.465852511556988"
+                },
+                {
+                    "time": "0.1576",
+                    "carbon": "7.094168967806208",
+                    "energy": "2.9178316964586934"
+                },
+                {
+                    "time": "0.1636",
+                    "carbon": "7.364261707701121",
+                    "energy": "3.028920840377471"
+                },
+                {
+                    "time": "0.153",
+                    "carbon": "6.88711475341728",
+                    "energy": "2.832670298080527"
+                },
+                {
+                    "time": "0.1664",
+                    "carbon": "7.490297944276991",
+                    "energy": "3.0807595444811264"
+                },
+                {
+                    "time": "0.1652",
+                    "carbon": "7.436286951037057",
+                    "energy": "3.0585448229615415"
+                }
+            ]
+        }
+    },
+    "23": {
+        "before": {
+            "code": "public class Main{\n    int counter=0;\n\n    public void method1(){\n        for(int i=0;i<1000;i++){\n           addCount();\n           System.out.println(\"counter=\"+counter);\n        }\n    }\n\n    public int addCount(){\n         counter=counter+1;\n         return counter;\n    }\n\n\t  public static void main(String args[]){\n\t        Main im=new Main();\n          im.method1();\n    }\n}",
+            "time": "0.371",
+            "energy": "16.700927806518077",
+            "carbon": "6.869091606820885",
+            "samples": [
+                {
+                    "time": "0.3742",
+                    "carbon": "16.845042022874495",
+                    "energy": "6.92836578400828"
+                },
+                {
+                    "time": "0.3918",
+                    "carbon": "17.63729603630611",
+                    "energy": "7.254219859732704"
+                },
+                {
+                    "time": "0.4322",
+                    "carbon": "19.455953417682625",
+                    "energy": "8.002233640692864"
+                },
+                {
+                    "time": "0.3844",
+                    "carbon": "17.304141295931906",
+                    "energy": "7.1171933150167925"
+                },
+                {
+                    "time": "0.388",
+                    "carbon": "17.46625174268544",
+                    "energy": "7.183869341766521"
+                },
+                {
+                    "time": "0.3284",
+                    "carbon": "14.783255493755906",
+                    "energy": "6.080352984581804"
+                },
+                {
+                    "time": "0.3902",
+                    "carbon": "17.56519390269389",
+                    "energy": "7.224564252177997"
+                },
+                {
+                    "time": "0.3486",
+                    "carbon": "15.692542504736831",
+                    "energy": "6.454342732198259"
+                },
+                {
+                    "time": "0.3862",
+                    "carbon": "17.385159098691645",
+                    "energy": "7.150515937291874"
+                },
+                {
+                    "time": "0.3604",
+                    "carbon": "16.223740826361986",
+                    "energy": "6.672824601882685"
+                },
+                {
+                    "time": "0.3978",
+                    "carbon": "17.90732313958349",
+                    "energy": "7.3652820073106895"
+                },
+                {
+                    "time": "0.3574",
+                    "carbon": "16.088707521658943",
+                    "energy": "6.6172854036583235"
+                },
+                {
+                    "time": "0.3446",
+                    "carbon": "15.512492871179715",
+                    "energy": "6.380288317916217"
+                },
+                {
+                    "time": "0.3512",
+                    "carbon": "15.809609933489662",
+                    "energy": "6.502492565644298"
+                },
+                {
+                    "time": "0.3648",
+                    "carbon": "16.42181042139955",
+                    "energy": "6.754290626321635"
+                },
+                {
+                    "time": "0.373",
+                    "carbon": "16.791002998142403",
+                    "energy": "6.9061395331359705"
+                },
+                {
+                    "time": "0.3782",
+                    "carbon": "17.02503406929485",
+                    "energy": "7.002396512700972"
+                },
+                {
+                    "time": "0.3462",
+                    "carbon": "15.58449920254464",
+                    "energy": "6.40990452200661"
+                },
+                {
+                    "time": "0.356",
+                    "carbon": "16.02567362371968",
+                    "energy": "6.591359561435905"
+                },
+                {
+                    "time": "0.3664",
+                    "carbon": "16.493826007627778",
+                    "energy": "6.783910636937305"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main{\n\n    int counter=0;\n\n    public void method1(){\n        for(int i=0;i<1000;i++){\n           addCount();\n           System.out.println(\"counter=\"+counter);\n        }\n    }\n\n        private void addCount(){\n            counter=counter+1;\n        }\n\n        public static void main(String args[]){\n            Main im=new Main();\n            im.method1();\n        }\n}",
+            "time": "0.36534999999999995",
+            "energy": "16.446577720043575",
+            "carbon": "6.764477416253925",
+            "samples": [
+                {
+                    "time": "0.404",
+                    "carbon": "18.1864691653824",
+                    "energy": "7.4800947677217815"
+                },
+                {
+                    "time": "0.3378",
+                    "carbon": "15.206389499227393",
+                    "energy": "6.254388001032227"
+                },
+                {
+                    "time": "0.3826",
+                    "carbon": "17.223115122490178",
+                    "energy": "7.08386724988021"
+                },
+                {
+                    "time": "0.3696",
+                    "carbon": "16.6378908681216",
+                    "energy": "6.843164514058413"
+                },
+                {
+                    "time": "0.378",
+                    "carbon": "17.01601300832832",
+                    "energy": "6.998686150325438"
+                },
+                {
+                    "time": "0.3798",
+                    "carbon": "17.097029842621826",
+                    "energy": "7.032008374270357"
+                },
+                {
+                    "time": "0.3342",
+                    "carbon": "15.044315811508223",
+                    "energy": "6.187727093273332"
+                },
+                {
+                    "time": "0.3528",
+                    "carbon": "15.881636444341249",
+                    "energy": "6.532117069557556"
+                },
+                {
+                    "time": "0.3382",
+                    "carbon": "15.224396337922752",
+                    "energy": "6.261794213787628"
+                },
+                {
+                    "time": "0.3844",
+                    "carbon": "17.304107027625218",
+                    "energy": "7.117179220462252"
+                },
+                {
+                    "time": "0.3918",
+                    "carbon": "17.637255816186816",
+                    "energy": "7.2542033171976374"
+                },
+                {
+                    "time": "0.389",
+                    "carbon": "17.5112368550496",
+                    "energy": "7.2023717184819"
+                },
+                {
+                    "time": "0.3746",
+                    "carbon": "16.862945261615998",
+                    "energy": "6.93572938610266"
+                },
+                {
+                    "time": "0.3294",
+                    "carbon": "14.828242576820545",
+                    "energy": "6.09885617184629"
+                },
+                {
+                    "time": "0.4044",
+                    "carbon": "18.204487041351168",
+                    "energy": "7.487505520107735"
+                },
+                {
+                    "time": "0.3704",
+                    "carbon": "16.673901617691648",
+                    "energy": "6.8579757353565745"
+                },
+                {
+                    "time": "0.333",
+                    "carbon": "14.99024634776064",
+                    "energy": "6.165488322833951"
+                },
+                {
+                    "time": "0.3754",
+                    "carbon": "16.899034524487487",
+                    "energy": "6.950572899921704"
+                },
+                {
+                    "time": "0.3162",
+                    "carbon": "14.234068367978688",
+                    "energy": "5.854472319749634"
+                },
+                {
+                    "time": "0.3614",
+                    "carbon": "16.268772864359807",
+                    "energy": "6.691346279111189"
+                }
+            ]
+        }
+    },
+    "24": {
+        "before": {
+            "code": "public class Main{\n\n    public static void main(String[] args) {\n        Counter counter = new Counter();\n\n        for (int i = 0; i < 10; i++) {\n            counter.increment();\n        }\n        System.out.println(\"Counter: \" + counter.getValue());\n    }\n}\n\nclass Counter {\n    private int value = 0;\n\n    public void increment() {\n        value++;\n    }\n\n    public int getValue() {\n        return value;\n    }\n}",
+            "time": "0.29700000000000004",
+            "energy": "13.369473768337922",
+            "carbon": "5.498864560917387",
+            "samples": [
+                {
+                    "time": "0.296",
+                    "carbon": "13.32440753983488",
+                    "energy": "5.480328821134086"
+                },
+                {
+                    "time": "0.301",
+                    "carbon": "13.549553547263999",
+                    "energy": "5.572931373989682"
+                },
+                {
+                    "time": "0.244",
+                    "carbon": "10.983625332479999",
+                    "energy": "4.5175650992490235"
+                },
+                {
+                    "time": "0.304",
+                    "carbon": "13.684600573931517",
+                    "energy": "5.628476216058033"
+                },
+                {
+                    "time": "0.216",
+                    "carbon": "9.7232209809408",
+                    "energy": "3.999160789460951"
+                },
+                {
+                    "time": "0.223",
+                    "carbon": "10.038391630905602",
+                    "energy": "4.128790477791474"
+                },
+                {
+                    "time": "0.273",
+                    "carbon": "12.289050312215041",
+                    "energy": "5.054486393414046"
+                },
+                {
+                    "time": "0.411",
+                    "carbon": "18.50108884045056",
+                    "energy": "7.6094978400773154"
+                },
+                {
+                    "time": "0.546",
+                    "carbon": "24.57826582288896",
+                    "energy": "10.10904073295423"
+                },
+                {
+                    "time": "0.374",
+                    "carbon": "16.83565183390464",
+                    "energy": "6.9245035992849795"
+                },
+                {
+                    "time": "0.262",
+                    "carbon": "11.79391967057664",
+                    "energy": "4.850839160508172"
+                },
+                {
+                    "time": "0.246",
+                    "carbon": "11.07374941502208",
+                    "energy": "4.554633134398582"
+                },
+                {
+                    "time": "0.329",
+                    "carbon": "14.810042902314242",
+                    "energy": "6.091370645721848"
+                },
+                {
+                    "time": "0.225",
+                    "carbon": "10.12844636208",
+                    "energy": "4.165829988723504"
+                },
+                {
+                    "time": "0.273",
+                    "carbon": "12.289174211059201",
+                    "energy": "5.05453735300865"
+                },
+                {
+                    "time": "0.239",
+                    "carbon": "10.75856653833984",
+                    "energy": "4.424998417219176"
+                },
+                {
+                    "time": "0.28",
+                    "carbon": "12.604249473177601",
+                    "energy": "5.184127808317948"
+                },
+                {
+                    "time": "0.283",
+                    "carbon": "12.73929806127744",
+                    "energy": "5.239673292603411"
+                },
+                {
+                    "time": "0.332",
+                    "carbon": "14.944940004464641",
+                    "energy": "6.146853823836307"
+                },
+                {
+                    "time": "0.283",
+                    "carbon": "12.739232313630719",
+                    "energy": "5.239646250596315"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main{\n\n    private static int counter = 0;\n\n    public static void main(String[] args) {\n        for (int i = 0; i < 10; i++) {\n            incrementCounter();\n        }\n        System.out.println(\"Counter: \" + getCounter());\n    }\n\n    public static void incrementCounter() {\n        counter++;\n    }\n\n    public static int getCounter() {\n        return counter;\n    }\n}",
+            "time": "0.28595000000000004",
+            "energy": "12.872035711374338",
+            "carbon": "5.294268288088265",
+            "samples": [
+                {
+                    "time": "0.325",
+                    "carbon": "14.629825312128",
+                    "energy": "6.017247150878246"
+                },
+                {
+                    "time": "0.277",
+                    "carbon": "12.46913958940416",
+                    "energy": "5.128557113121931"
+                },
+                {
+                    "time": "0.268",
+                    "carbon": "12.064038393461761",
+                    "energy": "4.961938991230823"
+                },
+                {
+                    "time": "0.236",
+                    "carbon": "10.6235765985024",
+                    "energy": "4.369477054964037"
+                },
+                {
+                    "time": "0.3",
+                    "carbon": "13.50457083648",
+                    "energy": "5.554429985044224"
+                },
+                {
+                    "time": "0.246",
+                    "carbon": "11.073686946923521",
+                    "energy": "4.554607441269645"
+                },
+                {
+                    "time": "0.244",
+                    "carbon": "10.98361346775552",
+                    "energy": "4.517560219287845"
+                },
+                {
+                    "time": "0.443",
+                    "carbon": "19.94163950198016",
+                    "energy": "8.201996327164439"
+                },
+                {
+                    "time": "0.417",
+                    "carbon": "18.77114393361792",
+                    "energy": "7.7205714998970505"
+                },
+                {
+                    "time": "0.352",
+                    "carbon": "15.845239496908798",
+                    "energy": "6.517147005078589"
+                },
+                {
+                    "time": "0.304",
+                    "carbon": "13.684671200378878",
+                    "energy": "5.628505264715832"
+                },
+                {
+                    "time": "0.208",
+                    "carbon": "9.363158999101438",
+                    "energy": "3.8510672963304216"
+                },
+                {
+                    "time": "0.3",
+                    "carbon": "13.504518968832",
+                    "energy": "5.5544086518806015"
+                },
+                {
+                    "time": "0.26",
+                    "carbon": "11.7038672734464",
+                    "energy": "4.813800609568505"
+                },
+                {
+                    "time": "0.235",
+                    "carbon": "10.5784636783104",
+                    "energy": "4.350922110889067"
+                },
+                {
+                    "time": "0.229",
+                    "carbon": "10.308464326656",
+                    "energy": "4.239871377553613"
+                },
+                {
+                    "time": "0.352",
+                    "carbon": "15.84525280960512",
+                    "energy": "6.517152480590585"
+                },
+                {
+                    "time": "0.274",
+                    "carbon": "12.334112520975362",
+                    "energy": "5.073020479877166"
+                },
+                {
+                    "time": "0.197",
+                    "carbon": "8.867900401056",
+                    "energy": "3.6473674349543326"
+                },
+                {
+                    "time": "0.252",
+                    "carbon": "11.34382997196288",
+                    "energy": "4.665717267468333"
+                }
+            ]
+        }
+    },
+    "25": {
+        "before": {
+            "code": "class SynchronizedExample {\n    private int counter = 0;\n\n    public synchronized void synchronizedMethod() {\n        counter++;\n    }\n\n    public void nonSynchronizedMethod() {\n        counter++;\n    }\n\n    public int getCounter() {\n        return counter;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        SynchronizedExample example = new SynchronizedExample();\n\n\n        for (int i = 0; i < 1000000; i++) {\n            example.synchronizedMethod();\n        }\n\t\t\t\tSystem.out.println(\"counter \" + example.getCounter());\n    }\n}",
+            "time": "0.3262999999999999",
+            "energy": "14.688406003330362",
+            "carbon": "6.04134138916978",
+            "samples": [
+                {
+                    "time": "0.392",
+                    "carbon": "17.64592596523008",
+                    "energy": "7.257769349499132"
+                },
+                {
+                    "time": "0.37",
+                    "carbon": "16.6556213724672",
+                    "energy": "6.850457070495759"
+                },
+                {
+                    "time": "0.43",
+                    "carbon": "19.3563819358848",
+                    "energy": "7.961279890229418"
+                },
+                {
+                    "time": "0.287",
+                    "carbon": "12.91926577366656",
+                    "energy": "5.313694012709056"
+                },
+                {
+                    "time": "0.498",
+                    "carbon": "22.417541847774718",
+                    "energy": "9.220334961989742"
+                },
+                {
+                    "time": "0.326",
+                    "carbon": "14.674857772631041",
+                    "energy": "6.035769001883147"
+                },
+                {
+                    "time": "0.312",
+                    "carbon": "14.04469635618816",
+                    "energy": "5.7765836113001905"
+                },
+                {
+                    "time": "0.308",
+                    "carbon": "13.864686069104641",
+                    "energy": "5.702545380222738"
+                },
+                {
+                    "time": "0.283",
+                    "carbon": "12.739285829157119",
+                    "energy": "5.239668261532323"
+                },
+                {
+                    "time": "0.287",
+                    "carbon": "12.91935105812736",
+                    "energy": "5.313729090207783"
+                },
+                {
+                    "time": "0.3",
+                    "carbon": "13.504450892544",
+                    "energy": "5.554380652103347"
+                },
+                {
+                    "time": "0.28",
+                    "carbon": "12.604154166374402",
+                    "energy": "5.184088608629791"
+                },
+                {
+                    "time": "0.334",
+                    "carbon": "15.0350166821376",
+                    "energy": "6.183902361363195"
+                },
+                {
+                    "time": "0.356",
+                    "carbon": "16.025404825036798",
+                    "energy": "6.591249004537635"
+                },
+                {
+                    "time": "0.298",
+                    "carbon": "13.41451460330496",
+                    "energy": "5.51738985633933"
+                },
+                {
+                    "time": "0.313",
+                    "carbon": "14.08960486922112",
+                    "energy": "5.795054482710646"
+                },
+                {
+                    "time": "0.236",
+                    "carbon": "10.62359317453824",
+                    "energy": "4.369483872687578"
+                },
+                {
+                    "time": "0.351",
+                    "carbon": "15.80030236482048",
+                    "energy": "6.498664362650663"
+                },
+                {
+                    "time": "0.256",
+                    "carbon": "11.52381330948096",
+                    "energy": "4.739744414189519"
+                },
+                {
+                    "time": "0.309",
+                    "carbon": "13.909651198917121",
+                    "energy": "5.721039538114612"
+                }
+            ]
+        },
+        "after": {
+            "code": "class SynchronizedExample {\n    private int counter = 0;\n\n    public synchronized void synchronizedMethod() {\n        counter++;\n    }\n\n    public void nonSynchronizedMethod() {\n        counter++;\n    }\n\n    public int getCounter() {\n        return counter;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        SynchronizedExample example = new SynchronizedExample();\n\n\n        for (int i = 0; i < 1000000; i++) {\n            example.nonSynchronizedMethod();\n        }\n\t\t\t\t System.out.println(\"counter \" + example.getCounter());\n    }\n}",
+            "time": "0.31245",
+            "energy": "14.064961885686145",
+            "carbon": "5.784918823582711",
+            "samples": [
+                {
+                    "time": "0.337",
+                    "carbon": "15.170052638304002",
+                    "energy": "6.2394426501344356"
+                },
+                {
+                    "time": "0.33",
+                    "carbon": "14.854912028352",
+                    "energy": "6.109825317261178"
+                },
+                {
+                    "time": "0.252",
+                    "carbon": "11.343731942108162",
+                    "energy": "4.665676947789087"
+                },
+                {
+                    "time": "0.315",
+                    "carbon": "14.179739811552",
+                    "energy": "5.832126984491338"
+                },
+                {
+                    "time": "0.36",
+                    "carbon": "16.2053858068992",
+                    "energy": "6.665275182377641"
+                },
+                {
+                    "time": "0.332",
+                    "carbon": "14.944954354513923",
+                    "energy": "6.146859726011576"
+                },
+                {
+                    "time": "0.461",
+                    "carbon": "20.75199645405312",
+                    "energy": "8.535296141552049"
+                },
+                {
+                    "time": "0.428",
+                    "carbon": "19.266488685987838",
+                    "energy": "7.924306796546798"
+                },
+                {
+                    "time": "0.251",
+                    "carbon": "11.29879443181824",
+                    "energy": "4.647194149806842"
+                },
+                {
+                    "time": "0.338",
+                    "carbon": "15.215138852060162",
+                    "energy": "6.2579866098523445"
+                },
+                {
+                    "time": "0.272",
+                    "carbon": "12.24419713007616",
+                    "energy": "5.036038279600325"
+                },
+                {
+                    "time": "0.329",
+                    "carbon": "14.809952247390722",
+                    "energy": "6.091333359351804"
+                },
+                {
+                    "time": "0.306",
+                    "carbon": "13.77467713274112",
+                    "energy": "5.6655247046964226"
+                },
+                {
+                    "time": "0.285",
+                    "carbon": "12.829263763795199",
+                    "energy": "5.276676186048965"
+                },
+                {
+                    "time": "0.287",
+                    "carbon": "12.919386722538238",
+                    "energy": "5.313743758979977"
+                },
+                {
+                    "time": "0.232",
+                    "carbon": "10.44348714842112",
+                    "energy": "4.295406264145607"
+                },
+                {
+                    "time": "0.234",
+                    "carbon": "10.533480546101762",
+                    "energy": "4.332420548611655"
+                },
+                {
+                    "time": "0.201",
+                    "carbon": "9.048086351976961",
+                    "energy": "3.721477916568124"
+                },
+                {
+                    "time": "0.449",
+                    "carbon": "20.211751260552962",
+                    "energy": "8.313093293465434"
+                },
+                {
+                    "time": "0.25",
+                    "carbon": "11.253760404480001",
+                    "energy": "4.628671654362624"
+                }
+            ]
+        }
+    },
+    "26": {
+        "before": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.2322",
+                    "carbon": "10.452198785639615",
+                    "energy": "4.298989360533573"
+                }
+            ]
+        },
+        "after": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.0",
+                    "carbon": "0.0",
+                    "energy": "0.0"
+                }
+            ]
+        }
+    },
+    "27": {
+        "before": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        int y = x * 2;\n        System.out.println(y);\n    }\n}",
+            "time": "0.1668",
+            "energy": "7.508304309139776",
+            "carbon": "3.0881655623491904",
+            "samples": [
+                {
+                    "time": "0.17",
+                    "carbon": "7.652364192230401",
+                    "energy": "3.147417392264364"
+                },
+                {
+                    "time": "0.142",
+                    "carbon": "6.391979399116799",
+                    "energy": "2.6290211268567396"
+                },
+                {
+                    "time": "0.199",
+                    "carbon": "8.957782548034562",
+                    "energy": "3.684335962006615"
+                },
+                {
+                    "time": "0.155",
+                    "carbon": "6.9771530746944",
+                    "energy": "2.869703059621807"
+                },
+                {
+                    "time": "0.224",
+                    "carbon": "10.083083704565759",
+                    "energy": "4.147172327687897"
+                },
+                {
+                    "time": "0.18",
+                    "carbon": "8.1024682516992",
+                    "energy": "3.332545191923881"
+                },
+                {
+                    "time": "0.162",
+                    "carbon": "7.29223455552768",
+                    "energy": "2.999296072688535"
+                },
+                {
+                    "time": "0.174",
+                    "carbon": "7.832407598968321",
+                    "energy": "3.2214692454556704"
+                },
+                {
+                    "time": "0.159",
+                    "carbon": "7.15715365820544",
+                    "energy": "2.9437372996198974"
+                },
+                {
+                    "time": "0.166",
+                    "carbon": "7.472307667299841",
+                    "energy": "3.0733601435604245"
+                },
+                {
+                    "time": "0.202",
+                    "carbon": "9.092810308032002",
+                    "energy": "3.7398728796935625"
+                },
+                {
+                    "time": "0.16",
+                    "carbon": "7.2021818990592",
+                    "energy": "2.962257415083049"
+                },
+                {
+                    "time": "0.16",
+                    "carbon": "7.202208697344",
+                    "energy": "2.9622684372175874"
+                },
+                {
+                    "time": "0.157",
+                    "carbon": "7.06718340105984",
+                    "energy": "2.906732532855912"
+                },
+                {
+                    "time": "0.122",
+                    "carbon": "5.49173488637952",
+                    "energy": "2.2587505587678964"
+                },
+                {
+                    "time": "0.154",
+                    "carbon": "6.93209591762688",
+                    "energy": "2.8511710509199357"
+                },
+                {
+                    "time": "0.154",
+                    "carbon": "6.9321050701056",
+                    "energy": "2.8511748153344336"
+                },
+                {
+                    "time": "0.202",
+                    "carbon": "9.09279284592384",
+                    "energy": "3.7398656975284754"
+                },
+                {
+                    "time": "0.145",
+                    "carbon": "6.5269961480448",
+                    "energy": "2.6845535156908262"
+                },
+                {
+                    "time": "0.149",
+                    "carbon": "6.707042358877439",
+                    "energy": "2.7586065222062905"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        System.out.println(x * 2);\n    }\n}",
+            "time": "0.16645",
+            "energy": "7.492539334247423",
+            "carbon": "3.081681428175966",
+            "samples": [
+                {
+                    "time": "0.171",
+                    "carbon": "7.697321741802241",
+                    "energy": "3.1659084324032616"
+                },
+                {
+                    "time": "0.15",
+                    "carbon": "6.7520949667200005",
+                    "energy": "2.7771366598119362"
+                },
+                {
+                    "time": "0.163",
+                    "carbon": "7.337274769163521",
+                    "energy": "3.0178211125569563"
+                },
+                {
+                    "time": "0.129",
+                    "carbon": "5.80678145920512",
+                    "energy": "2.388329214171066"
+                },
+                {
+                    "time": "0.12",
+                    "carbon": "5.401660413081601",
+                    "energy": "2.2217029279004623"
+                },
+                {
+                    "time": "0.156",
+                    "carbon": "7.02213830862336",
+                    "energy": "2.888205486336788"
+                },
+                {
+                    "time": "0.149",
+                    "carbon": "6.707034308586239",
+                    "energy": "2.75860321112152"
+                },
+                {
+                    "time": "0.123",
+                    "carbon": "5.53672252459008",
+                    "energy": "2.2772539743638998"
+                },
+                {
+                    "time": "0.213",
+                    "carbon": "9.587906954749439",
+                    "energy": "3.9435061304884442"
+                },
+                {
+                    "time": "0.19",
+                    "carbon": "8.5526300139264",
+                    "energy": "3.5176967247279283"
+                },
+                {
+                    "time": "0.141",
+                    "carbon": "6.3469692687168004",
+                    "energy": "2.61050846022322"
+                },
+                {
+                    "time": "0.151",
+                    "carbon": "6.7970289813465605",
+                    "energy": "2.7956180200278404"
+                },
+                {
+                    "time": "0.16",
+                    "carbon": "7.2022017816576",
+                    "energy": "2.9622655927957706"
+                },
+                {
+                    "time": "0.134",
+                    "carbon": "6.03186571171584",
+                    "energy": "2.480906367228725"
+                },
+                {
+                    "time": "0.159",
+                    "carbon": "7.157142490452479",
+                    "energy": "2.9437327063231047"
+                },
+                {
+                    "time": "0.193",
+                    "carbon": "8.68767675424128",
+                    "energy": "3.573241449019439"
+                },
+                {
+                    "time": "0.136",
+                    "carbon": "6.1218935581593605",
+                    "energy": "2.517934820470945"
+                },
+                {
+                    "time": "0.195",
+                    "carbon": "8.7777202960512",
+                    "energy": "3.6102763577658585"
+                },
+                {
+                    "time": "0.322",
+                    "carbon": "14.494392811584001",
+                    "energy": "5.961543763404499"
+                },
+                {
+                    "time": "0.174",
+                    "carbon": "7.83232957057536",
+                    "energy": "3.2214371523776455"
+                }
+            ]
+        }
+    },
+    "28": {
+        "before": {
+            "code": "public class Main{\n    public static void main(String[] args) {\n        int num1 = 10;\n        int num2 = 7;\n        \n        int min = Math.min(num1, num2);\n        \n        System.out.println(\"Minimum value: \" + min);\n    }\n}",
+            "time": "0.29405000000000003",
+            "energy": "13.23666480886963",
+            "carbon": "5.4442402358880795",
+            "samples": [
+                {
+                    "time": "0.236",
+                    "carbon": "10.62354599659008",
+                    "energy": "4.3694644683975"
+                },
+                {
+                    "time": "0.244",
+                    "carbon": "10.9837044306432",
+                    "energy": "4.5175976323235485"
+                },
+                {
+                    "time": "0.254",
+                    "carbon": "11.433890559859199",
+                    "energy": "4.702759187270089"
+                },
+                {
+                    "time": "0.435",
+                    "carbon": "19.581380936352",
+                    "energy": "8.053821979121578"
+                },
+                {
+                    "time": "0.426",
+                    "carbon": "19.1763639983232",
+                    "energy": "7.887238512510332"
+                },
+                {
+                    "time": "0.352",
+                    "carbon": "15.845338391224319",
+                    "energy": "6.517187680310562"
+                },
+                {
+                    "time": "0.221",
+                    "carbon": "9.94825852555392",
+                    "energy": "4.091718731560327"
+                },
+                {
+                    "time": "0.232",
+                    "carbon": "10.44343700969472",
+                    "energy": "4.295385642087439"
+                },
+                {
+                    "time": "0.357",
+                    "carbon": "16.070452797208322",
+                    "energy": "6.609777235491783"
+                },
+                {
+                    "time": "0.238",
+                    "carbon": "10.71358247683584",
+                    "energy": "4.406496472722582"
+                },
+                {
+                    "time": "0.253",
+                    "carbon": "11.38874128368768",
+                    "energy": "4.6841892899807425"
+                },
+                {
+                    "time": "0.29",
+                    "carbon": "13.054327598822402",
+                    "energy": "5.369244941395654"
+                },
+                {
+                    "time": "0.2",
+                    "carbon": "9.002999678976002",
+                    "energy": "3.7029337679628296"
+                },
+                {
+                    "time": "0.292",
+                    "carbon": "13.14438899715072",
+                    "energy": "5.406287194528091"
+                },
+                {
+                    "time": "0.238",
+                    "carbon": "10.713648056993279",
+                    "energy": "4.406523445841335"
+                },
+                {
+                    "time": "0.217",
+                    "carbon": "9.768207754690561",
+                    "energy": "4.017663849504228"
+                },
+                {
+                    "time": "0.409",
+                    "carbon": "18.411158651063037",
+                    "energy": "7.572509553182227"
+                },
+                {
+                    "time": "0.434",
+                    "carbon": "19.5366476495232",
+                    "energy": "8.035423178248893"
+                },
+                {
+                    "time": "0.252",
+                    "carbon": "11.343760534149123",
+                    "energy": "4.6656887076955345"
+                },
+                {
+                    "time": "0.301",
+                    "carbon": "13.549460850051839",
+                    "energy": "5.572893247626321"
+                }
+            ]
+        },
+        "after": {
+            "code": "public class Main {\n    public static void main(String[] args) {\n        int num1 = 10;\n        int num2 = 7;\n        \n        int min = num2 ^ ((num1 ^ num2) & -(num1 < num2 ? 1 : 0));\n        \n        System.out.println(\"Minimum value: \" + min);\n    }\n}",
+            "time": "0.19374999999999998",
+            "energy": "8.72164810672301",
+            "carbon": "3.5872138662951736",
+            "samples": [
+                {
+                    "time": "0.271",
+                    "carbon": "12.199099705344",
+                    "energy": "5.017489708807988"
+                },
+                {
+                    "time": "0.282",
+                    "carbon": "12.694205169561599",
+                    "energy": "5.221126586240685"
+                },
+                {
+                    "time": "0.264",
+                    "carbon": "11.88395387080704",
+                    "energy": "4.887870227062936"
+                },
+                {
+                    "time": "0.358",
+                    "carbon": "16.115280450739203",
+                    "energy": "6.628214849389034"
+                },
+                {
+                    "time": "0.318",
+                    "carbon": "14.314778080151038",
+                    "energy": "5.887668224366122"
+                },
+                {
+                    "time": "0.239",
+                    "carbon": "10.75863368533248",
+                    "energy": "4.425026034777249"
+                },
+                {
+                    "time": "0.213",
+                    "carbon": "9.58813366499712",
+                    "energy": "3.9435993764133155"
+                },
+                {
+                    "time": "0.154",
+                    "carbon": "6.93231557711616",
+                    "energy": "2.851261396867877"
+                },
+                {
+                    "time": "0.142",
+                    "carbon": "6.392137444162559",
+                    "energy": "2.6290861307840605"
+                },
+                {
+                    "time": "0.165",
+                    "carbon": "7.42749613056",
+                    "energy": "3.054929158499328"
+                },
+                {
+                    "time": "0.138",
+                    "carbon": "6.212060085726721",
+                    "energy": "2.5550203132594005"
+                },
+                {
+                    "time": "0.186",
+                    "carbon": "8.372788696512",
+                    "energy": "3.4437279908753857"
+                },
+                {
+                    "time": "0.13",
+                    "carbon": "5.85196664832",
+                    "energy": "2.406913882454016"
+                },
+                {
+                    "time": "0.136",
+                    "carbon": "6.122030964203521",
+                    "energy": "2.5179913355769084"
+                },
+                {
+                    "time": "0.16",
+                    "carbon": "7.202403201024",
+                    "energy": "2.962348436581171"
+                },
+                {
+                    "time": "0.13",
+                    "carbon": "5.851942065216",
+                    "energy": "2.4069037714233406"
+                },
+                {
+                    "time": "0.157",
+                    "carbon": "7.067322514414081",
+                    "energy": "2.9067897501785116"
+                },
+                {
+                    "time": "0.132",
+                    "carbon": "5.94195197409792",
+                    "energy": "2.4439248469464747"
+                },
+                {
+                    "time": "0.138",
+                    "carbon": "6.212057848934401",
+                    "energy": "2.555019393266719"
+                },
+                {
+                    "time": "0.162",
+                    "carbon": "7.292404357240321",
+                    "energy": "2.999365912132944"
+                }
+            ]
+        }
+    },
+    "29": {
+        "before": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.2322",
+                    "carbon": "10.452198785639615",
+                    "energy": "4.298989360533573"
+                }
+            ]
+        },
+        "after": {
+            "code": "",
+            "time": "0.18603000000000008",
+            "energy": "8.373915179055736",
+            "carbon": "3.444191313145623",
+            "samples": [
+                {
+                    "time": "0.0",
+                    "carbon": "0.0",
+                    "energy": "0.0"
+                }
+            ]
+        }
+    },
+    "30": {
+        "before": {
+            "code": "import java.util.Map;\nimport java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        for (int i = 0; i < 10; i++) {\n            map.put(\"Key\" + i, i);\n        }\n\n        for (String key : map.keySet()) {\n            int value = map.get(key);\n            System.out.println(key + \" = \" + value);\n        }\n    }\n}",
+            "time": "0.24689999999999998",
+            "energy": "11.114809894124926",
+            "carbon": "4.571521309453582",
+            "samples": [
+                {
+                    "time": "0.446",
+                    "carbon": "20.07779291960832",
+                    "energy": "8.257996227834902"
+                },
+                {
+                    "time": "0.281",
+                    "carbon": "12.649940252997121",
+                    "energy": "5.202920426057716"
+                },
+                {
+                    "time": "0.262",
+                    "carbon": "11.79457790344704",
+                    "energy": "4.851109891687767"
+                },
+                {
+                    "time": "0.223",
+                    "carbon": "10.038849470956803",
+                    "energy": "4.128978787404533"
+                },
+                {
+                    "time": "0.172",
+                    "carbon": "7.742996048240639",
+                    "energy": "3.184694274641375"
+                },
+                {
+                    "time": "0.178",
+                    "carbon": "8.0131351832064",
+                    "energy": "3.2958025008527922"
+                },
+                {
+                    "time": "0.218",
+                    "carbon": "9.813862097487359",
+                    "energy": "4.036441480696551"
+                },
+                {
+                    "time": "0.264",
+                    "carbon": "11.884716973578241",
+                    "energy": "4.888184091232731"
+                },
+                {
+                    "time": "0.26",
+                    "carbon": "11.7045499813632",
+                    "energy": "4.814081407334684"
+                },
+                {
+                    "time": "0.207",
+                    "carbon": "9.318723140816639",
+                    "energy": "3.8327908278178833"
+                },
+                {
+                    "time": "0.26",
+                    "carbon": "11.7045204816384",
+                    "energy": "4.814069274097874"
+                },
+                {
+                    "time": "0.198",
+                    "carbon": "8.913443590402562",
+                    "energy": "3.6660993487325735"
+                },
+                {
+                    "time": "0.26",
+                    "carbon": "11.704024605312",
+                    "energy": "4.813865320164826"
+                },
+                {
+                    "time": "0.295",
+                    "carbon": "13.280146540358402",
+                    "energy": "5.462124272049411"
+                },
+                {
+                    "time": "0.254",
+                    "carbon": "11.43447242842368",
+                    "energy": "4.7029985098106595"
+                },
+                {
+                    "time": "0.247",
+                    "carbon": "11.119345168988161",
+                    "energy": "4.57338666800483"
+                },
+                {
+                    "time": "0.249",
+                    "carbon": "11.20937497127424",
+                    "energy": "4.6104159256850945"
+                },
+                {
+                    "time": "0.201",
+                    "carbon": "9.04853051733888",
+                    "energy": "3.7216606017814815"
+                },
+                {
+                    "time": "0.227",
+                    "carbon": "10.21900314507264",
+                    "energy": "4.203075993568377"
+                },
+                {
+                    "time": "0.236",
+                    "carbon": "10.624192461987839",
+                    "energy": "4.369730359615598"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.Map;\nimport java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        for (int i = 0; i < 10; i++) {\n            map.put(\"Key\" + i, i);\n        }\n\n        for (Map.Entry<String, Integer> entry : map.entrySet()) {\n            String key = entry.getKey();\n            int value = entry.getValue();\n            System.out.println(key + \" = \" + value);\n        }\n    }\n}",
+            "time": "0.18719999999999998",
+            "energy": "8.4271588815888",
+            "carbon": "3.466090447997474",
+            "samples": [
+                {
+                    "time": "0.234",
+                    "carbon": "10.5341594611968",
+                    "energy": "4.332699786390244"
+                },
+                {
+                    "time": "0.198",
+                    "carbon": "8.913491730063361",
+                    "energy": "3.6661191485750604"
+                },
+                {
+                    "time": "0.206",
+                    "carbon": "9.273587177341438",
+                    "energy": "3.8142264060405338"
+                },
+                {
+                    "time": "0.201",
+                    "carbon": "9.048090695892482",
+                    "energy": "3.7214797032205778"
+                },
+                {
+                    "time": "0.181",
+                    "carbon": "8.148197802585601",
+                    "energy": "3.3513537562034577"
+                },
+                {
+                    "time": "0.28",
+                    "carbon": "12.604972594636802",
+                    "energy": "5.184425228174117"
+                },
+                {
+                    "time": "0.208",
+                    "carbon": "9.3632702552064",
+                    "energy": "3.851113055966392"
+                },
+                {
+                    "time": "0.196",
+                    "carbon": "8.82308899938816",
+                    "energy": "3.6289365054483502"
+                },
+                {
+                    "time": "0.187",
+                    "carbon": "8.417875423541762",
+                    "energy": "3.462272161702727"
+                },
+                {
+                    "time": "0.17",
+                    "carbon": "7.6529860096896005",
+                    "energy": "3.147673145785333"
+                },
+                {
+                    "time": "0.163",
+                    "carbon": "7.337840158944",
+                    "energy": "3.018053657373667"
+                },
+                {
+                    "time": "0.161",
+                    "carbon": "7.247816618595841",
+                    "energy": "2.981026975228469"
+                },
+                {
+                    "time": "0.159",
+                    "carbon": "7.157779911429119",
+                    "energy": "2.943994877570797"
+                },
+                {
+                    "time": "0.172",
+                    "carbon": "7.74299883612672",
+                    "energy": "3.18469542129892"
+                },
+                {
+                    "time": "0.175",
+                    "carbon": "7.878048304896",
+                    "energy": "3.2402412678037247"
+                },
+                {
+                    "time": "0.159",
+                    "carbon": "7.157529066516481",
+                    "energy": "2.9438917050582285"
+                },
+                {
+                    "time": "0.178",
+                    "carbon": "8.0130678633216",
+                    "energy": "3.2957748121841743"
+                },
+                {
+                    "time": "0.165",
+                    "carbon": "7.4275736889024",
+                    "energy": "3.054961058245557"
+                },
+                {
+                    "time": "0.167",
+                    "carbon": "7.5175850349504",
+                    "energy": "3.0919827248750997"
+                },
+                {
+                    "time": "0.184",
+                    "carbon": "8.283217998551041",
+                    "energy": "3.406887562804043"
+                }
+            ]
+        }
+    },
+    "31": {
+        "before": {
+            "code": "import java.util.HashSet;\nimport java.util.Set;\n\nenum Fruit {\n    APPLE, BANANA, MELON, ORANGE, GRAPE, CHERRY, PEAR, PEACH, PLUM, KIWI\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Set<Fruit> fruits = new HashSet<>();\n        fruits.add(Fruit.APPLE);\n        fruits.add(Fruit.MELON);\n        fruits.add(Fruit.ORANGE);\n        fruits.add(Fruit.GRAPE);\n        fruits.add(Fruit.CHERRY);\n\n        System.out.println(\"Fruits in the HashSet:\");\n        for (Fruit fruit : fruits) {\n            System.out.println(fruit);\n        }\n    }\n}",
+            "time": "0.11325",
+            "energy": "5.0978161703756175",
+            "carbon": "2.096731790875491",
+            "samples": [
+                {
+                    "time": "0.099",
+                    "carbon": "4.456343096536321",
+                    "energy": "1.8328939156053887"
+                },
+                {
+                    "time": "0.125",
+                    "carbon": "5.626722168",
+                    "energy": "2.3142708276983996"
+                },
+                {
+                    "time": "0.13",
+                    "carbon": "5.851819149696",
+                    "energy": "2.406853216269965"
+                },
+                {
+                    "time": "0.096",
+                    "carbon": "4.321362044436481",
+                    "energy": "1.7773762088767247"
+                },
+                {
+                    "time": "0.112",
+                    "carbon": "5.041589656965121",
+                    "energy": "2.073605825909754"
+                },
+                {
+                    "time": "0.131",
+                    "carbon": "5.896814033168641",
+                    "energy": "2.425359611842262"
+                },
+                {
+                    "time": "0.108",
+                    "carbon": "4.8615083760384",
+                    "energy": "1.999538395064594"
+                },
+                {
+                    "time": "0.101",
+                    "carbon": "4.5463866005260805",
+                    "energy": "1.8699288087963768"
+                },
+                {
+                    "time": "0.092",
+                    "carbon": "4.14127646281728",
+                    "energy": "1.7033070091567473"
+                },
+                {
+                    "time": "0.11",
+                    "carbon": "4.9515048101376005",
+                    "energy": "2.036553928409595"
+                },
+                {
+                    "time": "0.156",
+                    "carbon": "7.02217539399168",
+                    "energy": "2.888220739548778"
+                },
+                {
+                    "time": "0.104",
+                    "carbon": "4.681450262661119",
+                    "energy": "1.9254804930325184"
+                },
+                {
+                    "time": "0.114",
+                    "carbon": "5.131592790635521",
+                    "energy": "2.11062411478839"
+                },
+                {
+                    "time": "0.131",
+                    "carbon": "5.896790676518401",
+                    "energy": "2.4253500052520183"
+                },
+                {
+                    "time": "0.103",
+                    "carbon": "4.6364135014656",
+                    "energy": "1.9069568731528013"
+                },
+                {
+                    "time": "0.088",
+                    "carbon": "3.9612166853529596",
+                    "energy": "1.6292484226856723"
+                },
+                {
+                    "time": "0.162",
+                    "carbon": "7.292187291133441",
+                    "energy": "2.999276632843184"
+                },
+                {
+                    "time": "0.107",
+                    "carbon": "4.8164695509427204",
+                    "energy": "1.9810139263027409"
+                },
+                {
+                    "time": "0.092",
+                    "carbon": "4.14126801271296",
+                    "energy": "1.7033035336288402"
+                },
+                {
+                    "time": "0.104",
+                    "carbon": "4.681432843775999",
+                    "energy": "1.9254733286450685"
+                }
+            ]
+        },
+        "after": {
+            "code": "import java.util.EnumSet;\n\nenum Fruit {\n    APPLE, BANANA, MELON, ORANGE, GRAPE, CHERRY, PEAR, PEACH, PLUM, KIWI\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        EnumSet<Fruit> fruits = EnumSet.of(Fruit.APPLE, Fruit.MELON, Fruit.ORANGE, Fruit.GRAPE, Fruit.CHERRY);\n\n        System.out.println(\"Fruits in the EnumSet:\");\n        for (Fruit fruit : fruits) {\n            System.out.println(fruit);\n        }\n    }\n}",
+            "time": "0.13249999999999998",
+            "energy": "5.964334757265601",
+            "carbon": "2.4531308856633416",
+            "samples": [
+                {
+                    "time": "0.087",
+                    "carbon": "3.91624892433792",
+                    "energy": "1.6107531825801864"
+                },
+                {
+                    "time": "0.226",
+                    "carbon": "10.17310513238784",
+                    "energy": "4.184198140951119"
+                },
+                {
+                    "time": "0.169",
+                    "carbon": "7.607322892615682",
+                    "energy": "3.12889190573283"
+                },
+                {
+                    "time": "0.156",
+                    "carbon": "7.02212650873344",
+                    "energy": "2.888200633042064"
+                },
+                {
+                    "time": "0.188",
+                    "carbon": "8.462611471242239",
+                    "energy": "3.480672098121933"
+                },
+                {
+                    "time": "0.239",
+                    "carbon": "10.75828762006272",
+                    "energy": "4.424883698131797"
+                },
+                {
+                    "time": "0.126",
+                    "carbon": "5.671752283653121",
+                    "energy": "2.332791714266529"
+                },
+                {
+                    "time": "0.109",
+                    "carbon": "4.9065058528934395",
+                    "energy": "2.0180458572950717"
+                },
+                {
+                    "time": "0.089",
+                    "carbon": "4.00623964759296",
+                    "energy": "1.6477663670549842"
+                },
+                {
+                    "time": "0.125",
+                    "carbon": "5.626767417120001",
+                    "energy": "2.3142894386614565"
+                },
+                {
+                    "time": "0.095",
+                    "carbon": "4.2763016618496",
+                    "energy": "1.7588428735187405"
+                },
+                {
+                    "time": "0.095",
+                    "carbon": "4.2763109007744",
+                    "energy": "1.7588466734885106"
+                },
+                {
+                    "time": "0.161",
+                    "carbon": "7.2472251112934405",
+                    "energy": "2.980783688274992"
+                },
+                {
+                    "time": "0.09",
+                    "carbon": "4.0512735128448",
+                    "energy": "1.666288795833066"
+                },
+                {
+                    "time": "0.121",
+                    "carbon": "5.44667555735424",
+                    "energy": "2.240217656739799"
+                },
+                {
+                    "time": "0.122",
+                    "carbon": "5.49168676833024",
+                    "energy": "2.2587307678142277"
+                },
+                {
+                    "time": "0.169",
+                    "carbon": "7.6073648946048005",
+                    "energy": "3.1289091811509544"
+                },
+                {
+                    "time": "0.098",
+                    "carbon": "4.41134806178304",
+                    "energy": "1.8143874578113646"
+                },
+                {
+                    "time": "0.097",
+                    "carbon": "4.3663180595904",
+                    "energy": "1.7958666179095315"
+                },
+                {
+                    "time": "0.088",
+                    "carbon": "3.9612228662476796",
+                    "energy": "1.6292509648876705"
+                }
+            ]
+        }
+    }
+}
