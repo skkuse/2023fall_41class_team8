@@ -157,18 +157,18 @@ def get_pattern():
         return data[id]
 
 #전달받은 카테고리 아이디로 카데고리값 전달
-@app.route('/api/get_category_string', methods=['POST'])
-def get_category_string():
-    data = request.get_json()
-    with open(patterns_json_file_path, 'r') as file:
-        categories = json.load(file)
-        # 전달받은 카테고리 ID 확인
-        category_id = data.get('category_id')
+#@app.route('/api/get_category_string', methods=['POST'])
+#def get_category_string():
+#    data = request.get_json()
+#    with open(patterns_json_file_path, 'r') as file:
+#        categories = json.load(file)
+#        # 전달받은 카테고리 ID 확인
+ #       category_id = data.get('category_id')
 
-        # 카테고리 ID에 해당하는 문자열 반환
-        category_string = categories.get(category_id, "해당하는 카테고리가 없습니다.")
+ #       # 카테고리 ID에 해당하는 문자열 반환
+ #       category_string = categories.get(category_id, "해당하는 카테고리가 없습니다.")
 
-    return jsonify({'category_string': category_string})
+ #   return jsonify({'category_string': category_string})
 
 if __name__ == "__main__":
     app.run(debug=True)
