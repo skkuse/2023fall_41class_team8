@@ -10,7 +10,7 @@ import base64
 app = Flask(__name__)
 
 # Judge0 API URL
-judge0_url = "https://exec.skew.ch/"
+judge0_url = "http://judge:2358/"
 
 # 패턴 리스트와 개별 패턴 정보를 저장하는 JSON 파일 경로
 pattern_list_json_file_path = "./pattern_list.json"
@@ -36,7 +36,14 @@ def request_to_judge0(code: str, stdin: str):
 
 # Judge0에게 결과를 요청
 def check_submission(token: str):
-    result = requests.get(judge0_url + "submissions/" + token, params={"base64_encoded": "true"})
+    result = requests.get(
+        judge0_url + "submissions/" + token,
+        params={
+            "base64_encoded": "true",
+            "fields": "stdout,time,memory,stderr,token,compile_output,message,status,wall_time",
+        },
+    )
+    #    print(result.text)
     return result
 
 # 데이터가 쌓이지 않도록 Judge0에게 삭제 요청
@@ -46,7 +53,8 @@ def delete_submission(token: str):
 
 # base64로 인코딩된 문자열을 디코딩
 def decode_base64(data):
-    return "".join([base64.b64decode(t).decode('utf-8') for t in data.split("\n")])
+    return "".join([base64.b64decode(t).decode("utf-8") for t in data.split("\n")])
+
 
 def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     # Judge0에게 코드 실행을 요청하고 접근 토큰을 받음
@@ -55,7 +63,8 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
         # 주기적으로 Judge0에게 결과를 요청
         time.sleep(0.2)
         result = check_submission(token)
-        if result.json()["status"]["id"] != 2:
+        id = result.json()["status"]["id"]
+        if id != 2 and id != 1:
             break
     delete_submission(token)
     # 6: 컴파일 에러
@@ -85,10 +94,11 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
     memory = result.json()["memory"]
     calculation_result = calculate_energy_and_carbon(cpu_time, memory)
     return_result = dict()
-    return_result["time"] = cpu_time
+    return_result["time"] = result.json()["wall_time"]
     return_result["energy"] = calculation_result["energy"]
     return_result["carbon"] = calculation_result["carbon_footprint"]
     return_result["result"] = "success"
+    print(f"thread {threading.get_ident()} done")
     output_queue.put(return_result)
 
 # 에너지와 탄소 발자국을 계산
@@ -124,21 +134,27 @@ def runCode():
     data = request.get_json()
     code = data["code"]
     stdin = data["stdin"]
+    ip = None
+    if request.headers.getlist("X-Forwarded-For"):
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        ip = request.remote_addr
     # 동일 IP에서 동시에 실행되는 것을 방지
-    if request.remote_addr in running_judge0_IP:
+    if ip in running_judge0_IP:
         return 401
-    output_queue_dict[request.remote_addr] = Queue()
+    output_queue_dict[ip] = Queue()
     # 새 스레드에서 코드 실행 완료를 감지
     user_thread = threading.Thread(
         target=interact_judge0,
-        args=(code, stdin, output_queue_dict[request.remote_addr]),
+        args=(code, stdin, output_queue_dict[ip]),
     )
     user_thread.daemon = True
     user_thread.start()
     # 보낸 IP를 저장
-    running_judge0_IP.append(request.remote_addr)
-    result = output_queue_dict[request.remote_addr].get()
-    running_judge0_IP.remove(request.remote_addr)
+    running_judge0_IP.append(ip)
+    result = output_queue_dict[ip].get()
+    running_judge0_IP.remove(ip)
+    del output_queue_dict[ip]
     return json.dumps(result)
 
 # 패턴 리스트를 가져옴
@@ -161,4 +177,4 @@ def getPattern():
     return app.response_class(response=json.dumps(data[id]), status=200, mimetype='application/json')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0")
