@@ -139,32 +139,20 @@ def runCode():
     print(type(result))
     return json.dumps(result)
 
-#@app.route("/api/patterns")
-#def get_patterns():
-#    with open(patterns_json_file_path, 'r') as file:
-#        data = json.load(file)
-#        return data
-
-@app.route("/api/pattern")
-def get_pattern():
-    id = request.args["id"]
-    with open(pattern_json_file_path, 'r') as file:
+@app.route("/api/patterns", methods=["GET"])
+def getPatternList():
+    with open(pattern_list_json_file_path, "r") as file:
         data = json.load(file)
-        return data[id]
+    return json.dumps(data)
 
-#전달받은 카테고리 아이디로 카데고리값 전달
-#@app.route('/api/get_category_string', methods=['POST'])
-#def get_category_string():
-#    data = request.get_json()
-#    with open(patterns_json_file_path, 'r') as file:
-#        categories = json.load(file)
-#        # 전달받은 카테고리 ID 확인
- #       category_id = data.get('category_id')
-
- #       # 카테고리 ID에 해당하는 문자열 반환
- #       category_string = categories.get(category_id, "해당하는 카테고리가 없습니다.")
-
- #   return jsonify({'category_string': category_string})
+@app.route("/api/pattern", methods=["GET"])
+def getPattern():
+    id = request.args.get("id")
+    with open(patterns_json_file_path, "r") as file:
+        data = json.load(file)
+    if(id not in data):
+        return app.response_class(status=404)
+    return app.response_class(response=json.dumps(data[id]), status=200, mimetype='application/json')
 
 if __name__ == "__main__":
     app.run(debug=True)
