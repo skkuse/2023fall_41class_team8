@@ -22,7 +22,7 @@ def request_to_judge0(code: str, stdin: str):
         "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
         "language_id": 62,
         "stdin": stdin,
-        "number_of_runs": 10,
+        "number_of_runs": 5,
         # "cpu_time_limit": null,
         # "cpu_extra_time": null,
         # "wall_time_limit": null,
