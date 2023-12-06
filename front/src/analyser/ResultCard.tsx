@@ -2,6 +2,10 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import { ValueDisplay } from "./ValueDisplay";
 import { AnalysisResult, ErrorType } from "./Analyser";
 
+// 실행 결과를 나타내는 카드 컴포넌트
+// props.result가 null이면 실행 결과가 없는 것으로 간주
+// props.pending이 true이면 계산 중임을 나타냄
+// props.hideTitle이 true이면 제목을 숨김
 export function ResultCard(props: { result: AnalysisResult | null, pending: boolean, hideTitle?: boolean }) {
 
   const valueDisplay = () => {

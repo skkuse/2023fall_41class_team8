@@ -1,27 +1,11 @@
 import { DiffEditor } from "@monaco-editor/react";
 import { Box, Grid } from "@mui/material"
-import { ExecutionData } from "./GreenPatternPage";
+import { CodePerformanceData } from "./GreenPatternPage";
 import { ChartDisplay } from "../analyser/ChartDisplay";
 import { CenteredText } from "./CenteredText";
 
-export type CodeInfo = {
-  id: number | string
-}
-
-export type AnalyserList = {
-  runtime: number;
-  carbonFootprint: number;
-  energyNeeded: number;
-};
-
-type CodeInfoProps = {
-  before: ExecutionData;
-  after: ExecutionData;
-};
-
-
-
-const CodeInfo = ({ before, after }: CodeInfoProps) => {
+// 그린 패턴 적용 전후의 코드 실행 결과를 나타내는 컴포넌트
+const CodeInfo = ({ before, after }: CodePerformanceData) => {
 
   return (
     <Grid container spacing={2} style={{ height: "100%" }}>
@@ -30,6 +14,7 @@ const CodeInfo = ({ before, after }: CodeInfoProps) => {
       </Grid>
       <Grid item xs={10}>
         <Box style={{ flex: 1, height: '500px' }}>
+          {/* DiffEditor를 사용함으로써 두 코드의 차이를 보여줌*/}
           <DiffEditor language="java" original={before.code} modified={after.code}
             theme="vs-dark" />
         </Box>

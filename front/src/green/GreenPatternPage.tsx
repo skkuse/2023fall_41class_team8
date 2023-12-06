@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CodeInfo from "./CodeInfo";
 import { Sample } from "../analyser/Analyser";
 
+// 코드 실행 결과를 나타내는 타입
 export type ExecutionData = {
   code: string;
   time: string;
@@ -11,27 +12,37 @@ export type ExecutionData = {
   samples: Sample[];
 }
 
-export interface Technique {
+// 그린 패턴 요약 정보 타입
+export type Technique = {
   id: number;
   name: string;
 }
 
-export interface Category {
+// 그린 패턴 카테고리 타입
+export type Category = {
   name: string;
   techniques: Technique[];
 }
 
-type CodePerformanceData = {
+// 그린 패턴 적용 전후의 코드 실행 결과를 모두 포함한 타입
+export type CodePerformanceData = {
   before: ExecutionData;
   after: ExecutionData;
 }
 
 const GreenPatternPage = () => {
+  // 현재 선택된 그린 패턴의 id
   const [id, setId] = useState<number | null>(null);
+  // 그린 패턴 카테고리 목록
+  // null이면 로딩 중, []이면 로딩 완료
   const [category, setCategory] = useState<Category[] | null>(null);
+  // 현재 표시할 그린 패턴 적용 정보
+  // null이면 로딩 중, 아닐 경우 로딩 완료
   const [performanceData, setPerformanceData] = useState<CodePerformanceData | null>(null);
+  // 에러 발생 여부
   const [error, setError] = useState<boolean>(false);
 
+  // 컴포넌트가 마운트되면 그린 패턴 목록을 가져옴
   useEffect(() => {
     const fetchCategory = async () => {
       try {
@@ -46,6 +57,7 @@ const GreenPatternPage = () => {
     fetchCategory();
   }, []);
 
+  // 그린 패턴을 선택하면 해당 패턴의 성능 정보를 가져옴
   const getPerformance = async (id: number) => {
     setError(false);
     setPerformanceData(null);
@@ -60,6 +72,7 @@ const GreenPatternPage = () => {
     setId(id);
   }
 
+  // 카테고리 목록을 표시하는 컴포넌트 생성 함수
   const categoryList = () => {
     if (!category) {
       return (
@@ -79,6 +92,7 @@ const GreenPatternPage = () => {
     }
   }
 
+  // 그린 패턴 적용 정보를 표시하는 컴포넌트 생성 함수
   const displayTechnique = () => {
     if (!category) {
       return (

@@ -16,15 +16,21 @@ Chart.register(
 );
 
 type ChartDisplayProps = {
+  // interactive가 true이면 차트의 점을 클릭했을 때 viewDetails 함수 호출
   interactive: true,
+  // 그래프에 표시할 데이터
   results: SuccessfulAnalysis[],
+  // 초기화 버튼을 눌렀을 때 호출할 함수
   reset: () => void,
+  // 차트를 클릭했을 때 호출할 함수
   viewDetails: (result: SuccessfulAnalysis) => void
 } | {
   interactive: false,
+  // 그래프에 표시할 데이터
   results: Sample[]
 };
 
+// 표시할 데이터 수가 바뀌었을 때 차트를 다시 그리도록 함
 const needsUpdate = (a: ChartDisplayProps, b: ChartDisplayProps) => a.results.length == b.results.length;
 
 function ChartDisplayNoMemo(props: ChartDisplayProps) {
