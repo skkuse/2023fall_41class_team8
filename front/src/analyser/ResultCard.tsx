@@ -42,8 +42,8 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
       }
       return (
         <>
-          <ValueDisplay title='Error' value={msg[props.result.error]} helperText='TODO' />
-          <ValueDisplay title='Message' value={props.result.message} helperText='TODO' expand={true} />
+          <ValueDisplay title='Error' value={msg[props.result.error]} helperText='발생한 에러 종류' />
+          <ValueDisplay title='Message' value={props.result.message} helperText='실행/컴파일시 발생한 에러 메세지' expand={true} />
         </>
       );
     }
