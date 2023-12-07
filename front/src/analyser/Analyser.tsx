@@ -99,8 +99,8 @@ export function Analyser({ sending, setSending }: Props) {
       } else {
         const errorMap: {[k: string]: ErrorType} = {
           runtime: ErrorType.Runtime,
-          compile: ErrorType.Compile,
-          timeout: ErrorType.Timeout
+          compilation: ErrorType.Compile,
+          limited: ErrorType.Timeout
         };
         newRecord = {
           success: false,
@@ -116,7 +116,7 @@ export function Analyser({ sending, setSending }: Props) {
       setResults([...results, {
         success: false,
         code: code,
-        error: ErrorType.Runtime,
+        error: ErrorType.Server,
         message: "서버와의 통신에 실패했습니다."
       }]);
       console.log(e);

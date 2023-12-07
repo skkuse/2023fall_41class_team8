@@ -38,12 +38,12 @@ export function ResultCard(props: { result: AnalysisResult | null, pending: bool
         [ErrorType.Compile]: '컴파일 에러',
         [ErrorType.Runtime]: '런타임 에러',
         [ErrorType.Timeout]: '시간 초과',
-        [ErrorType.Server]: '서버 에러',
+        [ErrorType.Server]: '서버 요청 에러',
       }
       return (
         <>
-          <ValueDisplay title='Error' value={msg[props.result.error]} helperText='TODO' />
-          <ValueDisplay title='Message' value={props.result.message} helperText='TODO' expand={true} />
+          <ValueDisplay title='Error' value={msg[props.result.error]} helperText='발생한 에러 종류' />
+          <ValueDisplay title='Message' value={props.result.message} helperText='코드를 실행시 발생한 에러 메세지입니다.' expand={true} />
         </>
       );
     }
