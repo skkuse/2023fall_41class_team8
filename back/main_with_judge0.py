@@ -103,23 +103,45 @@ def interact_judge0(code: str, stdin: str | None, output_queue: queue):
 
 # 에너지와 탄소 발자국을 계산
 def calculate_energy_and_carbon(cpu_time: float, memory: int):
-    n_core = int(1)  # number of processor
-    tdp = 12.5  # TDP(W): Core type: AMD EPYC 7702P 64-core processor, 200W for 64 cores. Our server has 4 cores.
+    # cpu_time(sec): Processing time of java code
+    # memory(KB): Requested memory size of java code
+    
+    # number of processor
+    n_core = int(1)  
+
+    # TDP(W): Core type: AMD EPYC 7702P 64-core processor, 200W for 64 cores. Our server has 4 cores.
+    tdp = 12.5  
+    
+    # Usage of core(%): when cannot identify use 1 for value, [0,1] : 1 = 100%
     u_core = int(
         1
-    )  # Usage of core(%): when cannot identify use 1 for value, [0,1] : 1 = 100%
+    )  
+    
+    # Available memory(GB): 4GB
+    u_memory = int(
+        4
+    ) 
+    
+    #  power consume per memory usage(W): 0.3725W/1GB memory usage, convert 'memory' unit from KB to GB. (memory / (1024 * 1024) * 0.3725  = memory * 3.55243683e-7)
     p_memory = (
-        memory * 0.0000003752
-    )  #  power consume per memory usage(W): 0.3725W/1GB memory usage
-    pue = int(1)  # Power Usage Effectiveness(%), when cannot identify use 1 for value
-    carbon_intensity = 0.41130  # CI(gCO2e/kWh): Use 2023 stat of S.Korea
+        memory * 3.55243683e-7
+    )  
 
+    # Power Usage Effectiveness(%), when cannot identify use 1 for value
+    pue = int(1)  
+
+    # CI(gCO2e/kWh): Use 2023 stat of S.Korea
+    carbon_intensity = 0.41130  
+
+    # (kWh), Energy consumption when used for 1 hour
     energy = (
-        float(cpu_time) * int(3600) * (n_core * tdp * u_core + p_memory) * pue * 0.001
-    )  # (kWh), Energy consumption when used for 1 hour
+        float(cpu_time) * int(3600) * (n_core * tdp * u_core + u_memory * p_memory) * pue * 0.001
+    )  
+    
+    # (gCO2e), CO2e Emission on 1h with energy source of S.Korea
     carbon_footprint = (
         energy * carbon_intensity
-    )  # (gCO2e), CO2e Emission on 1h with energy source of S.Korea
+    )  
 
     return {"energy": energy, "carbon_footprint": carbon_footprint}
 
