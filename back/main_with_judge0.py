@@ -21,7 +21,7 @@ def request_to_judge0(code: str, stdin: str):
         # Judge0가 UTF-8로 인코딩을 할 수 없을 경우 문제를 발생시키므로 데이터를 송수신할때는 base64로 인코딩하여 사용
         "source_code": base64.b64encode(bytes(code, 'utf-8')).decode('utf-8'),
         "language_id": 62,
-        "stdin": stdin,
+        "stdin": base64.b64encode(bytes(stdin, 'utf-8')).decode('utf-8'),
         "number_of_runs": 5,
         # "cpu_time_limit": null,
         # "cpu_extra_time": null,
