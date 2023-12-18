@@ -1,5 +1,6 @@
 import { Card, Stack, Typography, TextField } from "@mui/material";
 
+// 실행 환경을 나타내는 카드 컴포넌트
 export function InfoCard() {
   return (
     <Card style={{ padding: 16 }}>
@@ -24,7 +25,7 @@ export function InfoCard() {
           />
           <TextField
             label="코어 타입"
-            value="???????"
+            value="x86_64"
             InputProps={{
               readOnly: true,
             }}

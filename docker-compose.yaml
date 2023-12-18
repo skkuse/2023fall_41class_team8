@@ -4,14 +4,39 @@ services:
     container_name: frontend
     image: frontend:latest
     build: ./front
-    ports:
-      - "8081:80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cc.rule=Host(`cc.skew.ch`)"
       - "traefik.http.routers.cc.entrypoints=websecure"
       - "traefik.http.routers.cc.tls=true"
+      - "traefik.http.services.cc.loadbalancer.server.port=80"
+  backend:
+    container_name: backend
+    image: backend:latest
+    build: ./back
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ccback.rule=Host(`cc.skew.ch`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.ccback.entrypoints=websecure"
+      - "traefik.http.routers.ccback.tls=true"
+      - "traefik.http.services.ccback.loadbalancer.server.port=5000"
+  judge:
+    container_name: judge
+    image: judge0/judge0:latest
+    volumes:
+      - ./judge/judge0.conf:/judge0.conf:ro
+    privileged: true
+    restart: unless-stopped
+  worker:
+    container_name: judgeworker
+    image: judge0/judge0:latest
+    command: ["./scripts/workers"]
+    volumes:
+      - ./judge/judge0.conf:/judge0.conf:ro
+    privileged: true
+    restart: always
 
 networks:
   default:
-    name: cc
+    external: true
+    name: proxy
