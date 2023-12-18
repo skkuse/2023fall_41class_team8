@@ -117,12 +117,12 @@ def calculate_energy_and_carbon(cpu_time: float, memory: int):
         1
     )  
     
-    # Available memory(KB): 4GB = 4 * 1024 * 1024 KB
+    # Available memory(GB): 4GB
     u_memory = int(
         4
     ) 
     
-    #  power consume per memory usage(W): 0.3725W/1GB memory usage, convert 'memory' unit to GB. (0.3725 / (1024 * 1024) = 3.55243683e-7)
+    #  power consume per memory usage(W): 0.3725W/1GB memory usage, convert 'memory' unit from KB to GB. (memory / (1024 * 1024) * 0.3725  = memory * 3.55243683e-7)
     p_memory = (
         memory * 3.55243683e-7
     )  
